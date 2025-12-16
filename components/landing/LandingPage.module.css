@@ -14,13 +14,13 @@
   --lp-primary-dark: #008A94;
   --lp-primary-rgb: 0, 184, 196;
 
-  /* Light Mode Only */
+  /* Light Mode Only - コントラスト改善 */
   --lp-bg: #f8feff;
   --lp-bg-gradient: linear-gradient(135deg, #f8feff 0%, #e0f7fa 50%, #b2ebf2 100%);
   --lp-surface: #ffffff;
-  --lp-text-primary: #1e293b;
-  --lp-text-secondary: #475569;
-  --lp-text-muted: #94a3b8;
+  --lp-text-primary: #111827;
+  --lp-text-secondary: #1f2937;
+  --lp-text-muted: #4b5563;
   --lp-border: #e2e8f0;
   --lp-shadow-color: 190 30% 15%;
   --lp-shadow-strength: 2%;

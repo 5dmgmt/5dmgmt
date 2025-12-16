@@ -34,10 +34,10 @@ a { text-decoration: none; }
   --5d-teal-50: #e0f7fa;
   --5d-teal-100: #b2ebf2;
 
-  /* テキスト */
-  --5d-text: #1f2937;
-  --5d-text-secondary: #374151;
-  --5d-text-muted: #6b7280;
+  /* テキスト - コントラスト改善 */
+  --5d-text: #111827;
+  --5d-text-secondary: #1f2937;
+  --5d-text-muted: #4b5563;
 
   /* 背景 */
   --5d-bg: #ffffff;
@@ -48,12 +48,12 @@ a { text-decoration: none; }
   --5d-border: #e5e7eb;
   --5d-border-light: #f3f4f6;
 
-  /* LP変数互換 */
+  /* LP変数互換 - コントラスト改善 */
   --lp-bg: #ffffff;
   --lp-bg-section: #f9fafb;
-  --lp-text-primary: #1f2937;
-  --lp-text-secondary: #374151;
-  --lp-text-muted: #6b7280;
+  --lp-text-primary: #111827;
+  --lp-text-secondary: #1f2937;
+  --lp-text-muted: #4b5563;
   --lp-border: #e5e7eb;
   --lp-primary: #00B8C4;
   --lp-primary-light: rgba(0, 184, 196, 0.1);
@@ -252,7 +252,7 @@ a { text-decoration: none; }
    7. CTA Section
    ========================================================================== */
 .five-d-page [class*="ctaSection"] {
-  background: linear-gradient(135deg, var(--5d-teal-50) 0%, var(--5d-teal-100) 100%) !important;
+  background: linear-gradient(135deg, var(--5d-teal) 0%, var(--5d-teal-dark) 100%) !important;
   border-radius: 16px !important;
   position: relative;
   overflow: hidden;
@@ -265,13 +265,13 @@ a { text-decoration: none; }
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   animation: pulse 4s ease-in-out infinite;
 }
 
-.five-d-page [class*="ctaTitle"] { color: var(--5d-text) !important; font-weight: 700 !important; }
+.five-d-page [class*="ctaTitle"] { color: white !important; font-weight: 700 !important; }
 .five-d-page [class*="ctaLead"],
-.five-d-page [class*="ctaSection"] p { color: var(--5d-text-secondary) !important; }
+.five-d-page [class*="ctaSection"] p { color: rgba(255, 255, 255, 0.9) !important; }
 
 /* ==========================================================================
    8. Tables & Forms
