@@ -60,10 +60,10 @@ export default function FiveDmgmtHeader() {
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/logo.png"
-            alt="五次元経営"
-            width={180}
-            height={40}
+            src="/logo-header.png"
+            alt="五次元経営株式会社"
+            width={200}
+            height={44}
             className="five-d-logo-img"
             priority
           />
