@@ -1,0 +1,296 @@
+/**
+ * components/diagnosis/ConsciousnessDiagnosis.module.css
+ *
+ * 【Phase 30】経営者運気診断スタイル
+ */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.errorMessage {
+  background: #fee;
+  border: 2px solid #f00;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  color: #d00;
+  font-weight: 500;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--lp-border, #e5e5e5);
+  color: var(--lp-text-primary, #111827);
+}
+
+.question {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--lp-border, #e5e5e5);
+  transition: border-color 0.2s;
+}
+
+.questionError {
+  border-color: #f00;
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+}
+
+.questionText {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: var(--lp-text-primary, #111827);
+}
+
+.radioOptions,
+.checkboxOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  line-height: 1.5;
+}
+
+.optionLabel:hover {
+  background: #f0f0f0;
+}
+
+.optionLabel input {
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.optionLabel input[type="radio"],
+.optionLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--lp-primary, #CF3721);
+}
+
+.optionLabel span {
+  color: var(--lp-text-primary, #374151);
+  font-size: 0.9375rem;
+}
+
+.submitButton {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  background: var(--lp-primary, #CF3721);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #b8301d;
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 結果表示 */
+.resultContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.resultCard {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resultHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.resultLabel {
+  font-size: 0.875rem;
+  color: var(--lp-text-muted, #6b7280);
+  margin-bottom: 0.5rem;
+}
+
+.resultScore {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.resultDimension {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 100px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.resultDescription {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--lp-text-secondary, #4b5563);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--lp-border, #e5e5e5);
+}
+
+.resultScale {
+  margin-bottom: 2rem;
+}
+
+.scaleTitle {
+  font-size: 0.875rem;
+  color: var(--lp-text-muted, #6b7280);
+  margin-bottom: 0.75rem;
+}
+
+.scaleBar {
+  position: relative;
+  height: 8px;
+  background: linear-gradient(to right, #f44336, #FF9800, #2196F3, #4CAF50, #9C27B0);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.scaleIndicator {
+  position: absolute;
+  top: -4px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 3px solid #333;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.scaleLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--lp-text-muted, #6b7280);
+}
+
+.resultInterpretation {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.resultInterpretation h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--lp-text-primary, #111827);
+}
+
+.resultInterpretation p {
+  line-height: 1.8;
+  color: var(--lp-text-secondary, #4b5563);
+}
+
+.resultActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.retryButton {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: var(--lp-text-secondary, #4b5563);
+  background: transparent;
+  border: 1px solid var(--lp-border, #e5e5e5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background: #f5f5f5;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  background: var(--lp-primary, #CF3721);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.ctaButton:hover {
+  background: #b8301d;
+  transform: translateY(-1px);
+}
+
+/* レスポンシブ */
+@media (max-width: 640px) {
+  .section {
+    padding: 1rem;
+  }
+
+  .question {
+    padding: 0.75rem;
+  }
+
+  .resultCard {
+    padding: 1.5rem;
+  }
+
+  .resultScore {
+    font-size: 3.5rem;
+  }
+
+  .resultDimension {
+    font-size: 1rem;
+    padding: 0.4rem 1.2rem;
+  }
+
+  .resultActions {
+    flex-direction: column;
+  }
+}

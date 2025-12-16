@@ -1,0 +1,164 @@
+/**
+ * components/contact/ContactForm.module.css
+ *
+ * 【Phase 30】お問い合わせフォームスタイル
+ */
+
+.form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--lp-border, #e5e5e5);
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--lp-text-primary, #111827);
+}
+
+.required {
+  color: #f44336;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--lp-border, #e5e5e5);
+  border-radius: 8px;
+  background: white;
+  color: var(--lp-text-primary, #111827);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--lp-primary, #CF3721);
+  box-shadow: 0 0 0 3px rgba(207, 55, 33, 0.1);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--lp-text-muted, #9ca3af);
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitButton {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--lp-primary, #CF3721);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #b8301d;
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fee;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  color: #d00;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* サンキュー画面 */
+.thankYou {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--lp-border, #e5e5e5);
+  text-align: center;
+}
+
+.thankYouIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f5e9;
+  color: #4CAF50;
+  border-radius: 50%;
+}
+
+.thankYouTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--lp-text-primary, #111827);
+}
+
+.thankYouMessage {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--lp-text-secondary, #4b5563);
+  margin-bottom: 2rem;
+}
+
+.backButton {
+  padding: 0.75rem 2rem;
+  font-size: 0.9375rem;
+  color: var(--lp-text-secondary, #4b5563);
+  background: transparent;
+  border: 1px solid var(--lp-border, #e5e5e5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background: #f5f5f5;
+}
