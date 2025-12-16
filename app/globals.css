@@ -1,7 +1,8 @@
 /**
  * app/globals.css
  *
- * 五次元経営マーケティングサイト グローバルスタイル
+ * 五次元経営マーケティングサイト
+ * ティール & ホワイト - モダンスタイリッシュデザイン
  */
 
 /* Reset */
@@ -18,12 +19,15 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  color-scheme: light only;
 }
 
 body {
   font-family: var(--font-noto-sans-jp), 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  background-color: #ffffff;
+  color: #1f2937;
 }
 
 img,
@@ -56,287 +60,286 @@ a {
   text-decoration: none;
 }
 
-/* 5dmgmt カラーパレット */
+/* カラーパレット - ティール & ホワイト */
 :root {
-  /* プライマリカラー */
-  --5d-primary: #2f4169;
-  --5d-primary-light: #3d5280;
-  --5d-primary-dark: #1e2a44;
+  /* ティール（メインカラー） */
+  --5d-teal: #0d9488;
+  --5d-teal-light: #14b8a6;
+  --5d-teal-dark: #0f766e;
+  --5d-teal-50: #f0fdfa;
+  --5d-teal-100: #ccfbf1;
 
-  /* アクセントカラー */
-  --5d-accent: #00B8C4;
-  --5d-accent-light: #00d4e2;
-  --5d-accent-dark: #009aa4;
+  /* テキストカラー */
+  --5d-text: #1f2937;
+  --5d-text-secondary: #4b5563;
+  --5d-text-muted: #9ca3af;
 
-  /* サポートカラー */
-  --5d-gold: #F5C518;
-  --5d-orange: #FF6B35;
-
-  /* 背景色 */
-  --5d-bg: #e6e5e5;
-  --5d-bg-white: #ffffff;
-  --5d-bg-section: #f5f5f5;
-
-  /* テキスト */
-  --5d-text: #333333;
-  --5d-text-muted: #666666;
-  --5d-text-light: #999999;
+  /* 背景 */
+  --5d-bg: #ffffff;
+  --5d-bg-soft: #f9fafb;
+  --5d-bg-muted: #f3f4f6;
 
   /* ボーダー */
-  --5d-border: #d0d0d0;
-  --5d-border-light: #e5e5e5;
+  --5d-border: #e5e7eb;
+  --5d-border-light: #f3f4f6;
 
-  /* グラデーション */
-  --5d-gradient-hero: linear-gradient(135deg, #d8ffff 0%, #87e7ff 100%);
+  /* LP変数互換 */
+  --lp-bg: #ffffff;
+  --lp-bg-section: #f9fafb;
+  --lp-text-primary: #1f2937;
+  --lp-text-secondary: #4b5563;
+  --lp-text-muted: #9ca3af;
+  --lp-border: #e5e7eb;
+  --lp-primary: #0d9488;
+  --lp-primary-light: rgba(13, 148, 136, 0.1);
 }
 
-/* ダークモード対応 - 5dmgmtは常にライトモードで表示 */
-@media (prefers-color-scheme: dark) {
-  .five-d-page {
-    --lp-bg: var(--5d-bg);
-    --lp-bg-section: var(--5d-bg-section);
-    --lp-text-primary: var(--5d-text);
-    --lp-text-secondary: var(--5d-text-muted);
-    --lp-text-muted: var(--5d-text-light);
-    --lp-border: var(--5d-border);
-    --lp-primary: var(--5d-primary);
-    --lp-primary-light: rgba(47, 65, 105, 0.1);
-    color-scheme: light;
-  }
-}
-
-/* 5dmgmt ページ基本スタイル */
+/* ページベース */
 .five-d-page {
-  /* ライトモードを強制 */
-  color-scheme: light;
   background-color: var(--5d-bg) !important;
   color: var(--5d-text) !important;
-
-  /* LP変数をオーバーライド */
-  --lp-bg: var(--5d-bg);
-  --lp-bg-section: var(--5d-bg-section);
-  --lp-text-primary: var(--5d-text);
-  --lp-text-secondary: var(--5d-text-muted);
-  --lp-text-muted: var(--5d-text-light);
-  --lp-border: var(--5d-border);
-  --lp-primary: var(--5d-primary);
-  --lp-primary-light: rgba(47, 65, 105, 0.1);
 }
 
 /* ヘッダー */
 .five-d-header {
-  background-color: var(--5d-primary) !important;
-  color: white !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid var(--5d-border);
+  backdrop-filter: blur(8px);
 }
 
 .five-d-header a {
-  color: white !important;
+  color: var(--5d-text) !important;
+  font-weight: 500;
+  transition: color 0.15s ease;
 }
 
-.five-d-header .logo-text {
-  color: white !important;
-  font-weight: 700;
+.five-d-header a:hover {
+  color: var(--5d-teal) !important;
 }
 
-/* スクロール時のヘッダー */
 .five-d-header.is-scrolled {
-  background-color: var(--5d-primary) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* ナビゲーションボタン */
+/* ナビボタン */
 .five-d-nav-btn {
-  background-color: var(--5d-accent) !important;
-  color: white !important;
+  background-color: var(--5d-teal) !important;
+  color: #ffffff !important;
   border: none !important;
-  border-radius: 80px !important;
+  border-radius: 9999px !important;
   padding: 0.5rem 1.25rem !important;
   font-weight: 600 !important;
-  transition: background-color 0.2s, transform 0.2s !important;
+  font-size: 0.875rem !important;
+  transition: all 0.15s ease !important;
 }
 
 .five-d-nav-btn:hover {
-  background-color: var(--5d-accent-dark) !important;
+  background-color: var(--5d-teal-dark) !important;
   transform: translateY(-1px) !important;
 }
 
-/* プライマリボタン */
+/* ボタン */
 .five-d-page .btn-primary,
 .five-d-page [class*="btnPrimary"] {
-  background-color: var(--5d-accent) !important;
-  color: white !important;
-  border-radius: 80px !important;
-  box-shadow: 0 4px 15px rgba(0, 184, 196, 0.3) !important;
+  background-color: var(--5d-teal) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
 }
 
 .five-d-page .btn-primary:hover,
 .five-d-page [class*="btnPrimary"]:hover {
-  background-color: var(--5d-accent-dark) !important;
+  background-color: var(--5d-teal-dark) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(0, 184, 196, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
 }
 
-/* セカンダリボタン */
 .five-d-page .btn-secondary,
 .five-d-page [class*="btnSecondary"] {
   background-color: transparent !important;
-  color: var(--5d-primary) !important;
-  border: 2px solid var(--5d-primary) !important;
-  border-radius: 80px !important;
+  color: var(--5d-teal) !important;
+  border: 2px solid var(--5d-teal) !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
 }
 
 .five-d-page .btn-secondary:hover,
 .five-d-page [class*="btnSecondary"]:hover {
-  background-color: var(--5d-primary) !important;
-  color: white !important;
+  background-color: var(--5d-teal) !important;
+  color: #ffffff !important;
 }
 
-/* CTAボタン */
 .five-d-page [class*="ctaBtn"] {
-  background-color: var(--5d-accent) !important;
-  color: white !important;
-  border-radius: 80px !important;
-  box-shadow: 0 4px 15px rgba(0, 184, 196, 0.3) !important;
+  background-color: var(--5d-teal) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
 }
 
 .five-d-page [class*="ctaBtn"]:hover {
-  background-color: var(--5d-accent-dark) !important;
+  background-color: var(--5d-teal-dark) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
 }
 
-/* ヒーローセクション */
+/* ヒーロー */
 .five-d-page [class*="hero"] {
-  background: var(--5d-gradient-hero) !important;
-  color: var(--5d-text) !important;
+  background: linear-gradient(180deg, var(--5d-teal-50) 0%, #ffffff 100%) !important;
 }
 
 .five-d-page [class*="heroTitle"] {
-  color: var(--5d-primary) !important;
+  color: var(--5d-text) !important;
+  font-weight: 700 !important;
 }
 
-.five-d-page [class*="heroCatch"],
+.five-d-page [class*="heroCatch"] {
+  color: var(--5d-teal) !important;
+  font-weight: 600 !important;
+}
+
 .five-d-page [class*="heroLead"] {
-  color: var(--5d-text) !important;
+  color: var(--5d-text-secondary) !important;
 }
 
 /* セクション */
 .five-d-page section {
-  background-color: var(--5d-bg-white);
+  background-color: #ffffff;
 }
 
 .five-d-page [class*="testimonialsSection"],
 .five-d-page [class*="architectureSection"] {
-  background-color: var(--5d-bg-section) !important;
+  background-color: var(--5d-bg-soft) !important;
 }
 
-/* セクションタグ */
 .five-d-page [class*="sectionTag"] {
-  color: var(--5d-accent) !important;
+  color: var(--5d-teal) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
 }
 
-/* セクションタイトル */
 .five-d-page [class*="sectionTitle"] {
-  color: var(--5d-primary) !important;
+  color: var(--5d-text) !important;
+  font-weight: 700 !important;
 }
 
 /* カード */
 .five-d-page [class*="featureCard"],
 .five-d-page [class*="testimonialCard"] {
-  background-color: var(--5d-bg-white) !important;
-  border: 1px solid var(--5d-border-light) !important;
-  color: var(--5d-text) !important;
+  background-color: #ffffff !important;
+  border: 1px solid var(--5d-border) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.five-d-page [class*="featureCard"]:hover,
+.five-d-page [class*="testimonialCard"]:hover {
+  border-color: var(--5d-teal-light) !important;
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1) !important;
 }
 
 .five-d-page [class*="featureCard"] h3 {
-  color: var(--5d-primary) !important;
+  color: var(--5d-text) !important;
+  font-weight: 600 !important;
 }
 
-/* CTAセクション */
+/* CTA */
 .five-d-page [class*="ctaSection"] {
-  background: var(--5d-gradient-hero) !important;
-  color: var(--5d-text) !important;
+  background: linear-gradient(135deg, var(--5d-teal-50) 0%, var(--5d-teal-100) 100%) !important;
+  border-radius: 16px !important;
 }
 
 .five-d-page [class*="ctaTitle"] {
-  color: var(--5d-primary) !important;
+  color: var(--5d-text) !important;
+  font-weight: 700 !important;
 }
 
 /* テーブル */
 .five-d-page table {
-  background-color: var(--5d-bg-white) !important;
+  background-color: #ffffff !important;
 }
 
 .five-d-page th {
-  color: var(--5d-text-muted) !important;
+  color: var(--5d-text-secondary) !important;
+  font-weight: 500 !important;
+  background-color: var(--5d-bg-soft) !important;
 }
 
 .five-d-page td {
   color: var(--5d-text) !important;
 }
 
-/* 爆運帯ハイライト */
 .five-d-page tr[style*="primary-light"] {
-  background-color: rgba(0, 184, 196, 0.1) !important;
+  background-color: var(--5d-teal-50) !important;
 }
 
 /* フッター */
 .five-d-footer {
-  background-color: var(--5d-primary) !important;
-  color: white !important;
+  background-color: var(--5d-text) !important;
+  color: #ffffff !important;
 }
 
 .five-d-footer a {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.15s ease !important;
 }
 
 .five-d-footer a:hover {
-  color: white !important;
+  color: #ffffff !important;
 }
 
 /* FAQ */
 .five-d-page [class*="faqItem"] {
-  background-color: var(--5d-bg-white) !important;
-  border-color: var(--5d-border-light) !important;
+  background-color: #ffffff !important;
+  border: 1px solid var(--5d-border) !important;
+  border-radius: 8px !important;
+}
+
+.five-d-page [class*="faqItem"]:hover {
+  border-color: var(--5d-teal-light) !important;
 }
 
 .five-d-page [class*="faqQuestion"] {
   color: var(--5d-text) !important;
+  font-weight: 500 !important;
 }
 
 .five-d-page [class*="faqAnswer"] {
-  color: var(--5d-text-muted) !important;
-}
-
-/* 診断コンポーネント */
-.five-d-page [class*="diagnosis"] {
-  background-color: var(--5d-bg-white) !important;
+  color: var(--5d-text-secondary) !important;
 }
 
 /* フォーム */
 .five-d-page input,
 .five-d-page select,
 .five-d-page textarea {
-  background-color: var(--5d-bg-white) !important;
+  background-color: #ffffff !important;
   color: var(--5d-text) !important;
-  border-color: var(--5d-border) !important;
+  border: 1px solid var(--5d-border) !important;
+  border-radius: 8px !important;
 }
 
 .five-d-page input:focus,
 .five-d-page select:focus,
 .five-d-page textarea:focus {
-  border-color: var(--5d-accent) !important;
-  box-shadow: 0 0 0 3px rgba(0, 184, 196, 0.1) !important;
+  border-color: var(--5d-teal) !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1) !important;
+  outline: none !important;
 }
 
 /* リンク */
 .five-d-page a {
-  color: var(--5d-primary);
+  color: var(--5d-teal);
 }
 
 .five-d-page a:hover {
-  color: var(--5d-accent);
+  color: var(--5d-teal-dark);
 }
 
-/* ロゴ画像 */
+/* ロゴ */
 .five-d-logo-img {
   height: 40px;
   width: auto;
@@ -348,21 +351,22 @@ a {
   }
 }
 
-/* 5dmgmt モバイルメニュー */
+/* モバイルメニュー */
 .five-d-header [class*="menuBtn"] span {
-  background-color: white !important;
+  background-color: var(--5d-text) !important;
 }
 
 .five-d-header [class*="mobileNav"] {
-  background-color: var(--5d-primary) !important;
+  background-color: #ffffff !important;
+  border-top: 1px solid var(--5d-border) !important;
 }
 
 .five-d-header [class*="mobileNav"] a {
-  color: white !important;
-  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--5d-text) !important;
+  border-bottom-color: var(--5d-border) !important;
 }
 
 .five-d-header [class*="mobileNav"] a:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: white !important;
+  color: var(--5d-teal) !important;
+  background-color: var(--5d-bg-soft) !important;
 }
