@@ -21,14 +21,14 @@ const services = [
   {
     title: '経営者運気診断',
     description: '3分で今の意識レベルを測定。ホーキンズ・スケールに基づく10の質問で、あなたの現在地を可視化します。',
-    href: '/5dmgmt/unki/shindan',
+    href: '/unki/shindan',
     cta: '診断を受ける（無料）',
     tag: '3分・無料',
   },
   {
     title: '宿曜鑑定',
     description: '生年月日から導く、あなたの潜在意識の設計図。27宿の特性と、意識レベルを上げやすい方向性を解読します。',
-    href: '/5dmgmt/unki/shukuyo',
+    href: '/unki/shukuyo',
     cta: '宿曜を調べる',
     tag: '生年月日から算出',
   },

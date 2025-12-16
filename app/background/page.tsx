@@ -20,19 +20,19 @@ const articles = [
   {
     title: '五次元経営ストーリー',
     description: '創業者がなぜ「意識レベル」に辿り着いたのか。個人的な体験から五次元経営が生まれるまでの物語。',
-    href: '/5dmgmt/background/story',
+    href: '/background/story',
     tag: 'Origin Story',
   },
   {
     title: 'ホーキンズ博士の研究',
     description: 'デビッド・R・ホーキンズ博士とは誰か。意識レベル理論の科学的背景と、経営への応用。',
-    href: '/5dmgmt/background/hawkins',
+    href: '/background/hawkins',
     tag: 'Theory',
   },
   {
     title: '五次元経営の全体像',
     description: 'イマココ意識、宿曜、風水。3つのアプローチがどのように連携し、意識レベルを上げるのか。',
-    href: '/5dmgmt/background/overview',
+    href: '/background/overview',
     tag: 'Framework',
   },
 ];

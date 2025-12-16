@@ -29,7 +29,7 @@ const programs = [
       '質疑応答',
     ],
     price: '無料（初回限定）',
-    href: '/5dmgmt/taiken/imakoko',
+    href: '/taiken/imakoko',
     cta: '詳細を見る',
   },
   {
@@ -44,7 +44,7 @@ const programs = [
       '経営者同士の対話セッション',
     ],
     price: '詳細はお問い合わせください',
-    href: '/5dmgmt/taiken/retreat',
+    href: '/taiken/retreat',
     cta: '詳細を見る',
   },
 ];

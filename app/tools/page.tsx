@@ -39,7 +39,7 @@ const tools = [
       'チャットサポート',
       '経営課題の意識的解決',
     ],
-    href: '/5dmgmt/company/contact',
+    href: '/company/contact',
     cta: 'お問い合わせ',
     tag: 'Coaching',
   },

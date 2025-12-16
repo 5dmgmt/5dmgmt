@@ -370,3 +370,381 @@ a {
   color: var(--5d-teal) !important;
   background-color: var(--5d-bg-soft) !important;
 }
+
+/* ================================================
+   SaaS Best Practices - Animations & Interactions
+   ================================================ */
+
+/* Fade-in on scroll animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+/* Animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Hero animations */
+.five-d-page [class*="hero"] [class*="heroCatch"] {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.five-d-page [class*="hero"] [class*="heroTitle"] {
+  animation: fadeInUp 0.7s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.five-d-page [class*="hero"] [class*="heroLead"] {
+  animation: fadeInUp 0.7s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.five-d-page [class*="hero"] [class*="btn"],
+.five-d-page [class*="hero"] a[class*="btn"] {
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Section header animations */
+.five-d-page [class*="sectionHeader"] {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Card animations - stagger effect */
+.five-d-page [class*="featureCard"],
+.five-d-page [class*="testimonialCard"] {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.five-d-page [class*="featureCard"]:nth-child(1),
+.five-d-page [class*="testimonialCard"]:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.five-d-page [class*="featureCard"]:nth-child(2),
+.five-d-page [class*="testimonialCard"]:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.five-d-page [class*="featureCard"]:nth-child(3),
+.five-d-page [class*="testimonialCard"]:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.five-d-page [class*="featureCard"]:nth-child(4),
+.five-d-page [class*="testimonialCard"]:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Enhanced button interactions */
+.five-d-page [class*="btn"],
+.five-d-page button,
+.five-d-page [class*="ctaBtn"] {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.five-d-page [class*="btn"]::before,
+.five-d-page [class*="ctaBtn"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.five-d-page [class*="btn"]:hover::before,
+.five-d-page [class*="ctaBtn"]:hover::before {
+  left: 100%;
+}
+
+.five-d-page [class*="btnPrimary"]:active,
+.five-d-page [class*="ctaBtn"]:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* Enhanced card hover effects */
+.five-d-page [class*="featureCard"]:hover,
+.five-d-page [class*="testimonialCard"]:hover {
+  transform: translateY(-8px) !important;
+  box-shadow:
+    0 4px 6px -1px rgba(13, 148, 136, 0.1),
+    0 10px 15px -3px rgba(13, 148, 136, 0.15),
+    0 20px 25px -5px rgba(13, 148, 136, 0.1) !important;
+}
+
+/* Article card hover (背景を読む page) */
+.article-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.article-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow:
+    0 10px 25px rgba(13, 148, 136, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* CTA section animation */
+.five-d-page [class*="ctaSection"] {
+  animation: scaleIn 0.6s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.five-d-page [class*="ctaSection"]::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Link hover effects */
+.five-d-page a:not([class*="btn"]):not([class*="ctaBtn"]) {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.five-d-page main a:not([class*="btn"]):not([class*="ctaBtn"])::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--5d-teal);
+  transition: width 0.3s ease;
+}
+
+.five-d-page main a:not([class*="btn"]):not([class*="ctaBtn"]):hover::after {
+  width: 100%;
+}
+
+/* Input focus animations */
+.five-d-page input:focus,
+.five-d-page select:focus,
+.five-d-page textarea:focus {
+  transform: scale(1.01);
+  transition: all 0.2s ease !important;
+}
+
+/* Tag/badge animations */
+.five-d-page span[style*="borderRadius: 100px"],
+.five-d-page span[style*="border-radius: 100px"] {
+  transition: all 0.2s ease;
+}
+
+.five-d-page span[style*="borderRadius: 100px"]:hover,
+.five-d-page span[style*="border-radius: 100px"]:hover {
+  transform: scale(1.05);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Loading skeleton animation (for future use) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--5d-bg-muted) 25%,
+    var(--5d-bg-soft) 50%,
+    var(--5d-bg-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text effect for special headings */
+.gradient-text {
+  background: linear-gradient(135deg, var(--5d-teal) 0%, var(--5d-teal-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Number counter animation placeholder */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header scroll transition */
+.five-d-header {
+  transition: all 0.3s ease !important;
+}
+
+.five-d-header.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Mobile menu animation */
+.five-d-header [class*="mobileNav"] {
+  transition: all 0.3s ease !important;
+}
+
+/* Footer link animations */
+.five-d-footer a {
+  position: relative;
+}
+
+.five-d-footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.five-d-footer a:hover::after {
+  width: 100%;
+}

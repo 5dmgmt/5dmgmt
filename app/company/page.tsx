@@ -20,17 +20,17 @@ const pages = [
   {
     title: '会社概要',
     description: '五次元経営株式会社の会社情報',
-    href: '/5dmgmt/company/profile',
+    href: '/company/profile',
   },
   {
     title: '特定商取引法に基づく表記',
     description: '特定商取引法に基づく表示事項',
-    href: '/5dmgmt/company/tokushoho',
+    href: '/company/tokushoho',
   },
   {
     title: 'お問い合わせ',
     description: 'ご質問・ご相談はこちらから',
-    href: '/5dmgmt/company/contact',
+    href: '/company/contact',
   },
 ];
 
