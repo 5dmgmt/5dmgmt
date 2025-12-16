@@ -239,21 +239,24 @@ export default function ShukuyoLookup() {
       {result && (
         <div className="shukuyo-result">
           <div className="shukuyo-result-main">
+            <p style={{ fontSize: '0.9rem', color: 'var(--5d-text-secondary)', marginBottom: '8px' }}>あなたの宿曜</p>
             <p className="shukuyo-result-shuku">{result.shukuyo}宿</p>
             <p className="shukuyo-result-yomi">（{result.shukuyo_yomi}しゅく）</p>
           </div>
           <div className="shukuyo-result-details">
             <div className="shukuyo-result-row">
-              <span className="shukuyo-result-label">曜日：</span>
-              <span className="shukuyo-result-value">{result.weekday}曜日</span>
+              <span className="shukuyo-result-label">七曜：</span>
+              <span className="shukuyo-result-value">{result.weekday}曜</span>
             </div>
+            {result.ryouhitsu && (
+              <div className="shukuyo-result-row">
+                <span className="shukuyo-result-label">七曜陵逼：</span>
+                <span className="shukuyo-result-value" style={{ color: '#d32f2f', fontWeight: 600 }}>{result.ryouhitsu}</span>
+              </div>
+            )}
             <div className="shukuyo-result-row">
-              <span className="shukuyo-result-label">五行：</span>
-              <span className="shukuyo-result-value">{result.element}</span>
-            </div>
-            <div className="shukuyo-result-row">
-              <span className="shukuyo-result-label">特性：</span>
-              <span className="shukuyo-result-value">{result.characteristic}</span>
+              <span className="shukuyo-result-label">調べた日付：</span>
+              <span className="shukuyo-result-value">{result.year}年{result.month}月{result.day}日</span>
             </div>
             {result.special_day && (
               <div className="shukuyo-result-row">

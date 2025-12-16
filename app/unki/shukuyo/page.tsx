@@ -63,7 +63,10 @@ export default function ShukuyoPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <p className={styles.sectionTag}>Senseiban</p>
-              <h2 className={styles.sectionTitle}>宿曜盤</h2>
+              <h2 className={styles.sectionTitle}>― 宿曜盤アプリ ―</h2>
+              <p className={styles.sectionLead}>
+                自分を中心とした人間関係を知りたい方はこちらのアプリを
+              </p>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
