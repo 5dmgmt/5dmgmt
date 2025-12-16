@@ -62,12 +62,12 @@ a {
 
 /* カラーパレット - ティール & ホワイト */
 :root {
-  /* ティール（メインカラー） */
-  --5d-teal: #0d9488;
-  --5d-teal-light: #14b8a6;
-  --5d-teal-dark: #0f766e;
-  --5d-teal-50: #f0fdfa;
-  --5d-teal-100: #ccfbf1;
+  /* ティール（メインカラー）- FDC本体と同じ */
+  --5d-teal: #00B8C4;
+  --5d-teal-light: #4dd0e1;
+  --5d-teal-dark: #008A94;
+  --5d-teal-50: #e0f7fa;
+  --5d-teal-100: #b2ebf2;
 
   /* テキストカラー */
   --5d-text: #1f2937;
@@ -83,15 +83,15 @@ a {
   --5d-border: #e5e7eb;
   --5d-border-light: #f3f4f6;
 
-  /* LP変数互換 */
+  /* LP変数互換 - FDC本体と同じ */
   --lp-bg: #ffffff;
   --lp-bg-section: #f9fafb;
   --lp-text-primary: #1f2937;
   --lp-text-secondary: #374151;
   --lp-text-muted: #6b7280;
   --lp-border: #e5e7eb;
-  --lp-primary: #0d9488;
-  --lp-primary-light: rgba(13, 148, 136, 0.1);
+  --lp-primary: #00B8C4;
+  --lp-primary-light: rgba(0, 184, 196, 0.1);
 }
 
 /* ページベース */
@@ -152,7 +152,7 @@ a {
 .five-d-page [class*="btnPrimary"]:hover {
   background-color: var(--5d-teal-dark) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(0, 184, 196, 0.25) !important;
 }
 
 .five-d-page .btn-secondary,
@@ -182,7 +182,7 @@ a {
 .five-d-page [class*="ctaBtn"]:hover {
   background-color: var(--5d-teal-dark) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(0, 184, 196, 0.25) !important;
 }
 
 /* ヒーロー */
@@ -239,7 +239,7 @@ a {
 .five-d-page [class*="featureCard"]:hover,
 .five-d-page [class*="testimonialCard"]:hover {
   border-color: var(--5d-teal-light) !important;
-  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1) !important;
+  box-shadow: 0 4px 16px rgba(0, 184, 196, 0.1) !important;
 }
 
 .five-d-page [class*="featureCard"] h3 {
@@ -334,7 +334,7 @@ a {
 .five-d-page select:focus,
 .five-d-page textarea:focus {
   border-color: var(--5d-teal) !important;
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(0, 184, 196, 0.1) !important;
   outline: none !important;
 }
 
@@ -577,9 +577,9 @@ a {
 .five-d-page [class*="testimonialCard"]:hover {
   transform: translateY(-8px) !important;
   box-shadow:
-    0 4px 6px -1px rgba(13, 148, 136, 0.1),
-    0 10px 15px -3px rgba(13, 148, 136, 0.15),
-    0 20px 25px -5px rgba(13, 148, 136, 0.1) !important;
+    0 4px 6px -1px rgba(0, 184, 196, 0.1),
+    0 10px 15px -3px rgba(0, 184, 196, 0.15),
+    0 20px 25px -5px rgba(0, 184, 196, 0.1) !important;
 }
 
 /* Article card hover (背景を読む page) */
@@ -590,7 +590,7 @@ a {
 .article-card:hover {
   transform: translateY(-6px) !important;
   box-shadow:
-    0 10px 25px rgba(13, 148, 136, 0.15),
+    0 10px 25px rgba(0, 184, 196, 0.15),
     0 4px 10px rgba(0, 0, 0, 0.05) !important;
 }
 
