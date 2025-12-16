@@ -1,0 +1,151 @@
+/**
+ * components/diagnosis/data.ts
+ * 意識レベル診断の質問データ
+ */
+
+import type { Question } from './types';
+
+export const questions: Question[] = [
+  {
+    id: 'q1',
+    section: 'エネルギーの向き',
+    text: '月曜日の朝、どんな気持ちですか？',
+    type: 'radio',
+    options: [
+      { value: 20, text: '憂鬱、できれば避けたい' },
+      { value: 175, text: 'やらなければという義務感' },
+      { value: 250, text: '淡々と、特に感情なし' },
+      { value: 350, text: '今週も頑張ろうという意欲' },
+      { value: 500, text: '何ができるか楽しみ' },
+      { value: 600, text: '特に月曜を意識しない、いつも充実' },
+    ],
+  },
+  {
+    id: 'q2',
+    section: 'エネルギーの向き',
+    text: '問題が起きた時、最初に考えることは？',
+    type: 'radio',
+    options: [
+      { value: 100, text: '誰のせいだ？なぜ私が？' },
+      { value: 200, text: 'どう対処すれば損害を最小化できるか' },
+      { value: 250, text: 'これも経験、どちらでもいい' },
+      { value: 400, text: '何が学べるか、どう改善できるか' },
+      { value: 500, text: 'みんなが成長する機会だ' },
+      { value: 600, text: '起きることはすべて完璧' },
+    ],
+  },
+  {
+    id: 'q3',
+    section: '他者との関係',
+    text: '部下がミスをした時の反応は？',
+    type: 'radio',
+    options: [
+      { value: 150, text: '怒り、罰を与える' },
+      { value: 200, text: '指導するが、内心イライラ' },
+      { value: 250, text: '淡々と事実を伝える' },
+      { value: 400, text: '原因を一緒に分析する' },
+      { value: 500, text: '成長の機会として支援する' },
+      { value: 600, text: 'すでに完璧だと知っている' },
+    ],
+  },
+  {
+    id: 'q4',
+    section: '他者との関係',
+    text: '競合他社の成功を聞いてどう感じる？',
+    type: 'radio',
+    options: [
+      { value: 125, text: '悔しい、脅威を感じる' },
+      { value: 200, text: '対抗策を考える' },
+      { value: 350, text: '市場にとって良いこと' },
+      { value: 400, text: '学べることを探す' },
+      { value: 500, text: '素直に祝福できる' },
+      { value: 600, text: 'すべてはつながっている' },
+    ],
+  },
+  {
+    id: 'q5',
+    section: '動機の源泉',
+    text: 'なぜ売上を上げたいのですか？',
+    type: 'radio',
+    options: [
+      { value: 100, text: '生き残るため、負けたくない' },
+      { value: 175, text: '目標達成、評価のため' },
+      { value: 250, text: '会社を維持するため' },
+      { value: 400, text: '成長と進化のため' },
+      { value: 500, text: 'より多くの人に価値を届けるため' },
+      { value: 540, text: '売上は結果、プロセスを楽しんでいる' },
+    ],
+  },
+  {
+    id: 'q6',
+    section: '動機の源泉',
+    text: '仕事のエネルギー源は？',
+    type: 'radio',
+    options: [
+      { value: 100, text: '恐怖（失敗、貧困、批判への恐れ）' },
+      { value: 125, text: '欲望（金、地位、承認）' },
+      { value: 310, text: '意志（目標、計画、規律）' },
+      { value: 400, text: '好奇心（学習、発見、創造）' },
+      { value: 500, text: '愛（貢献、奉仕、つながり）' },
+      { value: 540, text: '喜び（存在自体、今この瞬間）' },
+    ],
+  },
+  {
+    id: 'q7',
+    section: '第二領域の実践',
+    text: '「重要だが緊急でない」仕事（第二領域）の割合は？',
+    type: 'radio',
+    options: [
+      { value: 100, text: 'ほぼ0%（そんな余裕はない）' },
+      { value: 175, text: '5%未満（たまに時間が取れる程度）' },
+      { value: 250, text: '10-20%（意識的に時間を作っている）' },
+      { value: 350, text: '30-40%（優先的に確保している）' },
+      { value: 500, text: '50%以上（ここが仕事の中心）' },
+      { value: 600, text: 'すべてが重要かつ緊急でない' },
+    ],
+  },
+  {
+    id: 'q8',
+    section: '第二領域の実践',
+    text: '先週、「重要だが緊急でない」活動（第二領域）で具体的に何をしましたか？',
+    type: 'checkbox',
+    options: [
+      { value: 0, text: '「重要だが緊急でない」時間が取れなかった' },
+      { value: 1, text: '中長期ビジョン・戦略を考えた' },
+      { value: 2, text: '部下の育成・コーチングをした' },
+      { value: 3, text: '重要な関係性を深めた' },
+      { value: 4, text: '新しい知識・スキルを学んだ' },
+      { value: 5, text: '仕組み・システムを改善した' },
+      { value: 6, text: '自分自身と向き合う時間を持った' },
+      { value: 7, text: 'すべての仕事が「重要だが緊急でない」領域だった' },
+    ],
+  },
+  {
+    id: 'q9',
+    section: '意思決定とAI活用',
+    text: '重要な決断をする時の基準は？',
+    type: 'radio',
+    options: [
+      { value: 100, text: 'リスク回避、損失を防ぐ' },
+      { value: 175, text: '利益最大化、ROI' },
+      { value: 400, text: 'データと論理的分析' },
+      { value: 450, text: '長期的成長と学習' },
+      { value: 500, text: '全員が幸せになる方法' },
+      { value: 600, text: '直感的な正しさ、自然な流れ' },
+    ],
+  },
+  {
+    id: 'q10',
+    section: '意思決定とAI活用',
+    text: 'AIを導入する主な理由は？',
+    type: 'radio',
+    options: [
+      { value: 100, text: '競合に遅れないため' },
+      { value: 200, text: 'コスト削減、効率化のため' },
+      { value: 350, text: '時間を作るため' },
+      { value: 400, text: '人間の能力を拡張するため' },
+      { value: 500, text: 'より大きな価値を生み出すため' },
+      { value: 540, text: 'それが自然な流れだから' },
+    ],
+  },
+];
