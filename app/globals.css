@@ -303,31 +303,21 @@ a { text-decoration: none; }
 /* ==========================================================================
    9. Footer
    ========================================================================== */
+/* Footer - Teal Style */
 .five-d-footer {
-  background-color: var(--5d-text) !important;
+  background: linear-gradient(135deg, var(--5d-teal) 0%, var(--5d-teal-dark) 100%) !important;
   color: #ffffff !important;
 }
 
 .five-d-footer a {
-  color: rgba(255, 255, 255, 0.7) !important;
-  transition: color 0.15s ease !important;
-  position: relative;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: all 0.2s ease !important;
 }
 
-.five-d-footer a:hover { color: #ffffff !important; }
-
-.five-d-footer a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: #ffffff;
-  transition: width 0.3s ease;
+.five-d-footer a:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
-
-.five-d-footer a:hover::after { width: 100%; }
 
 /* ==========================================================================
    10. FAQ
