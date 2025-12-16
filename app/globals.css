@@ -258,6 +258,14 @@ a {
   font-weight: 700 !important;
 }
 
+.five-d-page [class*="ctaLead"] {
+  color: var(--5d-text-secondary) !important;
+}
+
+.five-d-page [class*="ctaSection"] p {
+  color: var(--5d-text-secondary) !important;
+}
+
 /* テーブル */
 .five-d-page table {
   background-color: #ffffff !important;
