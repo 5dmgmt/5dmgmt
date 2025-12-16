@@ -14,9 +14,9 @@ export default function FiveDmgmtFooter() {
     <footer className={`${styles.mainFooter} five-d-footer`}>
       <nav className={styles.footerNav}>
         <Link href="/company/profile">会社情報</Link>
-        <Link href="/company/tokushoho">特商法関連</Link>
+        <Link href="/company/tokushoho">特定商取引法</Link>
+        <Link href="/company/privacy">プライバシーポリシー</Link>
         <Link href="/company/contact">お問い合わせ</Link>
-        <Link href="/background/story">五次元経営ストーリー</Link>
       </nav>
       <p className={styles.copyright}>
         &copy; {new Date().getFullYear()} 五次元経営株式会社
