@@ -79,12 +79,39 @@ a { text-decoration: none; }
 .five-d-header a {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.five-d-header a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  opacity: 0;
 }
 
 .five-d-header a:hover {
   color: white !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.five-d-header a:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.five-d-header a:active {
+  transform: scale(0.95);
 }
 
 .five-d-header.is-scrolled {
