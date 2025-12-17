@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神夫養成講座 | 家庭の幸福を創る夫婦のパートナーシップ</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;400;700&family=Shippori+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --c-bg: #F9F8F4;
+            --c-text: #2C2C2C;
+            --c-text-light: #666666;
+            --c-accent: #B8860B; /* ゴールド系 */
+            --c-accent-dark: #8B6914;
+            --c-accent-light: #DAA520;
+            --c-surface: #FFFFFF;
+            --c-line: #E0E0E0;
+            --c-warm: #FDF5E6;
+            --font-serif: 'Shippori Mincho', 'Cormorant Garamond', serif;
+            --font-sans: 'Zen Kaku Gothic New', 'Manrope', sans-serif;
+            --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--c-bg);
+            color: var(--c-text);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; letter-spacing: 0.05em; }
+        p { font-weight: 300; letter-spacing: 0.02em; margin-bottom: 1.5rem; }
+        .en-label { font-family: 'Manrope', sans-serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; color: var(--c-accent); display: block; margin-bottom: 1rem; }
+        .text-center { text-align: center; }
+        .text-justify { text-align: justify; }
+
+        /* Layout Utilities */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; position: relative; }
+        .section { padding: 8rem 0; position: relative; }
+        .grid { display: grid; gap: 4rem; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .section { padding: 4rem 0; }
+            h1 { font-size: 2.5rem !important; }
+        }
+
+        /* Animation Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-out); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--c-accent) 0%, transparent 70%);
+            opacity: 0.12;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            animation: pulse 10s infinite alternate;
+        }
+
+        .hero-content { z-index: 2; text-align: center; }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #2C2C2C 0%, #5a4a2d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p { font-size: 1.1rem; color: var(--c-text-light); }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.6;
+        }
+        .scroll-line { width: 1px; height: 60px; background: var(--c-text); margin-top: 10px; animation: grow 2s infinite; transform-origin: top; }
+
+        /* --- INTRO: PARADIGM SHIFT --- */
+        .intro-card {
+            background: var(--c-surface);
+            padding: 3rem;
+            border-left: 3px solid var(--c-accent);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        /* --- COMPARISON SECTION --- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--c-line);
+            text-align: left;
+        }
+        .comparison-table th { font-weight: 500; color: var(--c-text-light); width: 25%; }
+        .comparison-table td.highlight { color: var(--c-accent-dark); font-weight: 700; background: rgba(184, 134, 11, 0.05); }
+
+        /* --- PRINCIPLE SECTION --- */
+        .principle-card {
+            background: var(--c-surface);
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .principle-card:hover { transform: translateY(-5px); border-color: var(--c-accent); }
+        .principle-number {
+            font-size: 2.5rem;
+            color: var(--c-accent);
+            font-family: var(--font-serif);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PROCESS SECTION --- */
+        .process-diagram {
+            position: relative;
+            padding: 2rem;
+            border: 1px solid var(--c-accent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- AGE GROUP SECTION --- */
+        .age-card {
+            background: var(--c-surface);
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .age-card:hover { transform: translateY(-5px); border-color: var(--c-accent); }
+        .age-label {
+            font-size: 1.5rem;
+            color: var(--c-accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-serif);
+            font-weight: 600;
+        }
+
+        /* --- MEN'S SECTION --- */
+        .story-bg {
+            background: #2C2C2C;
+            color: #fff;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .story-bg::after {
+            content: '神夫';
+            position: absolute;
+            bottom: -10%;
+            right: -5%;
+            font-size: 20rem;
+            font-family: var(--font-serif);
+            font-weight: 600;
+            color: rgba(255,255,255,0.03);
+            pointer-events: none;
+        }
+
+        /* --- CURRICULUM --- */
+        .curriculum-item {
+            background: var(--c-surface);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--c-accent);
+        }
+        .quarter-label {
+            font-size: 0.8rem;
+            color: var(--c-accent);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- PRODUCTS --- */
+        .concept-card {
+            position: relative;
+            padding: 3rem 2rem;
+            background: var(--c-surface);
+            overflow: hidden;
+        }
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--c-accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #F0EFE9;
+            padding: 4rem 0;
+            border-top: 1px solid var(--c-line);
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--c-text);
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            letter-spacing: 0.1em;
+            transition: background 0.3s ease;
+        }
+        .btn:hover { background: var(--c-accent); }
+
+        .btn-gold {
+            background: var(--c-accent);
+            color: #fff;
+        }
+        .btn-gold:hover { background: var(--c-accent-dark); }
+
+        /* Pain Points */
+        .pain-list {
+            list-style: none;
+            padding: 0;
+        }
+        .pain-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed var(--c-line);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .pain-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--c-accent);
+        }
+
+        /* Keyframes */
+        @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(1); } 100% { transform: translate(-50%, -50%) scale(1.1); } }
+        @keyframes grow { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content container">
+            <span class="en-label reveal">Partnership & Happiness Academy</span>
+            <h1 class="reveal reveal-delay-1">家庭の幸福を創る、<br>夫婦のパートナーシップ。</h1>
+            <p class="reveal reveal-delay-2">
+                Being × Doing × Having<br>
+                「神夫養成講座」という、人生を変える学び。
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 0.7rem; letter-spacing: 0.1em;">SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: PARADIGM SHIFT -->
+    <section class="section">
+        <div class="container grid-2">
+            <div class="reveal">
+                <h2 style="margin-bottom: 2rem;">2035年、<br>家庭力が人生を決める</h2>
+                <p style="font-family: var(--font-serif); font-size: 1.2rem; color: var(--c-accent-dark);">
+                    「家庭の幸福度＝人生の幸福度」の時代へ。
+                </p>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <div class="intro-card">
+                    <p>共働き70〜80%が標準となる時代。夫の家事・育児参加は「協力」ではなく<strong>「必須スキル」</strong>へと変わります。</p>
+                    <p>メンタルウェルビーイング重視の社会で、<strong>心の健康、会話の質、パートナーシップの丁寧さ</strong>がこれまで以上に重要視されます。</p>
+                    <p style="margin-bottom: 0;">AI・リモートワークで家庭にいる時間が増える中、<strong>"家庭力の差"が幸福度の差</strong>になる時代が到来しています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: 5 PRINCIPLES -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="en-label">5 Principles</span>
+                <h2>神夫養成講座の5つの原則</h2>
+                <p style="max-width: 600px; margin: 1rem auto;">結果は原則が支配している。<br>この5つの原則が、あなたの家庭と人生を変えます。</p>
+            </div>
+
+            <div class="grid-3 reveal reveal-delay-1" style="margin-top: 3rem;">
+                <div class="principle-card">
+                    <div class="principle-number">01</div>
+                    <h3>意識が行動を変える</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">Being → Doing → Having<br>「何をするか」より「どんな在り方で接するか」で夫婦関係は決まる。</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">02</div>
+                    <h3>すべてはコミュニケーション</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">問題はコミュニケーションで起き、コミュニケーションで解決する。</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">03</div>
+                    <h3>家庭はチーム</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">夫婦は共同経営者。役割分担ではなく"共創"、協力ではなく"共同責任"。</p>
+                </div>
+            </div>
+            <div class="grid-2 reveal reveal-delay-2" style="margin-top: 2rem; max-width: 680px; margin-left: auto; margin-right: auto;">
+                <div class="principle-card">
+                    <div class="principle-number">04</div>
+                    <h3>愛は「習慣」でつくられる</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">日常の小さな行動、声かけ、態度が愛着を作り続ける。</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-number">05</div>
+                    <h3>家庭の幸福＝人生の幸福</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 0;">仕事・子育て・健康、すべてが家庭の安心から生まれる。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: AGE-BASED COURSES -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="en-label">Age-Based Programs</span>
+                <h2>年代別・ライフステージ別プログラム</h2>
+                <p>あなたの今のステージに最適な学びを。</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="age-card reveal">
+                    <span class="age-label">20代</span>
+                    <h3>パートナーシップ基礎講座</h3>
+                    <p style="font-size: 0.85rem; color: var(--c-text-light);">〜幸せな結婚を選び、つくる力〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem;">
+                        <li>理想のパートナーシップの作り方</li>
+                        <li>結婚後に幸せを保つコミュニケーション</li>
+                        <li>関係悪化を防ぐ知識</li>
+                    </ul>
+                </div>
+                <div class="age-card reveal reveal-delay-1">
+                    <span class="age-label">30代</span>
+                    <h3 style="color: var(--c-accent-dark);">神夫養成講座【メイン】</h3>
+                    <p style="font-size: 0.85rem; color: var(--c-text-light);">〜愛とチーム力の家庭づくり実践編〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem;">
+                        <li>家事育児の分担とシステム化</li>
+                        <li>夫婦会議・神夫コミュニケーション</li>
+                        <li>子育てで協力し合う体制づくり</li>
+                    </ul>
+                </div>
+                <div class="age-card reveal reveal-delay-2">
+                    <span class="age-label">40代</span>
+                    <h3>夫婦再構築アカデミー</h3>
+                    <p style="font-size: 0.85rem; color: var(--c-text-light);">〜すれ違う夫婦が再びつながる〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem;">
+                        <li>夫婦の会話がなくなる問題</li>
+                        <li>価値観・生き方のズレを修復</li>
+                        <li>ミドル期の夫婦の悩み解決</li>
+                    </ul>
+                </div>
+                <div class="age-card reveal">
+                    <span class="age-label">50代</span>
+                    <h3>セカンドパートナーシップ講座</h3>
+                    <p style="font-size: 0.85rem; color: var(--c-text-light);">〜第二の人生を夫婦で共に創る〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem;">
+                        <li>空の巣症候群への対処</li>
+                        <li>老後の不安解消</li>
+                        <li>人生の目的の再共有</li>
+                    </ul>
+                </div>
+                <div class="age-card reveal reveal-delay-1">
+                    <span class="age-label">60代</span>
+                    <h3>熟年ハーモニー・ライフ講座</h3>
+                    <p style="font-size: 0.85rem; color: var(--c-text-light);">〜支え合い・心の安心を育てる〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem;">
+                        <li>健康問題で支え合う関係</li>
+                        <li>心がつながる熟年コミュニケーション</li>
+                        <li>最後まで仲良く生きる人生設計</li>
+                    </ul>
+                </div>
+                <div class="age-card reveal reveal-delay-2" style="background: #2C2C2C; color: white;">
+                    <span class="age-label" style="color: var(--c-accent-light);">男性向け</span>
+                    <h3 style="color: white;">神夫マスタープログラム</h3>
+                    <p style="font-size: 0.85rem; color: #aaa;">〜怒られない学びで家庭のヒーローに〜</p>
+                    <ul class="pain-list" style="font-size: 0.85rem; color: #ccc;">
+                        <li style="border-color: #444;">妻の感情の理解</li>
+                        <li style="border-color: #444;">家庭内リーダーシップ</li>
+                        <li style="border-color: #444;">愛される夫のマインドセット</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: MEN'S NEEDS -->
+    <section class="story-bg section">
+        <div class="container grid-2" style="align-items: center;">
+            <div class="reveal">
+                <span class="en-label" style="color: #fff; opacity: 0.7;">For Men</span>
+                <h2 style="color: #fff; font-size: 2.5rem; margin-bottom: 2rem;">怒られず、責められず、<br>家庭で尊敬される夫へ。</h2>
+                <p style="color: #ccc;">「何をしても妻に怒られる」「家事育児への正解がわからない」「話すと雰囲気が悪くなる」</p>
+                <p style="color: #ccc;">仕事も家庭も頑張っているのに報われない。そんな悩みを持つ男性のための、"責められない学び"があります。</p>
+                <p style="color: #ccc;">家庭での成功は"知識"ではなく"仕組み"でつくれる。<br><strong style="color: var(--c-accent-light);">たった3ヶ月で家庭の空気が変わる。</strong></p>
+            </div>
+            <div class="reveal reveal-delay-2" style="position: relative;">
+                <div style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 3rem;">
+                    <h3 style="color: white; margin-bottom: 2rem; text-align: center;">男性が望む未来</h3>
+                    <ul style="list-style: none; color: #ccc; font-size: 0.95rem;">
+                        <li style="padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">「妻に愛されたい」</li>
+                        <li style="padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">「家で嫌な空気になりたくない」</li>
+                        <li style="padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">「子どもから尊敬されたい」</li>
+                        <li style="padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">「仕事だけでなく家庭でも成功したい」</li>
+                        <li style="padding: 0.8rem 0;">「家庭内での居場所をつくりたい」</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: ANNUAL CURRICULUM -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 4rem;">
+                <span class="en-label">Annual Curriculum</span>
+                <h2>年間カリキュラム</h2>
+                <p>1年間で「神夫の在り方・習慣・コミュニケーション」を完成させる</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="reveal">
+                    <div class="curriculum-item">
+                        <div class="quarter-label">第1四半期：Being（在り方）</div>
+                        <h3>意識の土台づくり</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            <strong>1ヶ月目</strong> 自己理解・感情の取り扱い<br>
+                            <strong>2ヶ月目</strong> 他者理解（妻・子ども）・共感力<br>
+                            <strong>3ヶ月目</strong> 関係性の原則・夫婦はチーム
+                        </p>
+                    </div>
+                    <div class="curriculum-item">
+                        <div class="quarter-label">第2四半期：Doing（行動）</div>
+                        <h3>家庭の仕組みづくり</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            <strong>4ヶ月目</strong> 家事育児の分担システム<br>
+                            <strong>5ヶ月目</strong> 夫婦コミュニケーション術<br>
+                            <strong>6ヶ月目</strong> 夫が「自ら動く」仕組み
+                        </p>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <div class="curriculum-item">
+                        <div class="quarter-label">第3四半期：Having（成果）</div>
+                        <h3>夫婦の未来設計</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            <strong>7ヶ月目</strong> 夫婦ビジョン作成・家庭のミッション<br>
+                            <strong>8ヶ月目</strong> 経済・役割の再定義<br>
+                            <strong>9ヶ月目</strong> つながりの再強化・感謝と愛の言語
+                        </p>
+                    </div>
+                    <div class="curriculum-item">
+                        <div class="quarter-label">第4四半期：応用編</div>
+                        <h3>人生の幸福を育てる</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            <strong>10ヶ月目</strong> 子育ての共同戦略<br>
+                            <strong>11ヶ月目</strong> 危機対応・夫婦ケンカの減らし方<br>
+                            <strong>12ヶ月目</strong> 総まとめ・神夫認定
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CORPORATE TRAINING -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center reveal" style="margin-bottom: 3rem;">
+                <span class="en-label">Corporate Training</span>
+                <h2>企業研修プログラム</h2>
+                <p>社員の幸福度が会社の生産性を上げる</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="concept-card reveal">
+                    <h3>01. 離職率低下</h3>
+                    <p style="font-size: 0.9rem; color: var(--c-text-light);">Employee Retention</p>
+                    <p>共働き社員の家庭ストレスを軽減し、仕事への集中力と定着率を向上させます。</p>
+                </div>
+                <div class="concept-card reveal reveal-delay-1">
+                    <h3>02. 生産性向上</h3>
+                    <p style="font-size: 0.9rem; color: var(--c-text-light);">Productivity Boost</p>
+                    <p>家庭の安定がメンタルの安定に直結。心配事が減ることで業務効率が大幅に改善します。</p>
+                </div>
+                <div class="concept-card reveal reveal-delay-2">
+                    <h3>03. 男性育休推進</h3>
+                    <p style="font-size: 0.9rem; color: var(--c-text-light);">Paternity Leave Support</p>
+                    <p>育休中の「やるべきこと」を明確化。戻ってきた時に活躍できる人材を育成します。</p>
+                </div>
+            </div>
+
+            <div class="text-center reveal reveal-delay-2" style="margin-top: 3rem;">
+                <p style="font-size: 0.9rem; color: var(--c-text-light);">「イクメン研修」から「神夫研修」へ。<br>新時代の企業価値向上プログラム。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: COMMUNITY -->
+    <section class="section" style="background: var(--c-warm);">
+        <div class="container text-center">
+            <div class="reveal">
+                <span class="en-label">Online Community</span>
+                <h2 style="margin-bottom: 2rem;">神夫クラブ</h2>
+                <p style="max-width: 600px; margin: 0 auto 2rem;">月額制オンラインサロンで、継続的な学びとサポートを。<br>毎月のミニ講座、Q&A、デート課題、家庭の習慣化チャレンジ。</p>
+
+                <div class="grid-3" style="margin-top: 3rem; gap: 2rem;">
+                    <div style="background: white; padding: 2rem; border-radius: 4px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">毎月のミニ講座</h3>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;">最新のテーマで学び続ける</p>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 4px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Q&Aセッション</h3>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;">個別の悩みに直接回答</p>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 4px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">習慣化チャレンジ</h3>
+                        <p style="font-size: 0.85rem; margin-bottom: 0;">仲間と一緒に実践</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2 style="margin-bottom: 2rem;">幸せは家庭から。<br>あなたの人生を変える学びを。</h2>
+            <p style="margin-bottom: 3rem;">無料体験セミナー、個別相談、企業研修のご相談をお待ちしております。</p>
+            <a href="#" class="btn btn-gold">無料体験セミナーに申し込む</a>
+            <div style="margin-top: 4rem; font-size: 0.7rem; color: #999;">
+                &copy; 神夫養成講座. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        // Scroll Reveal Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
