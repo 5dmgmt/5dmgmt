@@ -91,6 +91,13 @@ export default function FiveDmgmtHeader() {
           <span />
         </button>
 
+        {/* モバイルナビゲーション オーバーレイ */}
+        <div
+          className={`${styles.mobileNavOverlay} ${isMenuOpen ? styles.isOpen : ''}`}
+          onClick={() => setIsMenuOpen(false)}
+          aria-hidden="true"
+        />
+
         {/* モバイルナビゲーション */}
         <nav className={`${styles.mobileNav} ${isMenuOpen ? styles.isOpen : ''}`}>
           {navItems.map((item) => (
