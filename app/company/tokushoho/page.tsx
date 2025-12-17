@@ -6,7 +6,8 @@
 
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// 特商法は24時間キャッシュ（ほぼ静的）
+export const revalidate = 86400;
 
 export const metadata = {
   title: '特定商取引法に基づく表記 | 五次元経営',

@@ -9,8 +9,8 @@
 import FiveDmgmtLandingPage from '@/components/landing/FiveDmgmtLandingPage';
 import Script from 'next/script';
 
-// ISR: 1時間ごとに再生成（キャッシュ有効化）
-export const revalidate = 3600;
+// トップページは6時間キャッシュ
+export const revalidate = 21600;
 
 // FAQ JSON-LD（トップページのFAQセクション用）
 const faqJsonLd = {

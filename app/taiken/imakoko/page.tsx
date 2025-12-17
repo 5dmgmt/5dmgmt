@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// イマココは6時間キャッシュ
+export const revalidate = 21600;
 
 export const metadata = {
   title: 'イマココ体験セッション | 五次元経営',

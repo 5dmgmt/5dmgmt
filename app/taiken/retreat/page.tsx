@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// リトリートは6時間キャッシュ
+export const revalidate = 21600;
 
 export const metadata = {
   title: '経営者リトリート | 五次元経営',
@@ -41,7 +42,7 @@ export default function RetreatPage() {
             <p className={styles.heroCatch}>日常を離れ、本来の自己と出会う</p>
             <h1 className={styles.heroTitle}>経営者リトリート</h1>
             <p className={styles.heroLead}>
-              1泊2日で、意識レベルを集中的に上げる。<br />
+              1泊2日で、意識レベルを集中的に整える。<br />
               環境を変え、仲間と共に、深い変容を体験する。
             </p>
           </div>
@@ -69,8 +70,8 @@ export default function RetreatPage() {
               </p>
               <p>
                 1泊2日という凝縮された時間でも、集中的に取り組むことで、
-                意識レベルを50-100上げることが可能です。
-                そして、その変化を「体」で覚えることで、
+                変化を体感しやすくなります（個人差があります）。
+                そして、その感覚を「体」で覚えることで、
                 日常に戻ってからも維持しやすくなります。
               </p>
             </div>

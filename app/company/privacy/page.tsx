@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// プライバシーポリシーは24時間キャッシュ（ほぼ静的）
+export const revalidate = 86400;
 
 export const metadata = {
   title: 'プライバシーポリシー | 五次元経営',

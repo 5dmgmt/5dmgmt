@@ -11,6 +11,7 @@ import Script from 'next/script';
 import './globals.css';
 import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
 import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
+import WebVitalsReporter from '@/components/WebVitalsReporter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 // GA4 測定ID（環境変数から取得）
@@ -111,6 +112,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        <WebVitalsReporter />
         <div className={`${styles.landingPage} five-d-page`}>
           <FiveDmgmtHeader />
           <main>{children}</main>

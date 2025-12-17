@@ -30,6 +30,22 @@ interface ShukuyoApiResponse {
   message?: string;
 }
 
+function getShortSpecialDay(person: Person): string {
+  let result = '';
+
+  if (person.specialDay) {
+    if (person.specialDay.includes('甘露')) result = '甘';
+    else if (person.specialDay.includes('金剛')) result = '剛';
+    else if (person.specialDay.includes('羅刹')) result = '羅';
+  }
+
+  if (person.shichiyoRyohitsu) {
+    result += '七';
+  }
+
+  return result;
+}
+
 // 27宿の循環順序
 const SHUKU_CYCLE_ORDER = ["鬼","柳","星","張","翼","軫","角","亢","氐","房","心","尾","箕","斗","女","虚","危","室","壁","奎","婁","胃","昴","畢","觜","参","井"];
 
@@ -178,6 +194,18 @@ export default function ShukuyoKankei() {
     }
   }, [peopleData, basePerson, saveToLocalStorage]);
 
+  const deletePerson = useCallback((id: number) => {
+    if (basePerson && id === basePerson.id) {
+      setError('基準となる人は削除できません');
+      setTimeout(() => setError(''), 5000);
+      return;
+    }
+
+    setPeopleData((prev) => prev.filter((p) => p.id !== id));
+    setSuccess('削除しました');
+    setTimeout(() => setSuccess(''), 3000);
+  }, [basePerson]);
+
   // SVGの宿名ラベルを更新
   const updateShukuLabels = useCallback(() => {
     if (!svgContainerRef.current || !basePerson) return;
@@ -324,60 +352,34 @@ export default function ShukuyoKankei() {
               tspan.setAttribute('font-size', isMobile ? '12' : '14');
               tspan.textContent = displayText;
 
-              if (person.id !== basePerson.id) {
-                (tspan as SVGTSpanElement).style.cursor = 'pointer';
-                tspan.addEventListener('click', (e) => {
-                  e.stopPropagation();
-                  if (confirm(`${person.name}さんを削除しますか?`)) {
-                    deletePerson(person.id);
-                  }
-                });
-                tspan.addEventListener('mouseenter', function(this: SVGTSpanElement) {
-                  this.setAttribute('fill', '#ff0000');
-                });
-                tspan.addEventListener('mouseleave', function(this: SVGTSpanElement) {
-                  this.setAttribute('fill', '#002060');
-                });
-              }
-              textEl.appendChild(tspan);
-            });
-          }
-        } else {
+	              if (person.id !== basePerson.id) {
+	                (tspan as SVGTSpanElement).style.cursor = 'pointer';
+	                tspan.addEventListener('click', (e) => {
+	                  e.stopPropagation();
+	                  if (confirm(`${person.name}さんを削除しますか?`)) {
+	                    deletePerson(person.id);
+	                  }
+	                });
+	                tspan.addEventListener('mouseenter', () => {
+	                  tspan.setAttribute('fill', '#ff0000');
+	                });
+	                tspan.addEventListener('mouseleave', () => {
+	                  tspan.setAttribute('fill', '#002060');
+	                });
+	              }
+	              textEl.appendChild(tspan);
+	            });
+	          }
+	        } else {
           (textEl as unknown as HTMLElement).style.display = 'none';
         }
-      }
-    });
-  }, [basePerson, peopleData]);
+	      }
+	    });
+	  }, [basePerson, deletePerson, peopleData]);
 
-  // 省略形特殊日
-  const getShortSpecialDay = (person: Person): string => {
-    let result = '';
-    if (person.specialDay) {
-      if (person.specialDay.includes('甘露')) result = '甘';
-      else if (person.specialDay.includes('金剛')) result = '剛';
-      else if (person.specialDay.includes('羅刹')) result = '羅';
-    }
-    if (person.shichiyoRyohitsu) {
-      result += '七';
-    }
-    return result;
-  };
-
-  // 人物を削除
-  const deletePerson = (id: number) => {
-    if (basePerson && id === basePerson.id) {
-      setError('基準となる人は削除できません');
-      setTimeout(() => setError(''), 5000);
-      return;
-    }
-    setPeopleData(prev => prev.filter(p => p.id !== id));
-    setSuccess('削除しました');
-    setTimeout(() => setSuccess(''), 3000);
-  };
-
-  // SVG更新
-  useEffect(() => {
-    if (svgContent && basePerson && svgContainerRef.current) {
+	  // SVG更新
+	  useEffect(() => {
+	    if (svgContent && basePerson && svgContainerRef.current) {
       svgContainerRef.current.innerHTML = svgContent;
       updateShukuLabels();
       updateSVGPlaceholders();

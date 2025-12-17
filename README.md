@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 五次元経営 マーケティングサイト
 
-## Getting Started
+五次元経営株式会社のマーケティングサイト。Next.js 16 + React 19 で構築。
 
-First, run the development server:
+## 技術スタック
+
+- **フレームワーク**: Next.js 16.0.10 (App Router)
+- **UI**: React 19.2.1
+- **スタイリング**: Tailwind CSS 4 + CSS Modules
+- **データベース**: better-sqlite3 (宿曜計算用)
+- **メール送信**: Resend
+- **エラー監視**: Sentry
+- **パフォーマンス監視**: Web Vitals + Google Analytics
+- **テスト**: Vitest (単体) + Playwright (E2E)
+- **リンター/フォーマッター**: ESLint + Prettier
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+> **Note**: `.npmrc` で `legacy-peer-deps=true` を設定済み（Sentry が Next.js 16 を未サポートのため）。
+
+### 2. 環境変数の設定
+
+`.env.example` をコピーして `.env.local` を作成:
+
+```bash
+cp .env.example .env.local
+```
+
+必要な環境変数:
+
+| 変数名 | 説明 |
+|--------|------|
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 測定ID |
+| `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` | hCaptcha サイトキー |
+| `HCAPTCHA_SECRET_KEY` | hCaptcha シークレットキー |
+| `RESEND_API_KEY` | Resend API キー |
+| `RESEND_FROM_EMAIL` | 送信元メールアドレス |
+| `CONTACT_TO_EMAIL` | 問い合わせ受信先 |
+| `SENTRY_DSN` | Sentry DSN |
+| `NEXT_PUBLIC_SENTRY_DSN` | Sentry DSN (クライアント用) |
+
+### 3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 でアクセス。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## npm スクリプト
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| コマンド | 説明 |
+|----------|------|
+| `npm run dev` | 開発サーバー起動 |
+| `npm run build` | 本番ビルド |
+| `npm run start` | 本番サーバー起動 |
+| `npm run lint` | ESLint 実行 |
+| `npm run lint:fix` | ESLint 自動修正 |
+| `npm run format` | Prettier フォーマット |
+| `npm run format:check` | Prettier チェック |
+| `npm run type-check` | TypeScript 型チェック |
+| `npm run test` | 単体テスト実行 |
+| `npm run test:ui` | テスト UI モード |
+| `npm run test:coverage` | カバレッジ付きテスト |
+| `npm run test:e2e` | E2E テスト実行 |
+| `npm run test:e2e:ui` | E2E テスト UI モード |
 
-## Learn More
+## ディレクトリ構成
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── api/              # API Routes
+│   ├── contact/      # 問い合わせフォーム
+│   └── shukuyo/      # 宿曜API
+├── background/       # 背景・ストーリー
+├── blog/             # ブログ・コラム
+├── company/          # 会社情報
+├── taiken/           # 体験サービス
+├── tools/            # ツール
+└── unki/             # 運気診断
+components/
+├── landing/          # LP コンポーネント
+└── WebVitalsReporter.tsx  # Web Vitals 監視
+lib/
+└── shukuyo/          # 宿曜計算ロジック
+__tests__/            # 単体テスト
+e2e/                  # E2E テスト
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## キャッシュ戦略 (ISR)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| ページ種別 | revalidate | 例 |
+|------------|------------|-----|
+| 静的コンテンツ | 24時間 | 会社概要、プライバシーポリシー、背景系 |
+| 準静的コンテンツ | 6時間 | トップページ、体験系、ブログ |
+| 動的コンテンツ | 1時間 | ツール、運気ページ |
 
-## Deploy on Vercel
+## セキュリティ
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`next.config.ts` で以下のセキュリティヘッダーを設定:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `Strict-Transport-Security` (HSTS)
+- `X-Frame-Options` (クリックジャッキング防止)
+- `X-Content-Type-Options` (MIME スニッフィング防止)
+- `X-XSS-Protection` (XSS 防止)
+- `Referrer-Policy` (リファラー制御)
+- `Permissions-Policy` (機能制限)
+
+## 監視
+
+### Sentry (エラー監視)
+
+- クライアントエラー: `sentry.client.config.ts`
+- サーバーエラー: `sentry.server.config.ts`
+- Edge エラー: `sentry.edge.config.ts`
+
+### Web Vitals (パフォーマンス監視)
+
+`WebVitalsReporter` コンポーネントが Core Web Vitals を Google Analytics に送信:
+
+- LCP (Largest Contentful Paint)
+- FID (First Input Delay)
+- CLS (Cumulative Layout Shift)
+- FCP (First Contentful Paint)
+- TTFB (Time to First Byte)
+- INP (Interaction to Next Paint)
+
+## デプロイ
+
+Vercel でデプロイ:
+
+```bash
+vercel
+```
+
+または GitHub 連携で自動デプロイ。
+
+## ライセンス
+
+Private - 五次元経営株式会社

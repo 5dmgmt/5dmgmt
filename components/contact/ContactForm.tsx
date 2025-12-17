@@ -302,7 +302,7 @@ export default function ContactForm({ inquiryTypes = [] }: ContactFormProps) {
 
         {submitStatus === 'error' && (
           <p className={styles.errorMessage}>
-            エラーが発生しました。お手数ですが、直接メールでお問い合わせください。
+            エラーが発生しました。時間をおいて再度お試しください。お急ぎの場合はお電話（0466-52-7722）ください。
           </p>
         )}
       </form>

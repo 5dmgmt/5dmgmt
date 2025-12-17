@@ -94,7 +94,7 @@ export default function FiveDmgmtLandingPage() {
       {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroTarget}>経営者のための意識診断</p>
+            <p className={styles.heroTarget}>経営者のための運気診断</p>
             <p className={styles.heroCatch}>努力で運気は上がらない</p>
             <h1 className={styles.heroTitle}>
               今、気づいている
@@ -107,7 +107,7 @@ export default function FiveDmgmtLandingPage() {
               五次元経営は、その逆をいく。<br />
               今この瞬間に気づいている——その深さが、そのまま運気になる。
             </p>
-            <p className={styles.heroValue}>3分の診断で、自分とチームを同時に変える「視点の現在地」がわかる</p>
+            <p className={styles.heroValue}>3分・10問で、今の意識レベル（現在地）がわかる</p>
             <div className={styles.heroActions}>
               <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
                 無料で診断する（3分）
@@ -158,7 +158,7 @@ export default function FiveDmgmtLandingPage() {
                 </div>
                 <div className={styles.trustContent}>
                   <div className={styles.trustValue}>3ヶ月</div>
-                  <div className={styles.trustLabel}>平均で成果が出る</div>
+                  <div className={styles.trustLabel}>変化を感じる目安（個人差あり）</div>
                 </div>
               </div>
               <div className={styles.trustItem}>
@@ -342,8 +342,8 @@ export default function FiveDmgmtLandingPage() {
                 思考に巻き込まれていますか？<br />
                 それとも、今この瞬間を見ていますか？<br />
                 <br />
-                思考への巻き込まれ度／観察力／今への滞在度——<br />
-                3つの観点から、現在の意識状態を可視化します。
+                10の質問に直感で答えるだけ。<br />
+                3分で、今の意識レベル（現在地）を数値化します。
               </p>
               <Link href="/unki/shindan" className={styles.ctaBtn}>
                 運気診断を受ける（無料）

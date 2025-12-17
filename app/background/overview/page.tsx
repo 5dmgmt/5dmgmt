@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// 概要は24時間キャッシュ（静的コンテンツ）
+export const revalidate = 86400;
 
 export const metadata = {
   title: '五次元経営の全体像 | 五次元経営',

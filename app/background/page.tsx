@@ -8,7 +8,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// 背景ページは24時間キャッシュ
+export const revalidate = 86400;
 
 export const metadata = {
   title: '背景を読む | 五次元経営',

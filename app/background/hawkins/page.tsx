@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// ホーキンズ博士紹介は24時間キャッシュ（静的コンテンツ）
+export const revalidate = 86400;
 
 export const metadata = {
   title: 'ホーキンズ博士の意識レベル理論 | 意識の地図解説 | 五次元経営',

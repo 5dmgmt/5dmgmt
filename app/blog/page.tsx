@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// ブログは6時間キャッシュ
+export const revalidate = 21600;
 
 export const metadata = {
   title: 'ブログ・コラム | 意識経営の実践知 | 五次元経営',

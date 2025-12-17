@@ -7,7 +7,8 @@
 import Link from 'next/link';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// 会社情報は24時間キャッシュ
+export const revalidate = 86400;
 
 export const metadata = {
   title: '会社について | 五次元経営',

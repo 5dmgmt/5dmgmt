@@ -10,7 +10,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import styles from '@/components/landing/LandingPage.module.css';
 
-export const revalidate = 3600;
+// 体験ページは6時間キャッシュ
+export const revalidate = 21600;
 
 export const metadata = {
   title: '体験する | 五次元経営',
