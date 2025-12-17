@@ -12,8 +12,13 @@ import styles from '@/components/landing/LandingPage.module.css';
 export const revalidate = 3600;
 
 export const metadata = {
-  title: 'ホーキンズ博士の研究 | 五次元経営',
-  description: 'デビッド・R・ホーキンズ博士の意識レベル理論の解説。科学的背景と経営への応用。',
+  title: 'ホーキンズ博士の意識レベル理論 | 意識の地図解説 | 五次元経営',
+  description: 'デビッド・R・ホーキンズ博士の意識レベル理論を完全解説。1-1000の意識スケール、パワーとフォースの違い、経営への応用方法。',
+  keywords: ['ホーキンズ', '意識レベル', '意識の地図', 'パワーかフォースか', 'Power vs Force', '意識スケール'],
+  openGraph: {
+    title: 'ホーキンズ博士の意識レベル理論 | 五次元経営',
+    description: 'デビッド・R・ホーキンズ博士の意識レベル理論を完全解説。意識の地図と経営への応用。',
+  },
 };
 
 const consciousnessLevels = [
@@ -119,12 +124,12 @@ export default function HawkinsPage() {
                       <tr key={item.level} style={{
                         borderBottom: '1px solid var(--lp-border)',
                         backgroundColor: isHighlight ? 'var(--lp-primary-light)' :
-                                        levelNum === 200 ? '#e8f5e9' : 'transparent',
+                                        levelNum === 200 ? '#e0f7fa' : 'transparent',
                       }}>
                         <td style={{
                           padding: '10px 12px',
                           fontWeight: 600,
-                          color: isAbove200 ? '#4CAF50' : '#f44336',
+                          color: isAbove200 ? 'var(--lp-primary)' : 'var(--lp-text-muted)',
                         }}>
                           {item.level}
                         </td>
@@ -170,21 +175,21 @@ export default function HawkinsPage() {
             <div style={{ maxWidth: '720px', margin: '0 auto', lineHeight: 1.8 }}>
               <p style={{ marginBottom: '1.5rem', color: 'var(--lp-text-secondary)' }}>
                 ホーキンズ博士の研究は、個人の意識だけでなく、
-                組織や場のエネルギーにも適用できます。
+                組織や場のエネルギーにも応用できると言われています。
               </p>
               <p style={{ marginBottom: '1.5rem', color: 'var(--lp-text-secondary)' }}>
-                経営者の意識レベルは、組織全体の意識レベルに影響します。
-                意識レベル200以下の経営者は、恐怖や怒りで組織を動かそうとします。
-                短期的には成果が出ることもありますが、長期的には疲弊と離職を招きます。
+                経営者の意識は、組織全体に影響を与えるようです。
+                恐怖や怒りをベースにした経営は、短期的には成果が出ることもありますが、
+                長期的には疲弊を招きやすいと言われています。
               </p>
               <p style={{ marginBottom: '1.5rem', color: 'var(--lp-text-secondary)' }}>
-                一方、意識レベル500以上の経営者は、存在するだけで場のエネルギーを上げます。
-                従業員は自発的に動き、顧客は自然と集まってきます。
-                「努力」ではなく「引き寄せ」で成果が出る状態です。
+                一方、愛や喜びをベースにした経営者のもとでは、
+                従業員が自発的に動き、顧客も自然と集まってくる——
+                そんな現象が起こりやすくなるようです。
               </p>
               <p style={{ color: 'var(--lp-text-secondary)' }}>
                 五次元経営では、ホーキンズ博士の研究を実践的なフレームワークとして活用し、
-                経営者の意識レベルを「爆運帯」（500以上）に上げることを目指しています。
+                経営者の意識を「爆運帯」（500以上）に近づけていくことを目指しています。
               </p>
             </div>
           </div>

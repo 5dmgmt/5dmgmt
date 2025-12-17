@@ -7,8 +7,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import Database from 'better-sqlite3';
 import path from 'path';
 
+// Node.jsランタイムを明示的に指定（better-sqlite3はEdgeで動作しない）
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 // データベースパス
 const DB_PATH = path.join(process.cwd(), 'data', 'shukuyo_master.db');
+
+// DB接続をキャッシュ
+let dbInstance: Database.Database | null = null;
+
+function getDB(): Database.Database {
+  if (!dbInstance) {
+    dbInstance = new Database(DB_PATH, { readonly: true });
+  }
+  return dbInstance;
+}
 
 // 27宿の詳細データ
 const SHUKUYO_DETAILS: Record<string, { yomi: string; element: string; characteristic: string }> = {
@@ -40,6 +54,16 @@ const SHUKUYO_DETAILS: Record<string, { yomi: string; element: string; character
   '婁': { yomi: 'ろう', element: '金', characteristic: '調和・外交・協調' },
   '胃': { yomi: 'い', element: '土', characteristic: '行動力・実行・推進' },
 };
+
+// 日付の実在チェック
+function isValidDate(year: number, month: number, day: number): boolean {
+  const date = new Date(year, month - 1, day);
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -76,8 +100,16 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  // 実在する日付かチェック（例: 2月30日は無効）
+  if (!isValidDate(year, month, day)) {
+    return NextResponse.json(
+      { success: false, message: `${year}年${month}月${day}日は存在しない日付です` },
+      { status: 400 }
+    );
+  }
+
   try {
-    const db = new Database(DB_PATH, { readonly: true });
+    const db = getDB();
 
     // 日付形式を決定
     let dateStr: string;
@@ -103,8 +135,6 @@ export async function GET(request: NextRequest) {
       lunar_date: string;
       is_leap_month: number;
     } | undefined;
-
-    db.close();
 
     if (!result) {
       return NextResponse.json(

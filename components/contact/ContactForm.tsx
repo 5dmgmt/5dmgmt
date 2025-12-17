@@ -22,6 +22,7 @@ export default function ContactForm({ inquiryTypes = [] }: ContactFormProps) {
     email: '',
     phone: '',
     message: '',
+    honeypot: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -57,6 +58,7 @@ export default function ContactForm({ inquiryTypes = [] }: ContactFormProps) {
         email: '',
         phone: '',
         message: '',
+        honeypot: '',
       });
     } catch {
       setSubmitStatus('error');
@@ -190,6 +192,18 @@ export default function ContactForm({ inquiryTypes = [] }: ContactFormProps) {
           className={styles.textarea}
         />
       </div>
+
+      {/* ハニーポット（ボット対策・非表示） */}
+      <input
+        type="text"
+        name="honeypot"
+        value={formData.honeypot}
+        onChange={handleInputChange}
+        style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
 
       <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
         {isSubmitting ? '送信中...' : '送信する'}
