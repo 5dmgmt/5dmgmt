@@ -3,9 +3,8 @@
 /**
  * components/landing/5dmgmt/FiveDmgmtLandingPage.tsx
  *
- * 【Phase 30】五次元経営マーケティングサイト トップページ
- * - 既存のLandingPageスタイルを流用
- * - 五次元経営の世界観（静か、余白、ブレない）
+ * 五次元経営マーケティングサイト トップページ
+ * コンセプト：「今、気づいている」= 気づきの深さが運気になる
  */
 
 import Link from 'next/link';
@@ -13,13 +12,43 @@ import styles from './LandingPage.module.css';
 import FiveDmgmtHeader from './FiveDmgmtHeader';
 import FiveDmgmtFooter from './FiveDmgmtFooter';
 
-// 運気帯域データ
-const unkiBands = [
-  { name: '低運気帯', scale: '20-199', traits: '恐れ・怒り', business: 'トラブル多発、不信' },
-  { name: '中運気帯', scale: '200-399', traits: '努力・正しさ', business: '成果は出るが疲労' },
-  { name: '高運気帯', scale: '400-499', traits: '理性・信頼', business: '組織文化が安定' },
-  { name: '爆運帯', scale: '500-599', traits: '愛・感謝・喜び', business: '成果が自然に集まる' },
-  { name: '統合帯', scale: '600+', traits: '平和', business: '存在が場を変える' },
+// 気づきと運気の相関データ
+const awarenessLevels = [
+  {
+    awareness: '思考に巻き込まれている',
+    band: '低運気帯',
+    scale: '20-199',
+    business: 'トラブル続き、人が離れる',
+    highlight: false,
+  },
+  {
+    awareness: '思考をコントロールしようとしている',
+    band: '中運気帯',
+    scale: '200-399',
+    business: '成果は出るが、消耗する',
+    highlight: false,
+  },
+  {
+    awareness: '思考を観察できている',
+    band: '高運気帯',
+    scale: '400-499',
+    business: '判断が冴え、信頼が集まる',
+    highlight: false,
+  },
+  {
+    awareness: '今、気づいている',
+    band: '爆運帯',
+    scale: '500-599',
+    business: '成果が向こうから来る',
+    highlight: true,
+  },
+  {
+    awareness: '気づきそのものになっている',
+    band: '統合帯',
+    scale: '600+',
+    business: '存在だけで場が変わる',
+    highlight: false,
+  },
 ];
 
 // お客様の声
@@ -27,17 +56,20 @@ const testimonials = [
   {
     name: 'T氏',
     title: '不動産仲介会社社長',
-    text: 'コロナで、手放すしかないところまで行った。棚卸し。環境整理。焦らず、淡々と動く。気づくと、大型案件が成約していた。',
+    headline: '焦りを手放した瞬間、大型案件が決まった',
+    text: 'コロナで追い詰められた。でも、焦っても何も変わらなかった。「今できること」だけに気づくようにした。すると、見えていなかった案件が、向こうから来た。',
   },
   {
     name: 'S氏',
     title: '営業サポート会社社長',
-    text: '独立。焦り。成果が出ない。強みを「一枚の紙」に落とす。受注が流れるように決まる。3か月で1,400万円。',
+    headline: '「足りない」から「すでにある」へ',
+    text: '独立して焦っていた。何かが足りないと思っていた。でも、今あるものに気づいたら、強みが見えた。3か月で1,400万円の受注。',
   },
   {
     name: 'H氏',
     title: '化粧品受託製造会社社長',
-    text: 'メイン取引先の不調。売上が10億円を割る。自宅と人間関係を整える。新たな取引が決まる。3か月で売上が30億円増えた。',
+    headline: '問題を見るのをやめたら、答えが来た',
+    text: 'メイン取引先の不調で売上激減。問題ばかり見ていた。環境を整え、今に集中したら、新たな取引が決まった。3か月で売上30億円増。',
   },
 ];
 
@@ -45,18 +77,18 @@ const testimonials = [
 const approaches = [
   {
     title: 'イマココ意識',
-    subtitle: '思考の外にある静けさ',
-    description: '多くの経営者が「わかっているのに変えられない」のは、過去の恐怖やプライドに支配されているから。五次元経営は、この無意識のパターンを解放し、「今この瞬間」の意識で生きる道を示します。',
+    subtitle: '気づきを深める',
+    description: '過去の後悔、未来の不安——それらは全て、思考の中の出来事。「今、ここ」に戻るたび、気づきは深まり、運気は自然に上がっていきます。',
   },
   {
     title: '宿曜',
-    subtitle: '生まれ持った設計図を知る',
-    description: '意識レベルを上げやすい人と、上げにくい人がいます。その違いは、宿曜（生まれた時の月の位置）に刻まれています。占いではなく、潜在意識のパターンを可視化する地図。',
+    subtitle: '気づきを妨げるパターンを知る',
+    description: '同じところで引っかかるのは、無意識のパターンがあるから。宿曜は、その癖を可視化し、気づきへの道を短くします。',
   },
   {
     title: '風水',
-    subtitle: '場のエネルギーを整える',
-    description: '意識レベル500以上の経営者の9割が、オフィスの「気の流れ」を重視しています。なぜなら、空間のエネルギーが意識レベルに直接影響するからです。',
+    subtitle: '気づきやすい環境をつくる',
+    description: '散らかった部屋で、今に気づくのは難しい。空間が整うと、意識も整い、運気の土台ができます。',
   },
 ];
 
@@ -69,37 +101,46 @@ export default function FiveDmgmtLandingPage() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroCatch}>戦略や努力の前に、あなた自身の運気を整える</p>
+            <p className={styles.heroCatch}>努力で運気は上がらない</p>
             <h1 className={styles.heroTitle}>
-              爆運帯＝ごきげん経営
+              今、気づいている
             </h1>
+            <p className={styles.heroSubtitle}>
+              それだけで、運気は変わる
+            </p>
             <p className={styles.heroLead}>
-              成果は出ている。でも、どこか重い。<br />
-              正解は分かっている。それでも、疲れる。<br />
+              頑張るほど、疲れる。<br />
+              考えるほど、迷う。<br />
+              正しくあろうとするほど、苦しい。<br />
               <br />
-              運気が変わると、会社の空気も、成果も、自然に変わる。
+              五次元経営は、その逆をいく。<br />
+              今この瞬間に気づいている——<br />
+              その深さが、そのまま運気になる。
             </p>
             <div className={styles.heroActions}>
               <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary}`}>
-                経営者運気診断（無料）
+                今の気づきの深さを測る
               </Link>
               <Link href="/taiken" className={`${styles.btn} ${styles.btnSecondary}`}>
                 体験セッション
               </Link>
             </div>
-            <p className={styles.heroReassurance}>3分で現在地がわかる</p>
+            <p className={styles.heroReassurance}>3分の診断で現在地がわかる</p>
           </div>
         </section>
 
-        {/* 運気帯域 Section */}
-        <section className={`${styles.section} ${styles.architectureSection}`} id="unki-band">
+        {/* 気づきと運気の相関 Section */}
+        <section className={`${styles.section} ${styles.architectureSection}`} id="awareness">
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Consciousness Level</p>
-              <h2 className={styles.sectionTitle}>運気の階層構造</h2>
+              <p className={styles.sectionTag}>Awareness = Fortune</p>
+              <h2 className={styles.sectionTitle}>気づきの深さ = 運気の高さ</h2>
               <p className={styles.sectionLead}>
-                運気は、気合や根性では上がりません。<br />
-                帯域ごとに世界の見え方が変わります。
+                ホーキンズ博士の研究が示したのは、<br />
+                「意識の状態」と「人生の質」が完全に連動しているということ。<br />
+                <br />
+                気づきが深まると、運気が上がる。<br />
+                運気が上がると、経営が自然に動き出す。
               </p>
             </div>
 
@@ -111,37 +152,70 @@ export default function FiveDmgmtLandingPage() {
               }}>
                 <thead>
                   <tr style={{ borderBottom: '2px solid var(--lp-border)' }}>
-                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>帯域</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>スケール</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>特性</th>
-                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>経営特徴</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>気づきの状態</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>運気帯</th>
+                    <th style={{ padding: '12px 16px', textAlign: 'left', color: 'var(--lp-text-muted)' }}>経営への現れ方</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {unkiBands.map((band, i) => (
-                    <tr key={band.name} style={{
+                  {awarenessLevels.map((level) => (
+                    <tr key={level.band} style={{
                       borderBottom: '1px solid var(--lp-border)',
-                      backgroundColor: band.name === '爆運帯' ? 'var(--lp-primary-light)' : 'transparent',
+                      backgroundColor: level.highlight ? 'var(--lp-primary-light)' : 'transparent',
                     }}>
                       <td style={{
                         padding: '12px 16px',
-                        fontWeight: band.name === '爆運帯' ? 600 : 400,
-                        color: band.name === '爆運帯' ? 'var(--lp-primary)' : 'var(--lp-text-primary)',
+                        fontWeight: level.highlight ? 600 : 400,
+                        color: level.highlight ? 'var(--lp-primary)' : 'var(--lp-text-primary)',
                       }}>
-                        {band.name}
+                        {level.awareness}
                       </td>
-                      <td style={{ padding: '12px 16px' }}>{band.scale}</td>
-                      <td style={{ padding: '12px 16px' }}>{band.traits}</td>
-                      <td style={{ padding: '12px 16px' }}>{band.business}</td>
+                      <td style={{
+                        padding: '12px 16px',
+                        fontWeight: level.highlight ? 600 : 400,
+                      }}>
+                        {level.band}
+                        <span style={{ fontSize: '0.8rem', color: 'var(--lp-text-muted)', marginLeft: '8px' }}>
+                          ({level.scale})
+                        </span>
+                      </td>
+                      <td style={{
+                        padding: '12px 16px',
+                        fontWeight: level.highlight ? 600 : 400,
+                      }}>
+                        {level.business}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
+            {/* 補足説明 */}
+            <div style={{
+              marginTop: '2.5rem',
+              padding: '2rem',
+              background: 'var(--lp-bg-secondary)',
+              borderRadius: '12px',
+              borderLeft: '4px solid var(--lp-primary)',
+            }}>
+              <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--lp-text-primary)' }}>
+                気づきが深まると、なぜ運気が上がるのか？
+              </h3>
+              <p style={{ lineHeight: 1.8, color: 'var(--lp-text-secondary)' }}>
+                思考に巻き込まれているとき、私たちは「問題」を見ています。<br />
+                問題を見れば、問題が増えます。<br />
+                <br />
+                今、気づいているとき、私たちは「全体」を見ています。<br />
+                全体を見れば、答えが自然に現れます。<br />
+                <br />
+                これが、気づきと運気の相関関係です。
+              </p>
+            </div>
+
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
               <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary}`}>
-                今の運気を診断する（無料）
+                今の気づきの深さを診断する（無料）
               </Link>
             </div>
           </div>
@@ -151,8 +225,8 @@ export default function FiveDmgmtLandingPage() {
         <section className={styles.section}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Approach</p>
-              <h2 className={styles.sectionTitle}>五次元経営の3つのアプローチ</h2>
+              <p className={styles.sectionTag}>Three Gates</p>
+              <h2 className={styles.sectionTitle}>気づきを深める3つの入り口</h2>
             </div>
 
             <div className={styles.featuresGrid}>
@@ -173,8 +247,8 @@ export default function FiveDmgmtLandingPage() {
         <section className={`${styles.section} ${styles.testimonialsSection}`} id="testimonials">
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Testimonials</p>
-              <h2 className={styles.sectionTitle}>お客様の変化</h2>
+              <p className={styles.sectionTag}>Shifts</p>
+              <h2 className={styles.sectionTitle}>気づいた人たちの変化</h2>
               <p className={styles.sectionLead}>
                 静かに、しかし確かに
               </p>
@@ -184,6 +258,14 @@ export default function FiveDmgmtLandingPage() {
               {testimonials.map((t) => (
                 <div key={t.name} className={styles.testimonialCard}>
                   <div className={styles.testimonialQuote}>&ldquo;</div>
+                  <p style={{
+                    fontWeight: 600,
+                    fontSize: '1.1rem',
+                    color: 'var(--lp-primary)',
+                    marginBottom: '0.75rem',
+                  }}>
+                    {t.headline}
+                  </p>
                   <p className={styles.testimonialText}>{t.text}</p>
                   <div className={styles.testimonialAuthor}>
                     <div>
@@ -196,7 +278,7 @@ export default function FiveDmgmtLandingPage() {
             </div>
 
             <p style={{ textAlign: 'center', fontSize: '0.875rem', color: 'var(--lp-text-muted)', marginTop: '2rem' }}>
-              ※個人の感想です。結果は状況により変わります。
+              ※個人の体験です。変化の現れ方は人により異なります。
             </p>
           </div>
         </section>
@@ -205,13 +287,16 @@ export default function FiveDmgmtLandingPage() {
         <section className={styles.section}>
           <div className={styles.container}>
             <div className={styles.ctaSection}>
-              <h2 className={styles.ctaTitle}>まずは、測ってみてください</h2>
+              <h2 className={styles.ctaTitle}>まず、今の「気づきの深さ」を測る</h2>
               <p className={styles.ctaLead}>
-                今のあなたの運気は、どの帯域にありますか？<br />
-                考える必要はありません。直感で答えるだけの、3分診断です。
+                あなたは今、どのくらい「気づいて」いますか？<br />
+                思考に巻き込まれていますか？<br />
+                それとも、今この瞬間を見ていますか？<br />
+                <br />
+                3分の診断で、現在地がわかります。
               </p>
               <Link href="/unki/shindan" className={styles.ctaBtn}>
-                経営者運気診断を受ける（無料）
+                運気診断を受ける（無料）
               </Link>
             </div>
           </div>
@@ -228,7 +313,7 @@ export default function FiveDmgmtLandingPage() {
             <div className={styles.faqAccordion}>
               <details className={styles.faqItem}>
                 <summary className={styles.faqQuestion}>
-                  <span>運気（ホーキンズスケール）は、本当に変えられますか？</span>
+                  <span>「気づいている」とは、具体的にどういう状態ですか？</span>
                   <span className={styles.faqIcon}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="6 9 12 15 18 9"></polyline>
@@ -236,7 +321,44 @@ export default function FiveDmgmtLandingPage() {
                   </span>
                 </summary>
                 <div className={styles.faqAnswer}>
-                  はい。適切なアプローチで3ヶ月で50-100上げることが可能です。
+                  今、この文章を読んでいるあなた。その「読んでいる自分」に気づいていますか？
+                  思考ではなく、思考を見ている意識——それが「気づき」です。
+                  呼吸している自分、座っている自分、画面を見ている自分。
+                  それに気づいている「何か」が、あなたの本質です。
+                </div>
+              </details>
+
+              <details className={styles.faqItem}>
+                <summary className={styles.faqQuestion}>
+                  <span>気づきを深めると、本当に運気が上がりますか？</span>
+                  <span className={styles.faqIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </summary>
+                <div className={styles.faqAnswer}>
+                  ホーキンズ博士の研究では、意識レベル200を超えた瞬間から、
+                  人生のあらゆる指標が上向きに転じることが確認されています。
+                  「気づき」は、その意識レベルを直接引き上げます。
+                  気づきが深まると、判断が冴え、人が集まり、機会が増えます。
+                </div>
+              </details>
+
+              <details className={styles.faqItem}>
+                <summary className={styles.faqQuestion}>
+                  <span>どのくらいで変化が現れますか？</span>
+                  <span className={styles.faqIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </summary>
+                <div className={styles.faqAnswer}>
+                  早い人で1週間、通常3ヶ月で周囲が変化に気づきます。
+                  本人は「何も変わっていない」と感じることが多いですが、
+                  それ自体が、気づきが深まっている証拠です。
+                  気づいている人は、変化を追いかけません。
                 </div>
               </details>
 
@@ -250,21 +372,10 @@ export default function FiveDmgmtLandingPage() {
                   </span>
                 </summary>
                 <div className={styles.faqAnswer}>
-                  違います。デビッド・ホーキンズ博士の科学的研究に基づいています。
-                </div>
-              </details>
-
-              <details className={styles.faqItem}>
-                <summary className={styles.faqQuestion}>
-                  <span>どのくらいで成果が出ますか？</span>
-                  <span className={styles.faqIcon}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  </span>
-                </summary>
-                <div className={styles.faqAnswer}>
-                  ホーキンズ・スケール200を超えた瞬間から、組織の空気が変わり始めます。
+                  いいえ。デビッド・ホーキンズ博士の意識研究に基づいています。
+                  「気づき」は、瞑想や禅の世界で何千年も探求されてきたテーマですが、
+                  五次元経営では、それを経営に応用しています。
+                  信じる必要はありません。測定し、実践し、結果を見るだけです。
                 </div>
               </details>
             </div>

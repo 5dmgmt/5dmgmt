@@ -1,7 +1,7 @@
 /**
  * app/5dmgmt/taiken/retreat/page.tsx
  *
- * 【Phase 30】経営者リトリートページ
+ * 経営者リトリートページ（1泊2日）
  */
 
 import Link from 'next/link';
@@ -13,33 +13,25 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: '経営者リトリート | 五次元経営',
-  description: '2泊3日の経営者向けリトリート。日常を離れ、意識レベルを集中的に上げる合宿プログラム。',
+  description: '1泊2日の経営者向けリトリート。日常を離れ、意識レベルを集中的に上げる合宿プログラム。',
 };
 
 const scheduleDay1 = [
   { time: '13:00', content: '集合・オリエンテーション' },
   { time: '14:00', content: '意識レベル測定（Before）' },
-  { time: '15:00', content: '環境整備ワークショップ Part 1' },
-  { time: '18:00', content: '夕食・自由時間' },
-  { time: '20:00', content: '夜の瞑想セッション' },
+  { time: '15:00', content: '環境整備ワークショップ' },
+  { time: '17:00', content: 'イマココ意識 集中トレーニング' },
+  { time: '19:00', content: '夕食・交流会' },
+  { time: '21:00', content: '夜の瞑想セッション' },
 ];
 
 const scheduleDay2 = [
   { time: '06:00', content: '朝の瞑想（任意）' },
   { time: '08:00', content: '朝食' },
-  { time: '09:00', content: 'イマココ意識 集中トレーニング' },
-  { time: '12:00', content: '昼食' },
-  { time: '14:00', content: '経営者同士の対話セッション' },
-  { time: '17:00', content: '環境整備ワークショップ Part 2' },
-  { time: '19:00', content: '夕食・交流会' },
-];
-
-const scheduleDay3 = [
-  { time: '06:00', content: '朝の瞑想' },
-  { time: '08:00', content: '朝食' },
-  { time: '09:00', content: '統合セッション' },
-  { time: '11:00', content: '意識レベル測定（After）' },
-  { time: '12:00', content: 'クロージング・昼食後解散' },
+  { time: '09:00', content: '経営者同士の対話セッション' },
+  { time: '11:00', content: '統合セッション' },
+  { time: '12:00', content: '意識レベル測定（After）' },
+  { time: '13:00', content: 'クロージング・昼食後解散' },
 ];
 
 export default function RetreatPage() {
@@ -54,7 +46,7 @@ export default function RetreatPage() {
             <p className={styles.heroCatch}>日常を離れ、本来の自己と出会う</p>
             <h1 className={styles.heroTitle}>経営者リトリート</h1>
             <p className={styles.heroLead}>
-              2泊3日で、意識レベルを集中的に上げる。<br />
+              1泊2日で、意識レベルを集中的に上げる。<br />
               環境を変え、仲間と共に、深い変容を体験する。
             </p>
           </div>
@@ -81,7 +73,7 @@ export default function RetreatPage() {
                 意識の変容を加速させます。
               </p>
               <p>
-                2泊3日という短い期間でも、集中的に取り組むことで、
+                1泊2日という凝縮された時間でも、集中的に取り組むことで、
                 意識レベルを50-100上げることが可能です。
                 そして、その変化を「体」で覚えることで、
                 日常に戻ってからも維持しやすくなります。
@@ -103,9 +95,9 @@ export default function RetreatPage() {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
               gap: '2rem',
-              maxWidth: '900px',
+              maxWidth: '700px',
               margin: '0 auto'
             }}>
               {/* Day 1 */}
@@ -183,44 +175,6 @@ export default function RetreatPage() {
                   </div>
                 ))}
               </div>
-
-              {/* Day 3 */}
-              <div style={{
-                background: 'white',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                border: '1px solid var(--lp-border)'
-              }}>
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  marginBottom: '1rem',
-                  paddingBottom: '0.75rem',
-                  borderBottom: '2px solid var(--lp-primary)'
-                }}>
-                  Day 3
-                </h3>
-                {scheduleDay3.map((item) => (
-                  <div key={item.time} style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    padding: '0.5rem 0',
-                    fontSize: '0.875rem'
-                  }}>
-                    <span style={{
-                      color: 'var(--lp-primary)',
-                      fontWeight: 500,
-                      width: '50px',
-                      flexShrink: 0
-                    }}>
-                      {item.time}
-                    </span>
-                    <span style={{ color: 'var(--lp-text-secondary)' }}>
-                      {item.content}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
@@ -241,6 +195,22 @@ export default function RetreatPage() {
               borderRadius: '12px'
             }}>
               <dl style={{ margin: 0 }}>
+                <div style={{
+                  display: 'flex',
+                  padding: '1rem 0',
+                  borderBottom: '1px solid var(--lp-border)'
+                }}>
+                  <dt style={{
+                    width: '120px',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)'
+                  }}>
+                    日程
+                  </dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
+                    1泊2日
+                  </dd>
+                </div>
                 <div style={{
                   display: 'flex',
                   padding: '1rem 0',
@@ -317,7 +287,7 @@ export default function RetreatPage() {
                     含まれるもの
                   </dt>
                   <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
-                    宿泊費、食事（5食）、プログラム費、意識レベル測定
+                    宿泊費、食事（3食）、プログラム費、意識レベル測定
                   </dd>
                 </div>
               </dl>

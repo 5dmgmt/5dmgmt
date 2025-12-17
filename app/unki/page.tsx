@@ -1,8 +1,8 @@
 /**
- * app/5dmgmt/unki/page.tsx
+ * app/unki/page.tsx
  *
- * 【Phase 30】運気を知る インデックスページ
- * - ISR: 1時間ごとに再生成
+ * 運気を知る インデックスページ
+ * 問いかけ型：「あなたは今、どこにいますか？」
  */
 
 import Link from 'next/link';
@@ -14,23 +14,33 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: '運気を知る | 五次元経営',
-  description: 'ホーキンズ博士の意識レベルに基づく経営者運気診断と、宿曜による潜在意識パターンの解読。',
+  description: '今の気づきの深さを測る。ホーキンズ博士の意識レベル理論に基づく経営者運気診断と宿曜鑑定。',
 };
 
 const services = [
   {
     title: '経営者運気診断',
-    description: '3分で今の意識レベルを測定。ホーキンズ・スケールに基づく10の質問で、あなたの現在地を可視化します。',
+    question: '今、何に囚われていますか？',
+    description: '10の問いに、直感で答えてください。考えなくていい。感じるだけでいい。3分後、あなたの現在地が見えてきます。',
     href: '/unki/shindan',
-    cta: '診断を受ける（無料）',
+    cta: '診断を受ける',
     tag: '3分・無料',
   },
   {
     title: '宿曜鑑定',
-    description: '生年月日から導く、あなたの潜在意識の設計図。27宿の特性と、意識レベルを上げやすい方向性を解読します。',
+    question: 'なぜ、同じところで引っかかるのですか？',
+    description: '生まれた日の月の位置が、あなたの無意識のパターンを決めています。それを知ることが、パターンから自由になる第一歩です。',
     href: '/unki/shukuyo',
     cta: '宿曜を調べる',
-    tag: '生年月日から算出',
+    tag: '生年月日から',
+  },
+  {
+    title: '宿曜関係図',
+    question: 'あの人との関係は、なぜうまくいかないのですか？',
+    description: '人間関係のパターンも、宿曜に刻まれています。相性ではなく、関係性の構造を可視化します。',
+    href: '/unki/kankei',
+    cta: '関係図を見る',
+    tag: '複数人対応',
   },
 ];
 
@@ -43,13 +53,17 @@ export default function UnkiIndexPage() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroCatch}>測れないものは、変えられない</p>
-            <h1 className={styles.heroTitle}>運気を知る</h1>
+            <h1 className={styles.heroTitle}>
+              あなたは今、<br />
+              どこにいますか？
+            </h1>
             <p className={styles.heroLead}>
-              経営の成果は、戦略や努力だけでは決まりません。<br />
-              あなた自身の「意識レベル」が、すべてに影響しています。<br />
+              忙しさの中にいますか。<br />
+              焦りの中にいますか。<br />
+              それとも、静けさの中にいますか。<br />
               <br />
-              まずは、今の自分を知ることから。
+              答えを知っているのは、あなただけです。<br />
+              ここでは、その「気づき」を数値で確認できます。
             </p>
           </div>
         </section>
@@ -57,14 +71,18 @@ export default function UnkiIndexPage() {
         {/* Services Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Services</p>
-              <h2 className={styles.sectionTitle}>2つの測定アプローチ</h2>
-            </div>
-
-            <div className={styles.featuresGrid} style={{ maxWidth: '800px', margin: '0 auto' }}>
-              {services.map((service) => (
-                <div key={service.title} className={styles.featureCard}>
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+              {services.map((service, index) => (
+                <div
+                  key={service.title}
+                  style={{
+                    padding: '2.5rem',
+                    background: 'white',
+                    borderRadius: '16px',
+                    marginBottom: index < services.length - 1 ? '2rem' : 0,
+                    border: '1px solid var(--lp-border)',
+                  }}
+                >
                   <span style={{
                     fontSize: '0.75rem',
                     color: 'var(--lp-primary)',
@@ -76,12 +94,35 @@ export default function UnkiIndexPage() {
                   }}>
                     {service.tag}
                   </span>
-                  <h3>{service.title}</h3>
-                  <p style={{ marginBottom: '1.5rem' }}>{service.description}</p>
+
+                  <h2 style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)',
+                    marginBottom: '0.5rem',
+                  }}>
+                    {service.question}
+                  </h2>
+
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--lp-text-muted)',
+                    marginBottom: '1rem',
+                  }}>
+                    {service.title}
+                  </p>
+
+                  <p style={{
+                    lineHeight: 1.8,
+                    color: 'var(--lp-text-secondary)',
+                    marginBottom: '1.5rem',
+                  }}>
+                    {service.description}
+                  </p>
+
                   <Link
                     href={service.href}
                     className={`${styles.btn} ${styles.btnPrimary}`}
-                    style={{ display: 'inline-block' }}
                   >
                     {service.cta}
                   </Link>
@@ -91,43 +132,31 @@ export default function UnkiIndexPage() {
           </div>
         </section>
 
-        {/* Explanation Section */}
+        {/* Question Section */}
         <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>About</p>
-              <h2 className={styles.sectionTitle}>ホーキンズ・スケールとは</h2>
-            </div>
-
-            <div style={{ maxWidth: '720px', margin: '0 auto', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: '1.5rem' }}>
-                デビッド・R・ホーキンズ博士（1927-2012）は、精神科医として20年以上の臨床経験を経た後、
-                キネシオロジー（筋肉反応テスト）を用いた意識研究を行いました。
+            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
+              <p style={{
+                fontSize: '1.5rem',
+                fontWeight: 500,
+                color: 'var(--lp-text-primary)',
+                lineHeight: 1.8,
+                marginBottom: '2rem',
+              }}>
+                測ることに、意味はあるのか？
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                その結果、人間の意識には「レベル」があり、それが1から1000のスケールで測定できることを発見。
-                著書『Power vs. Force』（邦題：パワーか、フォースか）で発表しました。
+              <p style={{
+                lineHeight: 2,
+                color: 'var(--lp-text-secondary)',
+              }}>
+                測定は、気づきの入り口に過ぎません。<br />
+                大切なのは、数値ではなく、<br />
+                「今の自分」に気づくこと。<br />
+                <br />
+                診断結果を見たとき、<br />
+                あなたの中に何が起きるか。<br />
+                それが、すでに変化の始まりです。
               </p>
-              <p>
-                このスケールは、個人の意識だけでなく、組織や場のエネルギーにも適用できます。
-                五次元経営では、このスケールを経営に応用し、「運気」として捉えています。
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <div className={styles.ctaSection}>
-              <h2 className={styles.ctaTitle}>まずは3分で測定</h2>
-              <p className={styles.ctaLead}>
-                10の質問に直感で答えるだけ。<br />
-                今のあなたの意識レベルがわかります。
-              </p>
-              <Link href="/unki/shindan" className={styles.ctaBtn}>
-                経営者運気診断を受ける（無料）
-              </Link>
             </div>
           </div>
         </section>

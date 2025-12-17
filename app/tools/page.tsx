@@ -1,7 +1,8 @@
 /**
- * app/5dmgmt/tools/page.tsx
+ * app/tools/page.tsx
  *
- * 【Phase 30】整った後の道具 インデックスページ
+ * 整った後の道具 インデックスページ
+ * 問いかけ型：「気づきを日常でどう維持しますか？」
  */
 
 import Link from 'next/link';
@@ -13,18 +14,18 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: '整った後の道具 | 五次元経営',
-  description: '意識レベルが整った経営者のための実践ツール。AIによる第二領域の自動化から、経営ダッシュボードまで。',
+  description: '気づきを日常で維持するためのツール。意識が整った経営者のための実践的サポート。',
 };
 
 const tools = [
   {
     title: 'Founders Direct',
-    description: '経営者の第二領域を支援するクラウドサービス。AIが日々のタスクを整理し、「重要だが緊急でない」仕事に集中できる環境を作ります。',
+    question: '「重要だけど緊急じゃない」ことに、時間を使えていますか？',
+    description: '日々の忙しさが、あなたを「今」から引き離します。AIが雑務を整理し、本当に大切なことに集中できる環境を作ります。',
     features: [
       'AI経営アシスタント',
       'OKR自動生成',
       'タスク優先順位の最適化',
-      '経営ダッシュボード',
     ],
     href: 'https://app.foundersdirect.jp/',
     cta: 'サービスを見る',
@@ -32,12 +33,12 @@ const tools = [
   },
   {
     title: '経営者コーチング',
-    description: '月2回の1on1セッションで、意識レベルの維持と向上をサポート。経営の悩みを、意識の観点から解決します。',
+    question: '一人で、気づきを維持できますか？',
+    description: '日常に戻ると、慣れたパターンに引き戻されます。定期的な対話が、気づきを維持し、深める助けになります。',
     features: [
-      '月2回のコーチングセッション',
+      '月2回の1on1セッション',
       '意識レベル定期測定',
       'チャットサポート',
-      '経営課題の意識的解決',
     ],
     href: '/company/contact',
     cta: 'お問い合わせ',
@@ -54,55 +55,35 @@ export default function ToolsIndexPage() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroCatch}>意識が整った後に使う道具</p>
-            <h1 className={styles.heroTitle}>整った後の道具</h1>
+            <h1 className={styles.heroTitle}>
+              気づきを日常で<br />
+              どう維持しますか？
+            </h1>
             <p className={styles.heroLead}>
-              意識レベルが低い状態でツールを使っても、<br />
-              「忙しさ」が増すだけです。<br />
+              セッションやリトリートで、気づきは深まります。<br />
+              でも、日常に戻ると、すぐに忘れてしまう。<br />
               <br />
-              整ってから使う道具は、成果を何倍にもします。
+              これは、あなたの問題ではありません。<br />
+              環境と仕組みの問題です。
             </p>
           </div>
         </section>
 
-        {/* Why After Section */}
+        {/* Tools Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Why After?</p>
-              <h2 className={styles.sectionTitle}>なぜ「整った後」なのか</h2>
-            </div>
-
-            <div style={{ maxWidth: '720px', margin: '0 auto', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: '1.5rem', color: 'var(--lp-text-secondary)' }}>
-                多くの経営者がAIツールや生産性ツールを導入しますが、
-                期待した効果が出ないことがあります。
-                ツールが悪いのではなく、使う側の意識が整っていないからです。
-              </p>
-              <p style={{ marginBottom: '1.5rem', color: 'var(--lp-text-secondary)' }}>
-                意識レベル200以下では、恐怖や焦りからツールを「もっと効率よく」使おうとします。
-                結果、タスクは増え、「忙しさ」が加速します。
-              </p>
-              <p style={{ color: 'var(--lp-text-secondary)' }}>
-                意識レベル400以上になると、ツールは「手放す」ために使えます。
-                本当に重要なことに集中し、それ以外はAIや仕組みに任せる。
-                ツールが、自由の道具になります。
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Tools Section */}
-        <section className={`${styles.section} ${styles.architectureSection}`}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Tools</p>
-              <h2 className={styles.sectionTitle}>提供ツール</h2>
-            </div>
-
-            <div className={styles.featuresGrid} style={{ maxWidth: '900px', margin: '0 auto' }}>
-              {tools.map((tool) => (
-                <div key={tool.title} className={styles.featureCard} style={{ padding: '2rem' }}>
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+              {tools.map((tool, index) => (
+                <div
+                  key={tool.title}
+                  style={{
+                    padding: '2.5rem',
+                    background: 'white',
+                    borderRadius: '16px',
+                    marginBottom: index < tools.length - 1 ? '2rem' : 0,
+                    border: '1px solid var(--lp-border)',
+                  }}
+                >
                   <span style={{
                     fontSize: '0.75rem',
                     color: 'var(--lp-primary)',
@@ -115,8 +96,30 @@ export default function ToolsIndexPage() {
                     {tool.tag}
                   </span>
 
-                  <h3 style={{ marginBottom: '1rem' }}>{tool.title}</h3>
-                  <p style={{ marginBottom: '1.5rem', lineHeight: 1.7 }}>{tool.description}</p>
+                  <h2 style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)',
+                    marginBottom: '0.5rem',
+                  }}>
+                    {tool.question}
+                  </h2>
+
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--lp-text-muted)',
+                    marginBottom: '1rem',
+                  }}>
+                    {tool.title}
+                  </p>
+
+                  <p style={{
+                    lineHeight: 1.8,
+                    color: 'var(--lp-text-secondary)',
+                    marginBottom: '1.5rem',
+                  }}>
+                    {tool.description}
+                  </p>
 
                   <div style={{
                     backgroundColor: '#fafafa',
@@ -124,18 +127,12 @@ export default function ToolsIndexPage() {
                     borderRadius: '8px',
                     marginBottom: '1.5rem'
                   }}>
-                    <p style={{
-                      fontSize: '0.75rem',
-                      color: 'var(--lp-text-muted)',
-                      marginBottom: '0.5rem'
-                    }}>
-                      機能
-                    </p>
                     <ul style={{
                       margin: 0,
                       paddingLeft: '1.25rem',
                       fontSize: '0.875rem',
-                      lineHeight: 1.8
+                      lineHeight: 1.8,
+                      color: 'var(--lp-text-secondary)',
                     }}>
                       {tool.features.map((feature) => (
                         <li key={feature}>{feature}</li>
@@ -146,7 +143,6 @@ export default function ToolsIndexPage() {
                   <Link
                     href={tool.href}
                     className={`${styles.btn} ${styles.btnPrimary}`}
-                    style={{ display: 'inline-block' }}
                   >
                     {tool.cta}
                   </Link>
@@ -156,18 +152,36 @@ export default function ToolsIndexPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className={styles.section}>
+        {/* Question Section */}
+        <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div className={styles.ctaSection}>
-              <h2 className={styles.ctaTitle}>まずは意識を整える</h2>
-              <p className={styles.ctaLead}>
-                ツールの効果を最大化するために、<br />
-                まずは今の意識レベルを確認しましょう。
+            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
+              <p style={{
+                fontSize: '1.5rem',
+                fontWeight: 500,
+                color: 'var(--lp-text-primary)',
+                lineHeight: 1.8,
+                marginBottom: '2rem',
+              }}>
+                道具に頼っていいのか？
               </p>
-              <Link href="/unki/shindan" className={styles.ctaBtn}>
-                運気診断を受ける（無料）
-              </Link>
+              <p style={{
+                lineHeight: 2,
+                color: 'var(--lp-text-secondary)',
+              }}>
+                気づきは、道具では得られません。<br />
+                でも、気づきを「維持する」ことは、<br />
+                環境と仕組みに大きく左右されます。<br />
+                <br />
+                道具は、あなたを助けるためにあります。<br />
+                使うか使わないかは、あなたが決めてください。
+              </p>
+
+              <div style={{ marginTop: '2.5rem' }}>
+                <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary}`}>
+                  まずは今の状態を知る
+                </Link>
+              </div>
             </div>
           </div>
         </section>

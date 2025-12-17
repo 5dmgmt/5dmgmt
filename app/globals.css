@@ -125,7 +125,9 @@ a { text-decoration: none; }
   100% { left: 100%; }
 }
 
-.five-d-nav-btn {
+.five-d-nav-btn,
+.five-d-nav-btn.btnPrimary,
+a.five-d-nav-btn {
   background: linear-gradient(135deg, #ffffff 0%, #f0fdff 100%) !important;
   color: #006A70 !important;
   border: none !important;
@@ -410,7 +412,14 @@ a { text-decoration: none; }
 }
 
 /* ==========================================================================
-   13. Animations
+   13. Scroll Offset for Fixed Header
+   ========================================================================== */
+[id^="chapter"] {
+  scroll-margin-top: 100px;
+}
+
+/* ==========================================================================
+   14. Animations
    ========================================================================== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }

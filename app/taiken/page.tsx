@@ -1,7 +1,8 @@
 /**
- * app/5dmgmt/taiken/page.tsx
+ * app/taiken/page.tsx
  *
- * 【Phase 30】体験する インデックスページ
+ * 体験する インデックスページ
+ * 問いかけ型：「思考の外に出たことはありますか？」
  */
 
 import Link from 'next/link';
@@ -13,39 +14,27 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: '体験する | 五次元経営',
-  description: '五次元経営の体験プログラム。イマココ体験セッションとリトリートで、意識レベルの変化を体感してください。',
+  description: '思考の外にある静けさを体験する。イマココ体験セッションと経営者リトリート。',
 };
 
 const programs = [
   {
     title: 'イマココ体験セッション',
+    question: '90分、思考を止められますか？',
+    description: '考えることをやめる。それだけのことが、なぜこれほど難しいのか。このセッションでは、安全な環境で「思考の外」を体験します。',
     duration: '90分',
     format: 'オンライン / 対面',
-    description: '「思考の外にある静けさ」を体験する90分。イマココ意識とは何か、なぜ経営に効くのかを、体感を通じて理解します。',
-    includes: [
-      '意識レベルの現状確認',
-      'イマココ意識の誘導体験',
-      '日常で実践するためのワーク',
-      '質疑応答',
-    ],
     price: '無料（初回限定）',
     href: '/taiken/imakoko',
-    cta: '詳細を見る',
   },
   {
     title: '経営者リトリート',
-    duration: '2泊3日',
+    question: '日常を離れたとき、何が見えますか？',
+    description: '慣れた環境が、あなたを「いつも通り」に引き戻します。1泊2日、物理的に離れることで、意識の変容が加速します。',
+    duration: '1泊2日',
     format: '合宿形式',
-    description: '日常を離れ、意識レベルを集中的に上げるリトリート。環境を変え、仲間と共に、深い変容を体験します。',
-    includes: [
-      '意識レベル測定（Before/After）',
-      'イマココ意識の集中トレーニング',
-      '環境整備ワークショップ',
-      '経営者同士の対話セッション',
-    ],
-    price: '詳細はお問い合わせください',
+    price: 'お問い合わせください',
     href: '/taiken/retreat',
-    cta: '詳細を見る',
   },
 ];
 
@@ -58,13 +47,16 @@ export default function TaikenIndexPage() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroCatch}>知識ではなく、体感から</p>
-            <h1 className={styles.heroTitle}>体験する</h1>
+            <h1 className={styles.heroTitle}>
+              思考の外に<br />
+              出たことはありますか？
+            </h1>
             <p className={styles.heroLead}>
-              意識レベルは、本を読んでも上がりません。<br />
-              頭で理解しても、変わりません。<br />
+              私たちは、ほとんどの時間を「考えること」に費やしています。<br />
+              過去を分析し、未来を計画し、問題を解決しようとする。<br />
               <br />
-              体験を通じて、初めて「分かる」のです。
+              でも、考えていないとき、<br />
+              あなたは何を感じていますか？
             </p>
           </div>
         </section>
@@ -72,14 +64,18 @@ export default function TaikenIndexPage() {
         {/* Programs Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Programs</p>
-              <h2 className={styles.sectionTitle}>体験プログラム</h2>
-            </div>
-
-            <div className={styles.featuresGrid} style={{ maxWidth: '900px', margin: '0 auto' }}>
-              {programs.map((program) => (
-                <div key={program.title} className={styles.featureCard} style={{ padding: '2rem' }}>
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+              {programs.map((program, index) => (
+                <div
+                  key={program.title}
+                  style={{
+                    padding: '2.5rem',
+                    background: 'white',
+                    borderRadius: '16px',
+                    marginBottom: index < programs.length - 1 ? '2rem' : 0,
+                    border: '1px solid var(--lp-border)',
+                  }}
+                >
                   <div style={{
                     display: 'flex',
                     gap: '0.75rem',
@@ -106,33 +102,30 @@ export default function TaikenIndexPage() {
                     </span>
                   </div>
 
-                  <h3 style={{ marginBottom: '1rem' }}>{program.title}</h3>
-                  <p style={{ marginBottom: '1.5rem', lineHeight: 1.7 }}>{program.description}</p>
-
-                  <div style={{
-                    backgroundColor: '#fafafa',
-                    padding: '1rem',
-                    borderRadius: '8px',
-                    marginBottom: '1.5rem'
+                  <h2 style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)',
+                    marginBottom: '0.5rem',
                   }}>
-                    <p style={{
-                      fontSize: '0.75rem',
-                      color: 'var(--lp-text-muted)',
-                      marginBottom: '0.5rem'
-                    }}>
-                      含まれるもの
-                    </p>
-                    <ul style={{
-                      margin: 0,
-                      paddingLeft: '1.25rem',
-                      fontSize: '0.875rem',
-                      lineHeight: 1.8
-                    }}>
-                      {program.includes.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+                    {program.question}
+                  </h2>
+
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--lp-text-muted)',
+                    marginBottom: '1rem',
+                  }}>
+                    {program.title}
+                  </p>
+
+                  <p style={{
+                    lineHeight: 1.8,
+                    color: 'var(--lp-text-secondary)',
+                    marginBottom: '1.5rem',
+                  }}>
+                    {program.description}
+                  </p>
 
                   <div style={{
                     display: 'flex',
@@ -151,7 +144,7 @@ export default function TaikenIndexPage() {
                       href={program.href}
                       className={`${styles.btn} ${styles.btnPrimary}`}
                     >
-                      {program.cta}
+                      詳細を見る
                     </Link>
                   </div>
                 </div>
@@ -160,44 +153,33 @@ export default function TaikenIndexPage() {
           </div>
         </section>
 
-        {/* Why Experience Section */}
+        {/* Question Section */}
         <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Why Experience?</p>
-              <h2 className={styles.sectionTitle}>なぜ体験が必要なのか</h2>
-            </div>
-
-            <div style={{ maxWidth: '720px', margin: '0 auto', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: '1.5rem' }}>
-                意識レベル200以下の状態では、「200以上の世界」を想像することすらできません。
-                恐れや怒りに支配されていると、「愛」や「喜び」の帯域があること自体が信じられないのです。
+            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
+              <p style={{
+                fontSize: '1.5rem',
+                fontWeight: 500,
+                color: 'var(--lp-text-primary)',
+                lineHeight: 1.8,
+                marginBottom: '2rem',
+              }}>
+                体験しないと、分からないのか？
               </p>
-              <p style={{ marginBottom: '1.5rem' }}>
-                だからこそ、体験が必要です。
-                一度でも「イマココ」の状態を味わうと、そこに戻る道が見えるようになります。
-                地図を見るだけでなく、実際にその土地を歩くことで、初めて道が分かるのです。
+              <p style={{
+                lineHeight: 2,
+                color: 'var(--lp-text-secondary)',
+              }}>
+                はい。<br />
+                <br />
+                本を読んでも、「水の味」は分かりません。<br />
+                説明を聞いても、「静けさ」は体験できません。<br />
+                <br />
+                一度でも「思考の外」を知ると、<br />
+                そこに戻る道が見えるようになります。<br />
+                <br />
+                それが、体験する意味です。
               </p>
-              <p>
-                体験セッションでは、安全な環境で「思考の外にある静けさ」を体験していただきます。
-                無理な勧誘はありません。合う・合わないは、体験してから判断してください。
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className={styles.section}>
-          <div className={styles.container}>
-            <div className={styles.ctaSection}>
-              <h2 className={styles.ctaTitle}>まずは90分の体験から</h2>
-              <p className={styles.ctaLead}>
-                初回限定で、イマココ体験セッションを無料で提供しています。<br />
-                オンラインでも対面でも、お好きな形式でご参加いただけます。
-              </p>
-              <Link href="/taiken/imakoko" className={styles.ctaBtn}>
-                体験セッションの詳細を見る
-              </Link>
             </div>
           </div>
         </section>

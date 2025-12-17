@@ -1,7 +1,8 @@
 /**
- * app/5dmgmt/background/page.tsx
+ * app/background/page.tsx
  *
- * 【Phase 30】背景を読む インデックスページ
+ * 背景を読む インデックスページ
+ * 問いかけ型：「なぜ「気づき」が運気を変えるのか？」
  */
 
 import Link from 'next/link';
@@ -13,25 +14,28 @@ export const revalidate = 3600;
 
 export const metadata = {
   title: '背景を読む | 五次元経営',
-  description: '五次元経営の背景にある理論と哲学。ホーキンズ博士の意識レベル理論から五次元経営のストーリーまで。',
+  description: 'なぜ気づきが運気を変えるのか。ホーキンズ博士の研究から五次元経営のストーリーまで。',
 };
 
 const articles = [
   {
     title: '五次元経営ストーリー',
-    description: '創業者がなぜ「意識レベル」に辿り着いたのか。個人的な体験から五次元経営が生まれるまでの物語。',
+    question: 'なぜ、数字の世界から意識の世界へ移ったのか？',
+    description: '160億円のM&Aをクローズした経営者が、なぜ「意識レベル」を語り始めたのか。個人的な体験から生まれた物語。',
     href: '/background/story',
-    tag: 'Origin Story',
+    tag: 'Origin',
   },
   {
     title: 'ホーキンズ博士の研究',
-    description: 'デビッド・R・ホーキンズ博士とは誰か。意識レベル理論の科学的背景と、経営への応用。',
+    question: '意識に「レベル」があるとは、どういうことか？',
+    description: 'デビッド・R・ホーキンズ博士が20年の臨床経験を経て発見した意識の階層構造。科学と経営の接点。',
     href: '/background/hawkins',
     tag: 'Theory',
   },
   {
     title: '五次元経営の全体像',
-    description: 'イマココ意識、宿曜、風水。3つのアプローチがどのように連携し、意識レベルを上げるのか。',
+    question: 'イマココ、宿曜、風水。なぜこの3つなのか？',
+    description: '意識・時間・空間。この3つの軸から、気づきを深めるアプローチの全体像を解説します。',
     href: '/background/overview',
     tag: 'Framework',
   },
@@ -46,12 +50,18 @@ export default function BackgroundIndexPage() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <p className={styles.heroCatch}>なぜ、意識レベルなのか</p>
-            <h1 className={styles.heroTitle}>背景を読む</h1>
+            <h1 className={styles.heroTitle}>
+              なぜ「気づき」が<br />
+              運気を変えるのか？
+            </h1>
             <p className={styles.heroLead}>
-              五次元経営は、思いつきではありません。<br />
-              科学的研究、実践経験、そして個人的な探求が<br />
-              結晶化したものです。
+              努力しても変わらない。<br />
+              戦略を立てても、うまくいかない。<br />
+              <br />
+              それは「やり方」の問題ではなく、<br />
+              「在り方」の問題かもしれません。<br />
+              <br />
+              ここでは、その理由を探ります。
             </p>
           </div>
         </section>
@@ -59,11 +69,6 @@ export default function BackgroundIndexPage() {
         {/* Articles Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Articles</p>
-              <h2 className={styles.sectionTitle}>記事一覧</h2>
-            </div>
-
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               {articles.map((article, index) => (
                 <Link
@@ -92,14 +97,22 @@ export default function BackgroundIndexPage() {
                   }}>
                     {article.tag}
                   </span>
-                  <h3 style={{
+                  <h2 style={{
                     fontSize: '1.25rem',
                     fontWeight: 600,
                     color: 'var(--lp-text-primary)',
-                    marginBottom: '0.5rem'
+                    marginBottom: '0.75rem',
+                    lineHeight: 1.4,
+                  }}>
+                    {article.question}
+                  </h2>
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--lp-text-muted)',
+                    marginBottom: '0.5rem',
                   }}>
                     {article.title}
-                  </h3>
+                  </p>
                   <p style={{
                     fontSize: '0.9375rem',
                     color: 'var(--lp-text-secondary)',
@@ -114,18 +127,37 @@ export default function BackgroundIndexPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className={styles.section}>
+        {/* Question Section */}
+        <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div className={styles.ctaSection}>
-              <h2 className={styles.ctaTitle}>まずは体験から</h2>
-              <p className={styles.ctaLead}>
-                理論を知ることも大切ですが、<br />
-                体験なしには本当の理解は得られません。
+            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
+              <p style={{
+                fontSize: '1.5rem',
+                fontWeight: 500,
+                color: 'var(--lp-text-primary)',
+                lineHeight: 1.8,
+                marginBottom: '2rem',
+              }}>
+                理解すれば、変われるのか？
               </p>
-              <Link href="/unki/shindan" className={styles.ctaBtn}>
-                運気診断を受ける（無料）
-              </Link>
+              <p style={{
+                lineHeight: 2,
+                color: 'var(--lp-text-secondary)',
+              }}>
+                理解は、入り口に過ぎません。<br />
+                <br />
+                ここで読んだことが「腑に落ちる」とき、<br />
+                それは理解ではなく、気づきです。<br />
+                <br />
+                頭ではなく、体で分かる瞬間。<br />
+                その瞬間から、変化が始まります。
+              </p>
+
+              <div style={{ marginTop: '2.5rem' }}>
+                <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary}`}>
+                  まずは今の状態を知る
+                </Link>
+              </div>
             </div>
           </div>
         </section>

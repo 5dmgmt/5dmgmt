@@ -220,10 +220,18 @@
   font-size: 3.5rem;
   font-weight: 700;
   color: var(--lp-text-primary);
-  margin: 0 0 16px;
+  margin: 0 0 8px;
   line-height: 1.2;
   letter-spacing: -0.02em;
   position: relative;
+}
+
+.heroSubtitle {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--lp-primary);
+  margin: 0 0 24px;
+  line-height: 1.3;
 }
 
 .heroLead {
@@ -697,7 +705,8 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 101;
+  z-index: 1001;
+  position: relative;
 }
 
 .menuBtn span {
@@ -721,7 +730,7 @@
   right: 0;
   bottom: 0;
   background: var(--lp-surface);
-  z-index: 99;
+  z-index: 1000;
   padding-top: 80px;
   flex-direction: column;
   align-items: center;
@@ -763,6 +772,7 @@
   .mainNav { display: none; }
   .menuBtn { display: flex; }
   .heroTitle { font-size: 2.25rem; }
+  .heroSubtitle { font-size: 1.25rem; }
   .heroActions { flex-direction: column; align-items: center; }
   .ctaSection { padding: 40px 24px; }
   .architectureSection .sectionTag, .architectureSection .sectionTitle { text-align: center; }

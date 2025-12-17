@@ -15,13 +15,6 @@ export const metadata = {
   description: '生年月日から導く潜在意識の設計図。27宿の特性と意識レベル向上の方向性を解読します。',
 };
 
-// 27宿リスト
-const SHUKUYO_LIST = [
-  ['昴', '畢', '觜', '参', '井', '鬼', '柳', '星', '張'],
-  ['翼', '軫', '角', '亢', '氐', '房', '心', '尾', '箕'],
-  ['斗', '女', '虚', '危', '室', '壁', '奎', '婁', '胃'],
-];
-
 export default function ShukuyoPage() {
   return (
     <div className={`${styles.landingPage} five-d-page`}>
@@ -237,42 +230,6 @@ export default function ShukuyoPage() {
           </div>
         </section>
 
-        {/* 27宿リンク */}
-        <section className={`${styles.section} ${styles.testimonialsSection}`}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <p className={styles.sectionTag}>Reference</p>
-              <h2 className={styles.sectionTitle}>資料庫　宿曜別リンク</h2>
-            </div>
-
-            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-              {SHUKUYO_LIST.map((row, rowIndex) => (
-                <div key={rowIndex} style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(9, 1fr)',
-                  gap: '8px',
-                  marginBottom: '8px',
-                }}>
-                  {row.map((shuku) => (
-                    <div key={shuku} style={{
-                      padding: '12px 8px',
-                      background: '#fff',
-                      border: '1px solid var(--5d-border)',
-                      borderRadius: '8px',
-                      textAlign: 'center',
-                      fontSize: '1rem',
-                      fontWeight: 500,
-                      color: 'var(--5d-text)',
-                      cursor: 'default',
-                    }}>
-                      {shuku}宿
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <FiveDmgmtFooter />
