@@ -7,8 +7,6 @@
 
 import Link from 'next/link';
 import styles from './LandingPage.module.css';
-import FiveDmgmtHeader from './FiveDmgmtHeader';
-import FiveDmgmtFooter from './FiveDmgmtFooter';
 
 // 気づきと運気の相関データ
 const awarenessLevels = [
@@ -92,11 +90,8 @@ const approaches = [
 
 export default function FiveDmgmtLandingPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>努力で運気は上がらない</p>
@@ -379,9 +374,6 @@ export default function FiveDmgmtLandingPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

@@ -5,8 +5,6 @@
  * - ConsciousnessDiagnosis コンポーネントを表示
  */
 
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import ConsciousnessDiagnosis from '@/components/diagnosis/ConsciousnessDiagnosis';
 import styles from '@/components/landing/LandingPage.module.css';
 
@@ -17,11 +15,8 @@ export const metadata = {
 
 export default function ShindanPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero} style={{ paddingBottom: '2rem' }}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>3分で現在地を知る</p>
@@ -39,9 +34,6 @@ export default function ShindanPage() {
             <ConsciousnessDiagnosis />
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

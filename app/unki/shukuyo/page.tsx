@@ -5,8 +5,6 @@
  */
 
 import Link from 'next/link';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import { ShukuyoSenseibanWrapper, ShukuyoLookupWrapper, ShukuyoTodayFortuneWrapper } from '@/components/shukuyo/ShukuyoClientWrapper';
 import styles from '@/components/landing/LandingPage.module.css';
 
@@ -17,11 +15,8 @@ export const metadata = {
 
 export default function ShukuyoPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>宿曜×五次元経営</p>
@@ -229,10 +224,6 @@ export default function ShukuyoPage() {
             </div>
           </div>
         </section>
-
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

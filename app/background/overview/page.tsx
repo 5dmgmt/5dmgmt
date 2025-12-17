@@ -5,8 +5,6 @@
  */
 
 import Link from 'next/link';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -57,11 +55,8 @@ const approaches = [
 
 export default function OverviewPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>Framework</p>
@@ -267,9 +262,6 @@ export default function OverviewPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

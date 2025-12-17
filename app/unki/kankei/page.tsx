@@ -5,8 +5,6 @@
 
 import { Metadata } from 'next';
 import ShukuyoKankei from '@/components/shukuyo/ShukuyoKankei';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 
 export const metadata: Metadata = {
   title: '宿曜関係図 | 五次元経営株式会社',
@@ -15,12 +13,8 @@ export const metadata: Metadata = {
 
 export default function ShukuyoKankeiPage() {
   return (
-    <>
-      <FiveDmgmtHeader />
-      <main style={{ paddingTop: '80px', minHeight: '100vh', background: 'var(--5d-bg, #f8f9fa)' }}>
-        <ShukuyoKankei />
-      </main>
-      <FiveDmgmtFooter />
-    </>
+    <div style={{ paddingTop: '80px', minHeight: '100vh', background: 'var(--5d-bg, #f8f9fa)' }}>
+      <ShukuyoKankei />
+    </div>
   );
 }

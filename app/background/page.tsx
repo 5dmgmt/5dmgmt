@@ -6,8 +6,6 @@
  */
 
 import Link from 'next/link';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -43,11 +41,8 @@ const articles = [
 
 export default function BackgroundIndexPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <h1 className={styles.heroTitle}>
@@ -161,9 +156,6 @@ export default function BackgroundIndexPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
 
       <style>{`
         .article-card:hover {
@@ -171,6 +163,6 @@ export default function BackgroundIndexPage() {
           transform: translateY(-2px);
         }
       `}</style>
-    </div>
+    </>
   );
 }

@@ -4,8 +4,6 @@
  * 特定商取引法に基づく表記ページ
  */
 
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -33,11 +31,8 @@ const tokushohoInfo = [
 
 export default function TokushohoPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero} style={{ paddingBottom: '2rem' }}>
           <div className={styles.container}>
             <h1 className={styles.heroTitle}>特定商取引法に基づく表記</h1>
@@ -98,9 +93,6 @@ export default function TokushohoPage() {
             </p>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

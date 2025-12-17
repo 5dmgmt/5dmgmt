@@ -5,8 +5,6 @@
  */
 
 import Link from 'next/link';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -43,11 +41,8 @@ const consciousnessLevels = [
 
 export default function HawkinsPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>Theory</p>
@@ -210,9 +205,6 @@ export default function HawkinsPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

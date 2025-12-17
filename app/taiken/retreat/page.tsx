@@ -5,8 +5,6 @@
  */
 
 import Link from 'next/link';
-import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
-import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -36,11 +34,8 @@ const scheduleDay2 = [
 
 export default function RetreatPage() {
   return (
-    <div className={`${styles.landingPage} five-d-page`}>
-      <FiveDmgmtHeader />
-
-      <main>
-        {/* Hero Section */}
+    <>
+      {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <p className={styles.heroCatch}>日常を離れ、本来の自己と出会う</p>
@@ -310,9 +305,6 @@ export default function RetreatPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <FiveDmgmtFooter />
-    </div>
+    </>
   );
 }

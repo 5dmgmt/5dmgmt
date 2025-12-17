@@ -7,6 +7,9 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import './globals.css';
+import FiveDmgmtHeader from '@/components/landing/FiveDmgmtHeader';
+import FiveDmgmtFooter from '@/components/landing/FiveDmgmtFooter';
+import styles from '@/components/landing/LandingPage.module.css';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -161,7 +164,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <div className={`${styles.landingPage} five-d-page`}>
+          <FiveDmgmtHeader />
+          <main>{children}</main>
+          <FiveDmgmtFooter />
+        </div>
+      </body>
     </html>
   );
 }
