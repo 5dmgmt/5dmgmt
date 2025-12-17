@@ -715,6 +715,13 @@ export default function ShukuyoKankei() {
           <div className="sk-csv-section">
             <h4>CSV一括登録</h4>
             <p className="sk-csv-hint">形式: 名前,YYYY/MM/DD</p>
+            <a
+              href="/sample-takaichi-cabinet.csv"
+              download="sample-takaichi-cabinet.csv"
+              className="sk-sample-download"
+            >
+              サンプルCSVをダウンロード（高市内閣一覧）
+            </a>
             <input
               type="file"
               accept=".csv"
@@ -997,6 +1004,19 @@ const styles = `
   font-size: 0.8rem;
   color: var(--5d-text-secondary, #666);
   margin-bottom: 8px;
+}
+
+.sk-sample-download {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--5d-teal, #00897b);
+  text-decoration: underline;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.sk-sample-download:hover {
+  color: var(--5d-teal-dark, #00695c);
 }
 
 .sk-file-input {

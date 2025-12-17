@@ -3,9 +3,11 @@
  *
  * 体験する インデックスページ
  * 問いかけ型：「思考の外に出たことはありますか？」
+ * Service JSON-LD（サービス一覧ページ用）
  */
 
 import Link from 'next/link';
+import Script from 'next/script';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -13,6 +15,48 @@ export const revalidate = 3600;
 export const metadata = {
   title: '体験する | 五次元経営',
   description: '思考の外にある静けさを体験する。イマココ体験セッションと経営者リトリート。',
+};
+
+// Service JSON-LD（サービス一覧ページ用）
+const servicesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: '経営コンサルティング',
+  provider: {
+    '@type': 'Organization',
+    name: '五次元経営株式会社',
+  },
+  areaServed: 'JP',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: '五次元経営プログラム',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'イマココ体験セッション',
+          description: '経営者向け90分のマインドフルネス体験セッション',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: '宿曜鑑定',
+          description: '宿曜占星術に基づく経営者向け鑑定サービス',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: '経営者リトリート',
+          description: '1泊2日の経営者向け意識変容プログラム',
+        },
+      },
+    ],
+  },
 };
 
 const programs = [
@@ -39,6 +83,11 @@ const programs = [
 export default function TaikenIndexPage() {
   return (
     <>
+      <Script
+        id="services-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
       {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>

@@ -175,6 +175,52 @@ export default function ImakokoPage() {
           </div>
         </section>
 
+        {/* Service Details Section */}
+        <section className={`${styles.section} ${styles.testimonialsSection}`}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <p className={styles.sectionTag}>Details</p>
+              <h2 className={styles.sectionTitle}>サービス詳細</h2>
+            </div>
+
+            <div style={{
+              maxWidth: '600px',
+              margin: '0 auto',
+              background: 'white',
+              padding: '2rem',
+              borderRadius: '12px',
+              border: '1px solid var(--lp-border)'
+            }}>
+              <dl style={{ margin: 0 }}>
+                <div style={{ display: 'flex', padding: '1rem 0', borderBottom: '1px solid var(--lp-border)' }}>
+                  <dt style={{ width: '120px', fontWeight: 600, color: 'var(--lp-text-primary)' }}>料金</dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
+                    <strong style={{ color: 'var(--lp-primary)', fontSize: '1.125rem' }}>初回無料</strong>
+                  </dd>
+                </div>
+                <div style={{ display: 'flex', padding: '1rem 0', borderBottom: '1px solid var(--lp-border)' }}>
+                  <dt style={{ width: '120px', fontWeight: 600, color: 'var(--lp-text-primary)' }}>所要時間</dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>90分</dd>
+                </div>
+                <div style={{ display: 'flex', padding: '1rem 0', borderBottom: '1px solid var(--lp-border)' }}>
+                  <dt style={{ width: '120px', fontWeight: 600, color: 'var(--lp-text-primary)' }}>形式</dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>オンライン（Zoom）または 対面（藤沢）</dd>
+                </div>
+                <div style={{ display: 'flex', padding: '1rem 0', borderBottom: '1px solid var(--lp-border)' }}>
+                  <dt style={{ width: '120px', fontWeight: 600, color: 'var(--lp-text-primary)' }}>勧誘</dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
+                    <span style={{ color: '#16a34a', fontWeight: 500 }}>一切なし</span>（合わなければそれで終了）
+                  </dd>
+                </div>
+                <div style={{ display: 'flex', padding: '1rem 0' }}>
+                  <dt style={{ width: '120px', fontWeight: 600, color: 'var(--lp-text-primary)' }}>キャンセル</dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>前日まで無料</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className={styles.section}>
           <div className={styles.container}>
@@ -187,13 +233,6 @@ export default function ImakokoPage() {
               <Link href="/company/contact" className={styles.ctaBtn}>
                 セッションを予約する（無料）
               </Link>
-              <p style={{
-                marginTop: '1rem',
-                fontSize: '0.875rem',
-                color: 'var(--lp-text-muted)'
-              }}>
-                無理な勧誘は一切ありません
-              </p>
             </div>
           </div>
         </section>

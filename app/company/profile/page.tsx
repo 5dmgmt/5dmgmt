@@ -2,9 +2,11 @@
  * app/company/profile/page.tsx
  *
  * 会社概要ページ - 五次元経営株式会社
+ * AboutPage + Person JSON-LD（会社概要ページ用）
  */
 
 import Image from 'next/image';
+import Script from 'next/script';
 import styles from '@/components/landing/LandingPage.module.css';
 
 export const revalidate = 3600;
@@ -12,6 +14,67 @@ export const revalidate = 3600;
 export const metadata = {
   title: '会社概要 | 五次元経営',
   description: '五次元経営株式会社は、「イマココの心地よさから始める経営」を広め、みんな、ごきげんな会社をふつうにすることを使命としています。',
+};
+
+// AboutPage JSON-LD
+const aboutPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: '会社概要 | 五次元経営株式会社',
+  description: '五次元経営株式会社は、「イマココの心地よさから始める経営」を広め、みんな、ごきげんな会社をふつうにすることを使命としています。',
+  mainEntity: {
+    '@type': 'Organization',
+    name: '五次元経営株式会社',
+    legalName: '五次元経営株式会社',
+    url: 'https://www.5dmgmt.com',
+    logo: 'https://www.5dmgmt.com/logo.png',
+    foundingDate: '1965-03-02',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '片瀬海岸1-12-16-1003',
+      addressLocality: '藤沢市',
+      addressRegion: '神奈川県',
+      postalCode: '251-0035',
+      addressCountry: 'JP',
+    },
+    telephone: '0466-52-7722',
+  },
+};
+
+// Person JSON-LD（代表者：望月貴生）
+const personTakaoJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: '望月 貴生',
+  jobTitle: '代表取締役',
+  worksFor: {
+    '@type': 'Organization',
+    name: '五次元経営株式会社',
+  },
+  description: 'みずほ銀行、ジャフコ等でM&A実務を経験後、五次元経営株式会社代表取締役。JAPAN MENSA会員。',
+  image: 'https://www.5dmgmt.com/images/takao.png',
+  memberOf: {
+    '@type': 'Organization',
+    name: 'JAPAN MENSA',
+  },
+};
+
+// Person JSON-LD（代表者：望月美香）
+const personMikaJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: '望月 美香',
+  jobTitle: '代表取締役',
+  worksFor: {
+    '@type': 'Organization',
+    name: '五次元経営株式会社',
+  },
+  description: '資生堂を経て、30年以上美容家として活動。五次元経営株式会社代表取締役。JAPAN MENSA会員。',
+  image: 'https://www.5dmgmt.com/images/mika.png',
+  memberOf: {
+    '@type': 'Organization',
+    name: 'JAPAN MENSA',
+  },
 };
 
 const companyInfo = [
@@ -92,6 +155,21 @@ const mikaCareer = [
 export default function ProfilePage() {
   return (
     <>
+      <Script
+        id="about-page-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }}
+      />
+      <Script
+        id="person-takao-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personTakaoJsonLd) }}
+      />
+      <Script
+        id="person-mika-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personMikaJsonLd) }}
+      />
       {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>

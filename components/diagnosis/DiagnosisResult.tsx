@@ -51,15 +51,97 @@ export default function DiagnosisResult({ result, onRetry }: Props) {
           <ResultInterpretation level={result.level} />
         </div>
 
+        <div className={styles.resultRecommendation}>
+          <NextActionRecommendation level={result.level} />
+        </div>
+
         <div className={styles.resultActions}>
           <button onClick={onRetry} className={styles.retryButton}>
             もう一度診断する
           </button>
-          <a href="/taiken" className={styles.ctaButton}>
-            体験セッションを受ける
-          </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+function NextActionRecommendation({ level }: { level: number }) {
+  if (level >= 500) {
+    // 高レベル: リトリートを推奨
+    return (
+      <div className={styles.recommendationCard} style={{ borderColor: '#16a34a' }}>
+        <div className={styles.recommendationBadge} style={{ backgroundColor: '#16a34a' }}>
+          おすすめ
+        </div>
+        <h3 className={styles.recommendationTitle}>経営者リトリート</h3>
+        <p className={styles.recommendationDesc}>
+          高い意識レベルをお持ちです。同じレベルの経営者と集中的に過ごすことで、
+          さらなる飛躍が期待できます。
+        </p>
+        <div className={styles.recommendationMeta}>
+          <span>1泊2日</span>
+          <span>20万円〜</span>
+          <span>少人数制</span>
+        </div>
+        <a href="/taiken/retreat" className={styles.ctaButton}>
+          リトリートを見る
+        </a>
+        <p className={styles.recommendationAlt}>
+          または <a href="/taiken/imakoko">イマココ体験セッション（無料）</a> から始める
+        </p>
+      </div>
+    );
+  }
+
+  if (level >= 300) {
+    // 中〜高レベル: チーム診断 + イマココ
+    return (
+      <div className={styles.recommendationCard} style={{ borderColor: '#0891b2' }}>
+        <div className={styles.recommendationBadge} style={{ backgroundColor: '#0891b2' }}>
+          おすすめ
+        </div>
+        <h3 className={styles.recommendationTitle}>イマココ体験セッション</h3>
+        <p className={styles.recommendationDesc}>
+          意識を整える方法を90分で体験できます。チームメンバーと一緒に受けることで、
+          組織全体の意識レベル向上にもつながります。
+        </p>
+        <div className={styles.recommendationMeta}>
+          <span>90分</span>
+          <span>初回無料</span>
+          <span>オンライン可</span>
+        </div>
+        <a href="/taiken/imakoko" className={styles.ctaButton}>
+          体験セッションを予約する
+        </a>
+        <p className={styles.recommendationAlt}>
+          チームで受けたい場合は <a href="/company/contact">お問い合わせ</a> ください
+        </p>
+      </div>
+    );
+  }
+
+  // 低〜中レベル: イマココ体験を強く推奨
+  return (
+    <div className={styles.recommendationCard} style={{ borderColor: '#0891b2' }}>
+      <div className={styles.recommendationBadge} style={{ backgroundColor: '#0891b2' }}>
+        まずはここから
+      </div>
+      <h3 className={styles.recommendationTitle}>イマココ体験セッション</h3>
+      <p className={styles.recommendationDesc}>
+        意識レベルを上げる第一歩として、90分の体験セッションをおすすめします。
+        初回は無料で、オンラインでも受けられます。
+      </p>
+      <div className={styles.recommendationMeta}>
+        <span>90分</span>
+        <span>初回無料</span>
+        <span>勧誘なし</span>
+      </div>
+      <a href="/taiken/imakoko" className={styles.ctaButton}>
+        無料で体験する
+      </a>
+      <p className={styles.recommendationAlt}>
+        詳しく話を聞きたい方は <a href="/company/contact">お問い合わせ</a> へ
+      </p>
     </div>
   );
 }

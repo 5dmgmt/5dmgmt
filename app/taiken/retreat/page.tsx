@@ -267,7 +267,40 @@ export default function RetreatPage() {
                     料金
                   </dt>
                   <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
-                    お問い合わせください
+                    <strong style={{ color: 'var(--lp-primary)', fontSize: '1.125rem' }}>20万円〜</strong>
+                    <span style={{ fontSize: '0.875rem', marginLeft: '8px' }}>（詳細はお問い合わせ）</span>
+                  </dd>
+                </div>
+                <div style={{
+                  display: 'flex',
+                  padding: '1rem 0',
+                  borderBottom: '1px solid var(--lp-border)'
+                }}>
+                  <dt style={{
+                    width: '120px',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)'
+                  }}>
+                    含まれるもの
+                  </dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
+                    宿泊費、食事（3食）、プログラム費、意識レベル測定
+                  </dd>
+                </div>
+                <div style={{
+                  display: 'flex',
+                  padding: '1rem 0',
+                  borderBottom: '1px solid var(--lp-border)'
+                }}>
+                  <dt style={{
+                    width: '120px',
+                    fontWeight: 600,
+                    color: 'var(--lp-text-primary)'
+                  }}>
+                    勧誘
+                  </dt>
+                  <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
+                    <span style={{ color: '#16a34a', fontWeight: 500 }}>一切なし</span>（体験後の判断は自由）
                   </dd>
                 </div>
                 <div style={{
@@ -279,10 +312,10 @@ export default function RetreatPage() {
                     fontWeight: 600,
                     color: 'var(--lp-text-primary)'
                   }}>
-                    含まれるもの
+                    キャンセル
                   </dt>
                   <dd style={{ margin: 0, color: 'var(--lp-text-secondary)' }}>
-                    宿泊費、食事（3食）、プログラム費、意識レベル測定
+                    7日前まで無料、それ以降は50%
                   </dd>
                 </div>
               </dl>

@@ -320,6 +320,78 @@
   color: white;
 }
 
+/* 推奨アクションカード */
+.resultRecommendation {
+  margin-bottom: 2rem;
+}
+
+.recommendationCard {
+  position: relative;
+  background: white;
+  border: 2px solid;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.recommendationBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 16px;
+  border-radius: 100px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.recommendationTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--lp-text-primary, #111827);
+  margin: 0.5rem 0 1rem;
+}
+
+.recommendationDesc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--lp-text-secondary, #4b5563);
+  margin-bottom: 1.5rem;
+}
+
+.recommendationMeta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.recommendationMeta span {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #f3f4f6;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  color: var(--lp-text-muted, #6b7280);
+}
+
+.recommendationAlt {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--lp-text-muted, #6b7280);
+}
+
+.recommendationAlt a {
+  color: var(--5d-teal, #00B8C4);
+  text-decoration: none;
+}
+
+.recommendationAlt a:hover {
+  text-decoration: underline;
+}
+
 /* レスポンシブ */
 @media (max-width: 640px) {
   .section {

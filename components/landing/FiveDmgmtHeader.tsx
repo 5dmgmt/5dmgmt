@@ -14,10 +14,10 @@ import { useEffect, useState } from 'react';
 import styles from './LandingPage.module.css';
 
 const navItems = [
-  { href: '/unki', label: '運気を知る' },
+  { href: '/unki/shindan', label: '無料診断' },
   { href: '/taiken', label: '体験する' },
-  { href: '/background', label: '背景を読む' },
-  { href: '/tools', label: '整った後の道具' },
+  { href: '/unki', label: '宿曜を知る' },
+  { href: '/background', label: '理論を読む' },
   { href: '/company', label: '会社について' },
 ];
 
@@ -74,8 +74,8 @@ export default function FiveDmgmtHeader() {
               {item.label}
             </Link>
           ))}
-          <Link href="/unki/shindan" className="five-d-nav-btn">
-            運気診断
+          <Link href="/company/contact" className="five-d-nav-btn five-d-contact-btn">
+            お問い合わせ
           </Link>
         </nav>
 
@@ -99,11 +99,11 @@ export default function FiveDmgmtHeader() {
             </Link>
           ))}
           <Link
-            href="/unki/shindan"
+            href="/company/contact"
             className={`${styles.btn} ${styles.btnPrimary} five-d-nav-btn`}
             onClick={handleNavClick}
           >
-            運気診断
+            お問い合わせ
           </Link>
         </nav>
       </div>

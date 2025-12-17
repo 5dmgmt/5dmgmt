@@ -94,6 +94,7 @@ export default function FiveDmgmtLandingPage() {
       {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
+            <p className={styles.heroTarget}>経営者・人事責任者のための意識診断</p>
             <p className={styles.heroCatch}>努力で運気は上がらない</p>
             <h1 className={styles.heroTitle}>
               今、気づいている
@@ -102,23 +103,80 @@ export default function FiveDmgmtLandingPage() {
               それだけで、運気は変わる
             </p>
             <p className={styles.heroLead}>
-              頑張るほど、疲れる。<br />
-              考えるほど、迷う。<br />
-              正しくあろうとするほど、苦しい。<br />
-              <br />
+              頑張るほど、疲れる。考えるほど、迷う。<br />
               五次元経営は、その逆をいく。<br />
-              今この瞬間に気づいている——<br />
-              その深さが、そのまま運気になる。
+              今この瞬間に気づいている——その深さが、そのまま運気になる。
             </p>
+            <p className={styles.heroValue}>3分の診断で、チームが変わる視点を手に入れる</p>
             <div className={styles.heroActions}>
-              <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary}`}>
-                今の気づきの深さを測る
-              </Link>
-              <Link href="/taiken" className={`${styles.btn} ${styles.btnSecondary}`}>
-                体験セッション
+              <Link href="/unki/shindan" className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
+                無料で診断する（3分）
               </Link>
             </div>
-            <p className={styles.heroReassurance}>3分の診断で現在地がわかる</p>
+            <p className={styles.heroReassurance}>
+              <Link href="/taiken" className={styles.heroSubLink}>体験セッションを見る</Link>
+            </p>
+          </div>
+        </section>
+
+        {/* 信頼の根拠 Section */}
+        <section className={styles.trustSection}>
+          <div className={styles.container}>
+            <div className={styles.trustGrid}>
+              <div className={styles.trustItem}>
+                <div className={styles.trustIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div className={styles.trustContent}>
+                  <div className={styles.trustValue}>JAPAN MENSA</div>
+                  <div className={styles.trustLabel}>代表2名が会員</div>
+                </div>
+              </div>
+              <div className={styles.trustItem}>
+                <div className={styles.trustIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <div className={styles.trustContent}>
+                  <div className={styles.trustValue}>160億円</div>
+                  <div className={styles.trustLabel}>M&Aクローズ実績</div>
+                </div>
+              </div>
+              <div className={styles.trustItem}>
+                <div className={styles.trustIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div className={styles.trustContent}>
+                  <div className={styles.trustValue}>3ヶ月</div>
+                  <div className={styles.trustLabel}>平均で成果が出る</div>
+                </div>
+              </div>
+              <div className={styles.trustItem}>
+                <div className={styles.trustIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div className={styles.trustContent}>
+                  <div className={styles.trustValue}>藤沢市</div>
+                  <div className={styles.trustLabel}>0466-52-7722</div>
+                </div>
+              </div>
+            </div>
+            <p className={styles.trustNote}>
+              <Link href="/company/profile" className={styles.trustLink}>会社概要を見る →</Link>
+            </p>
           </div>
         </section>
 
