@@ -108,82 +108,18 @@ export default function TaikenIndexPage() {
         {/* Programs Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-              {programs.map((program, index) => (
-                <div
-                  key={program.title}
-                  style={{
-                    padding: '2.5rem',
-                    background: 'white',
-                    borderRadius: '16px',
-                    marginBottom: index < programs.length - 1 ? '2rem' : 0,
-                    border: '1px solid var(--lp-border)',
-                  }}
-                >
-                  <div style={{
-                    display: 'flex',
-                    gap: '0.75rem',
-                    marginBottom: '1rem',
-                    flexWrap: 'wrap'
-                  }}>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      color: 'var(--lp-primary)',
-                      backgroundColor: 'var(--lp-primary-light)',
-                      padding: '4px 12px',
-                      borderRadius: '100px',
-                    }}>
-                      {program.duration}
-                    </span>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      color: 'var(--lp-text-muted)',
-                      backgroundColor: '#f5f5f5',
-                      padding: '4px 12px',
-                      borderRadius: '100px',
-                    }}>
-                      {program.format}
-                    </span>
+            <div className={styles.cardContainer}>
+              {programs.map((program) => (
+                <div key={program.title} className={styles.serviceCard}>
+                  <div className={styles.serviceCardTagGroup}>
+                    <span className={styles.serviceCardTag}>{program.duration}</span>
+                    <span className={styles.serviceCardTagMuted}>{program.format}</span>
                   </div>
-
-                  <h2 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: 600,
-                    color: 'var(--lp-text-primary)',
-                    marginBottom: '0.5rem',
-                  }}>
-                    {program.question}
-                  </h2>
-
-                  <p style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--lp-text-muted)',
-                    marginBottom: '1rem',
-                  }}>
-                    {program.title}
-                  </p>
-
-                  <p style={{
-                    lineHeight: 1.8,
-                    color: 'var(--lp-text-secondary)',
-                    marginBottom: '1.5rem',
-                  }}>
-                    {program.description}
-                  </p>
-
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    flexWrap: 'wrap',
-                    gap: '1rem'
-                  }}>
-                    <span style={{
-                      fontWeight: 600,
-                      color: 'var(--lp-primary)'
-                    }}>
-                      {program.price}
-                    </span>
+                  <h2 className={styles.serviceCardQuestion}>{program.question}</h2>
+                  <p className={styles.serviceCardTitle}>{program.title}</p>
+                  <p className={styles.serviceCardDescription}>{program.description}</p>
+                  <div className={styles.serviceCardFooter}>
+                    <span className={styles.serviceCardPrice}>{program.price}</span>
                     <Link
                       href={program.href}
                       className={`${styles.btn} ${styles.btnPrimary}`}
@@ -200,20 +136,11 @@ export default function TaikenIndexPage() {
         {/* Question Section */}
         <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
-              <p style={{
-                fontSize: '1.5rem',
-                fontWeight: 500,
-                color: 'var(--lp-text-primary)',
-                lineHeight: 1.8,
-                marginBottom: '2rem',
-              }}>
+            <div className={styles.questionSection}>
+              <p className={styles.questionTitle}>
                 体験しないと、分からないのか？
               </p>
-              <p style={{
-                lineHeight: 2,
-                color: 'var(--lp-text-secondary)',
-              }}>
+              <p className={styles.questionText}>
                 はい。<br />
                 <br />
                 本を読んでも、「水の味」は分かりません。<br />

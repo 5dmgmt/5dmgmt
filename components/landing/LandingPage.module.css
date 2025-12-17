@@ -16,6 +16,7 @@
 
   /* Light Mode Only - コントラスト改善 */
   --lp-bg: #f8feff;
+  --lp-bg-secondary: #f0f9fa;
   --lp-bg-gradient: linear-gradient(135deg, #f8feff 0%, #e0f7fa 50%, #b2ebf2 100%);
   --lp-surface: #ffffff;
   --lp-text-primary: #111827;
@@ -915,3 +916,186 @@
 @media (max-width: 768px) { .mobileBreak { display: block; } }
 .pcBreak { display: block; }
 @media (max-width: 768px) { .pcBreak { display: none; } }
+
+/* ==========================================================================
+   17. Reusable Card Components
+   ========================================================================== */
+
+/* Service/Article Card - タグ付きカード（unki, taiken, background用） */
+.serviceCard {
+  display: block;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--lp-border);
+  text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.serviceCard:last-child { margin-bottom: 0; }
+
+.serviceCard:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.serviceCardTag {
+  font-size: 0.75rem;
+  color: var(--lp-primary);
+  background-color: var(--lp-primary-light);
+  padding: 4px 12px;
+  border-radius: 100px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.serviceCardTagGroup {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.serviceCardTagMuted {
+  font-size: 0.75rem;
+  color: var(--lp-text-muted);
+  background-color: #f5f5f5;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.serviceCardQuestion {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--lp-text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.serviceCardTitle {
+  font-size: 0.85rem;
+  color: var(--lp-text-muted);
+  margin-bottom: 1rem;
+}
+
+.serviceCardDescription {
+  line-height: 1.8;
+  color: var(--lp-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.serviceCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.serviceCardPrice {
+  font-weight: 600;
+  color: var(--lp-primary);
+}
+
+/* Simple Link Card - シンプルなリンクカード（company用） */
+.linkCard {
+  display: block;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--lp-border);
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+}
+
+.linkCard:last-child { margin-bottom: 0; }
+
+.linkCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.linkCardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--lp-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.linkCardDescription {
+  font-size: 0.875rem;
+  color: var(--lp-text-secondary);
+  margin: 0;
+}
+
+/* Info Box - 補足説明ボックス */
+.infoBox {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  background: var(--lp-bg-secondary);
+  border-radius: 12px;
+  border-left: 4px solid var(--lp-primary);
+}
+
+.infoBoxTitle {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--lp-text-primary);
+}
+
+.infoBoxText {
+  line-height: 1.8;
+  color: var(--lp-text-secondary);
+  margin: 0;
+}
+
+/* Centered Question Section */
+.questionSection {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.questionTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--lp-text-primary);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.questionText {
+  line-height: 2;
+  color: var(--lp-text-secondary);
+}
+
+/* Card Container */
+.cardContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cardContainerNarrow {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cardContainerMedium {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Note Text */
+.noteText {
+  font-size: 0.8125rem;
+  color: var(--lp-text-muted);
+  margin-top: 1rem;
+}
+
+.noteTextCenter {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--lp-text-muted);
+  margin-top: 2rem;
+}

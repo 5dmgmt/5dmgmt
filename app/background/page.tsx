@@ -64,56 +64,17 @@ export default function BackgroundIndexPage() {
         {/* Articles Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-              {articles.map((article, index) => (
+            <div className={styles.cardContainerMedium}>
+              {articles.map((article) => (
                 <Link
                   key={article.title}
                   href={article.href}
-                  style={{
-                    display: 'block',
-                    padding: '2rem',
-                    background: 'white',
-                    borderRadius: '12px',
-                    marginBottom: index < articles.length - 1 ? '1.5rem' : 0,
-                    border: '1px solid var(--lp-border)',
-                    textDecoration: 'none',
-                    transition: 'box-shadow 0.2s, transform 0.2s',
-                  }}
-                  className="article-card"
+                  className={styles.serviceCard}
                 >
-                  <span style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--lp-primary)',
-                    backgroundColor: 'var(--lp-primary-light)',
-                    padding: '4px 12px',
-                    borderRadius: '100px',
-                    display: 'inline-block',
-                    marginBottom: '1rem',
-                  }}>
-                    {article.tag}
-                  </span>
-                  <h2 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: 600,
-                    color: 'var(--lp-text-primary)',
-                    marginBottom: '0.75rem',
-                    lineHeight: 1.4,
-                  }}>
-                    {article.question}
-                  </h2>
-                  <p style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--lp-text-muted)',
-                    marginBottom: '0.5rem',
-                  }}>
-                    {article.title}
-                  </p>
-                  <p style={{
-                    fontSize: '0.9375rem',
-                    color: 'var(--lp-text-secondary)',
-                    lineHeight: 1.7,
-                    margin: 0
-                  }}>
+                  <span className={styles.serviceCardTag}>{article.tag}</span>
+                  <h2 className={styles.serviceCardQuestion}>{article.question}</h2>
+                  <p className={styles.serviceCardTitle}>{article.title}</p>
+                  <p className={styles.serviceCardDescription} style={{ marginBottom: 0 }}>
                     {article.description}
                   </p>
                 </Link>
@@ -125,20 +86,11 @@ export default function BackgroundIndexPage() {
         {/* Question Section */}
         <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
-              <p style={{
-                fontSize: '1.5rem',
-                fontWeight: 500,
-                color: 'var(--lp-text-primary)',
-                lineHeight: 1.8,
-                marginBottom: '2rem',
-              }}>
+            <div className={styles.questionSection}>
+              <p className={styles.questionTitle}>
                 理解すれば、変われるのか？
               </p>
-              <p style={{
-                lineHeight: 2,
-                color: 'var(--lp-text-secondary)',
-              }}>
+              <p className={styles.questionText}>
                 理解は、入り口に過ぎません。<br />
                 <br />
                 ここで読んだことが「腑に落ちる」とき、<br />
@@ -156,13 +108,6 @@ export default function BackgroundIndexPage() {
             </div>
           </div>
         </section>
-
-      <style>{`
-        .article-card:hover {
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          transform: translateY(-2px);
-        }
-      `}</style>
     </>
   );
 }

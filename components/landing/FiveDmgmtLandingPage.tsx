@@ -193,7 +193,7 @@ export default function FiveDmgmtLandingPage() {
                 気づきが深まると、運気が変わる。<br />
                 運気が変わると、経営も動き出す。
               </p>
-              <p style={{ fontSize: '0.8125rem', color: 'var(--lp-text-muted)', marginTop: '1rem' }}>
+              <p className={styles.noteText}>
                 ※ここでいう「運気」とは、偶然や神秘的な力ではなく、<br />
                 判断の質・人との関係性・選択の精度が生む結果の総体を指しています。
               </p>
@@ -247,17 +247,11 @@ export default function FiveDmgmtLandingPage() {
             </div>
 
             {/* 補足説明 */}
-            <div style={{
-              marginTop: '2.5rem',
-              padding: '2rem',
-              background: 'var(--lp-bg-secondary)',
-              borderRadius: '12px',
-              borderLeft: '4px solid var(--lp-primary)',
-            }}>
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--lp-text-primary)' }}>
+            <div className={styles.infoBox}>
+              <h3 className={styles.infoBoxTitle}>
                 気づきが深まると、なぜ運気が上がるのか？
               </h3>
-              <p style={{ lineHeight: 1.8, color: 'var(--lp-text-secondary)' }}>
+              <p className={styles.infoBoxText}>
                 思考に巻き込まれているとき、私たちは「問題」を見ています。<br />
                 問題を見れば、問題が増えます。<br />
                 <br />
@@ -332,7 +326,7 @@ export default function FiveDmgmtLandingPage() {
               ))}
             </div>
 
-            <p style={{ textAlign: 'center', fontSize: '0.875rem', color: 'var(--lp-text-muted)', marginTop: '2rem' }}>
+            <p className={styles.noteTextCenter}>
               ※個人の体験です。変化の現れ方は人により異なります。
             </p>
           </div>

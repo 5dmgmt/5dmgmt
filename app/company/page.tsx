@@ -48,49 +48,20 @@ export default function CompanyIndexPage() {
         {/* Pages Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-              {pages.map((page, index) => (
+            <div className={styles.cardContainerNarrow}>
+              {pages.map((page) => (
                 <Link
                   key={page.title}
                   href={page.href}
-                  style={{
-                    display: 'block',
-                    padding: '1.5rem',
-                    background: 'white',
-                    borderRadius: '8px',
-                    marginBottom: index < pages.length - 1 ? '1rem' : 0,
-                    border: '1px solid var(--lp-border)',
-                    textDecoration: 'none',
-                    transition: 'box-shadow 0.2s',
-                  }}
-                  className="page-link"
+                  className={styles.linkCard}
                 >
-                  <h3 style={{
-                    fontSize: '1.125rem',
-                    fontWeight: 600,
-                    color: 'var(--lp-text-primary)',
-                    marginBottom: '0.25rem'
-                  }}>
-                    {page.title}
-                  </h3>
-                  <p style={{
-                    fontSize: '0.875rem',
-                    color: 'var(--lp-text-secondary)',
-                    margin: 0
-                  }}>
-                    {page.description}
-                  </p>
+                  <h3 className={styles.linkCardTitle}>{page.title}</h3>
+                  <p className={styles.linkCardDescription}>{page.description}</p>
                 </Link>
               ))}
             </div>
           </div>
         </section>
-
-      <style>{`
-        .page-link:hover {
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-      `}</style>
     </>
   );
 }

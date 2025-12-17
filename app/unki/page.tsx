@@ -66,55 +66,13 @@ export default function UnkiIndexPage() {
         {/* Services Section */}
         <section className={styles.section}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-              {services.map((service, index) => (
-                <div
-                  key={service.title}
-                  style={{
-                    padding: '2.5rem',
-                    background: 'white',
-                    borderRadius: '16px',
-                    marginBottom: index < services.length - 1 ? '2rem' : 0,
-                    border: '1px solid var(--lp-border)',
-                  }}
-                >
-                  <span style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--lp-primary)',
-                    backgroundColor: 'var(--lp-primary-light)',
-                    padding: '4px 12px',
-                    borderRadius: '100px',
-                    display: 'inline-block',
-                    marginBottom: '1rem',
-                  }}>
-                    {service.tag}
-                  </span>
-
-                  <h2 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: 600,
-                    color: 'var(--lp-text-primary)',
-                    marginBottom: '0.5rem',
-                  }}>
-                    {service.question}
-                  </h2>
-
-                  <p style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--lp-text-muted)',
-                    marginBottom: '1rem',
-                  }}>
-                    {service.title}
-                  </p>
-
-                  <p style={{
-                    lineHeight: 1.8,
-                    color: 'var(--lp-text-secondary)',
-                    marginBottom: '1.5rem',
-                  }}>
-                    {service.description}
-                  </p>
-
+            <div className={styles.cardContainer}>
+              {services.map((service) => (
+                <div key={service.title} className={styles.serviceCard}>
+                  <span className={styles.serviceCardTag}>{service.tag}</span>
+                  <h2 className={styles.serviceCardQuestion}>{service.question}</h2>
+                  <p className={styles.serviceCardTitle}>{service.title}</p>
+                  <p className={styles.serviceCardDescription}>{service.description}</p>
                   <Link
                     href={service.href}
                     className={`${styles.btn} ${styles.btnPrimary}`}
@@ -130,20 +88,11 @@ export default function UnkiIndexPage() {
         {/* Question Section */}
         <section className={`${styles.section} ${styles.testimonialsSection}`}>
           <div className={styles.container}>
-            <div style={{ maxWidth: '640px', margin: '0 auto', textAlign: 'center' }}>
-              <p style={{
-                fontSize: '1.5rem',
-                fontWeight: 500,
-                color: 'var(--lp-text-primary)',
-                lineHeight: 1.8,
-                marginBottom: '2rem',
-              }}>
+            <div className={styles.questionSection}>
+              <p className={styles.questionTitle}>
                 測ることに、意味はあるのか？
               </p>
-              <p style={{
-                lineHeight: 2,
-                color: 'var(--lp-text-secondary)',
-              }}>
+              <p className={styles.questionText}>
                 測定は、気づきの入り口に過ぎません。<br />
                 大切なのは、数値ではなく、<br />
                 「今の自分」に気づくこと。<br />
