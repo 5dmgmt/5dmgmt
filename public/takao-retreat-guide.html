@@ -739,6 +739,7 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
 <nav class="nav">
   <a href="#opening" class="nav-item">Opening</a>
   <a href="#overview" class="nav-item">全体像</a>
+  <a href="#shukuyo" class="nav-item">🔮 宿曜</a>
   <a href="#heart" class="nav-item heart"><svg width="16" height="16" viewBox="0 0 100 100"><path fill="#e53935" d="M50 88C25 65 10 50 10 32c0-15 12-27 27-27 10 0 13 8 13 8s3-8 13-8c15 0 27 12 27 27 0 18-15 33-40 56z"/></svg> 人間関係</a>
   <a href="#club" class="nav-item club"><svg width="16" height="16" viewBox="0 0 100 100"><circle fill="#1976d2" cx="50" cy="28" r="18"/><circle fill="#1976d2" cx="28" cy="55" r="18"/><circle fill="#1976d2" cx="72" cy="55" r="18"/><path fill="#1976d2" d="M40 55h20v35H40z"/></svg> 健康</a>
   <a href="#diamond" class="nav-item diamond"><svg width="16" height="16" viewBox="0 0 100 100"><path fill="#fbc02d" d="M50 5L5 50l45 45 45-45L50 5z"/></svg> お金</a>
@@ -953,6 +954,38 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
         </tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<!-- Shukuyo: 構造を知る -->
+<section id="shukuyo" class="section">
+  <div class="section-header">
+    <div class="section-icon">🔮</div>
+    <div class="section-tag">Structure</div>
+    <h2 class="section-title">構造を知る｜宿曜</h2>
+    <p class="section-lead">自分と周囲の関係性を可視化する</p>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">宿曜鑑定</h3>
+    <p>宿曜は、月の運行に基づく東洋の占星術。生まれた日の月の位置から「宿」を割り出し、性格傾向や人間関係の相性を読み解きます。</p>
+
+    <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 12px;">
+      <a href="https://drive.google.com/file/d/1MZZJChM5uS3gNDOY8SDBZOTwo4L6J5Nv/view?usp=sharing" target="_blank" style="display: block; padding: 14px 16px; background: var(--teal-50); border: 1px solid var(--teal-light); border-radius: 8px; text-decoration: none; color: var(--teal-dark); font-weight: 500;">
+        📄 宿曜鑑定書（1） →
+      </a>
+      <a href="https://drive.google.com/file/d/1dobKUbQ-1E34w91eotYgnogq8lOKtUri/view?usp=sharing" target="_blank" style="display: block; padding: 14px 16px; background: var(--teal-50); border: 1px solid var(--teal-light); border-radius: 8px; text-decoration: none; color: var(--teal-dark); font-weight: 500;">
+        📄 宿曜鑑定書（2） →
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">宿曜関係図</h3>
+    <p>27宿の関係性を一覧できるマンダラ図。命・業・胎の三角形、栄・親・友・衰・危・安・壊の関係が一目でわかります。</p>
+    <div style="margin-top: 16px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
+      <img src="/shukuyokankeiT.png" alt="宿曜関係図" style="width: 100%; height: auto; display: block;">
+    </div>
   </div>
 </section>
 
