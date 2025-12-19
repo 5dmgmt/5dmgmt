@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>五次元経営®リトリート｜思考主導から気づき主導へ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #00B8C4;
+      --teal-dark: #008A94;
+      --teal-light: #e0f7fa;
+      --teal-50: #f0fdfa;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted: #6b7280;
+      --bg: #ffffff;
+      --bg-soft: #f9fafb;
+      --border: #e5e7eb;
+      --heart: #e91e63;
+      --club: #4caf50;
+      --diamond: #ff9800;
+      --spade: #3f51b5;
+      --joker: #9c27b0;
+    }
+
+    /* SVG Suit Icons */
+    .suit-icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.1em;
+    }
+    .suit-icon.large {
+      width: 32px;
+      height: 32px;
+    }
+    .suit-icon.nav {
+      width: 14px;
+      height: 14px;
+      vertical-align: -0.15em;
+    }
+    .suit-icon.work {
+      width: 24px;
+      height: 24px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: white;
+      padding: 12px 16px;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0, 184, 196, 0.3);
+    }
+
+    .header-title {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      background: linear-gradient(180deg, var(--teal-light) 0%, var(--bg) 100%);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--teal);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--teal-dark);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-lead {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    /* ===== Navigation ===== */
+    .nav {
+      display: flex;
+      overflow-x: auto;
+      padding: 12px 16px;
+      gap: 8px;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar { display: none; }
+
+    .nav-item {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .nav-item:active {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+    }
+
+    .nav-item.heart { border-bottom: 3px solid var(--heart); }
+    .nav-item.club { border-bottom: 3px solid var(--club); }
+    .nav-item.diamond { border-bottom: 3px solid var(--diamond); }
+    .nav-item.spade { border-bottom: 3px solid var(--spade); }
+    .nav-item.joker { border-bottom: 3px solid var(--joker); }
+
+    /* ===== Section ===== */
+    .section {
+      padding: 32px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .section-lead {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card:last-child { margin-bottom: 0; }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--teal-light);
+      color: var(--teal);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card p {
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    /* ===== 4 Steps Box ===== */
+    .steps-box {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .steps-box-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .step-item {
+      text-align: center;
+      padding: 12px 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+    }
+
+    .step-num {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .step-arrow {
+      display: none;
+    }
+
+    @media (min-width: 400px) {
+      .steps-grid {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .step-item {
+        flex: 1;
+        max-width: 80px;
+      }
+      .step-arrow {
+        display: block;
+        font-size: 16px;
+        opacity: 0.7;
+      }
+    }
+
+    /* ===== Protocol Box ===== */
+    .protocol-box {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .protocol-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin-bottom: 12px;
+    }
+
+    .protocol-step {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .protocol-step:last-child { margin-bottom: 0; }
+
+    .protocol-num {
+      width: 20px;
+      height: 20px;
+      background: var(--teal);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ===== Work Card ===== */
+    .work-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .work-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .work-header.heart { background: var(--teal-50); border-left: 4px solid var(--heart); }
+    .work-header.club { background: var(--teal-50); border-left: 4px solid var(--club); }
+    .work-header.diamond { background: var(--teal-50); border-left: 4px solid var(--diamond); }
+    .work-header.spade { background: var(--teal-50); border-left: 4px solid var(--spade); }
+    .work-header.joker { background: var(--teal-50); border-left: 4px solid var(--joker); }
+
+    .work-icon {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .work-title-area {
+      flex: 1;
+    }
+
+    .work-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--text-secondary);
+    }
+
+    .work-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+
+    .work-body {
+      padding: 16px;
+    }
+
+    .work-keyword {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .work-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== Dimension Box ===== */
+    .dimension-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .dimension-header {
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dimension-header.dim3 { background: var(--teal-50); color: var(--teal-dark); border-left: 3px solid var(--teal); }
+    .dimension-header.dim4 { background: var(--teal-light); color: var(--teal-dark); border-left: 3px solid var(--teal); }
+    .dimension-header.dim5 { background: linear-gradient(135deg, var(--teal-light) 0%, #b2ebf2 100%); color: var(--teal-dark); border-left: 3px solid var(--teal-dark); }
+
+    .dimension-content {
+      padding: 16px;
+      font-size: 13px;
+      background: white;
+      display: none;
+    }
+
+    .dimension-box.open .dimension-content {
+      display: block;
+    }
+
+    .dimension-toggle {
+      transition: transform 0.2s;
+    }
+
+    .dimension-box.open .dimension-toggle {
+      transform: rotate(180deg);
+    }
+
+    /* ===== Table ===== */
+    .scale-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 16px 0;
+    }
+
+    .scale-table th,
+    .scale-table td {
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scale-table th {
+      background: var(--bg-soft);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .scale-table tr:last-child td { border-bottom: none; }
+
+    .scale-low { color: #dc2626; }
+    .scale-mid { color: #f59e0b; }
+    .scale-high { color: #10b981; }
+    .scale-top { color: var(--teal); font-weight: 600; }
+
+    /* ===== Highlight Box ===== */
+    .highlight-box {
+      background: var(--teal-50);
+      border: 1px solid var(--teal-light);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .highlight-box p {
+      font-size: 14px;
+      color: var(--teal-dark);
+      font-weight: 500;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* ===== Quote ===== */
+    .quote {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--teal-dark);
+      text-align: center;
+      padding: 20px;
+      background: var(--teal-50);
+      border: 1px solid var(--teal-light);
+      border-radius: 8px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: white;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .footer-list li {
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-list li:last-child { border-bottom: none; }
+
+    .footer-note {
+      font-size: 13px;
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    .copyright {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    /* ===== Utilities ===== */
+    .text-center { text-align: center; }
+    .text-teal { color: var(--teal); }
+    .text-muted { color: var(--text-muted); }
+    .font-bold { font-weight: 700; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-24 { margin-bottom: 24px; }
+
+    .list-check {
+      list-style: none;
+      padding: 0;
+    }
+
+    .list-check li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 14px;
+    }
+
+    .list-check li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      top: 10px;
+      background: var(--teal);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center;
+    }
+
+    /* ===== Responsive ===== */
+    @media (min-width: 768px) {
+      .hero { padding: 60px 40px; }
+      .hero-title { font-size: 36px; }
+      .section { padding: 48px 40px; }
+      .section-title { font-size: 24px; }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .card-grid .card { margin-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <h1 class="header-title">五次元経営®リトリート｜進行ガイド</h1>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <span class="hero-badge">1DAY RETREAT</span>
+  <h2 class="hero-title">思考主導から<br>気づき主導へ</h2>
+  <p class="hero-subtitle">主導権を戻す1日</p>
+  <p class="hero-lead">疲れや重さの多くは、出来事そのものではなく、思考×感情の自動運転によって増幅されています。この1日で、主導権の位置を変えていきます。</p>
+</section>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="#opening" class="nav-item">Opening</a>
+  <a href="#overview" class="nav-item">全体像</a>
+  <a href="#heart" class="nav-item heart"><svg class="suit-icon nav" viewBox="0 0 24 24" fill="#e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> 人間関係</a>
+  <a href="#club" class="nav-item club"><svg class="suit-icon nav" viewBox="0 0 24 24" fill="#4caf50"><path d="M12 2C9.24 2 7 4.24 7 7c0 1.53.69 2.9 1.78 3.82C6.55 11.58 5 13.62 5 16c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5V21h.5c2.76 0 5-2.24 5-5 0-2.38-1.55-4.42-3.78-5.18C16.31 9.9 17 8.53 17 7c0-2.76-2.24-5-5-5z"/></svg> 健康</a>
+  <a href="#diamond" class="nav-item diamond"><svg class="suit-icon nav" viewBox="0 0 24 24" fill="#ff9800"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> お金</a>
+  <a href="#spade" class="nav-item spade"><svg class="suit-icon nav" viewBox="0 0 24 24" fill="#3f51b5"><path d="M12 2C9.24 5 4 9 4 14c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5V19h.5c2.76 0 5-2.24 5-5 0-5-5.24-9-8-12z"/></svg> 人生目的</a>
+  <a href="#joker" class="nav-item joker">🃏 統合</a>
+</nav>
+
+<!-- 4 Steps -->
+<section class="section" style="background: var(--bg-soft);">
+  <div class="steps-box">
+    <p class="steps-box-title">意識変容の4ステップ</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-label">自己認識</div>
+      </div>
+      <span class="step-arrow">→</span>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-label">自己受容</div>
+      </div>
+      <span class="step-arrow">→</span>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-label">選択</div>
+      </div>
+      <span class="step-arrow">→</span>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-label">行動</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="text-center mb-16"><strong>反射は「過去の蓄積」<br>選択は「今この瞬間の自由」</strong></p>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>① 自己認識（Awareness）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        自分がどんな反射を起こしているのか、どんな感情・思考パターンを持っているのかに"気づく"段階。無意識の癖、思い込み、自動反応のタイミングを観察できる状態。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>② 自己受容（Acceptance）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        気づいた自分を否定せず、そのまま認める段階。怒る自分、不安を抱える自分、完璧主義の自分──これらを排除しようとすると反射が強まり、受け入れるほど反射は弱まる。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>③ 選択（Choice）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        反射と選択の「間」が生まれる。これがイマココの意識。過去のプログラムに飲まれない、気分や恐れに支配されない、自分の価値基準で決められる──自由の回復が起きる。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>④ 行動（Action）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        選んだ在り方を現実世界の行動として実装する。習慣化、目標設定、行動デザイン、意思決定の基準化。ここが変わると現実が変わる。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Opening -->
+<section id="opening" class="section">
+  <div class="section-header">
+    <div class="section-tag">Opening Session</div>
+    <h2 class="section-title">江ノ島の海を前に<br>「今ここ」に立つ</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">
+      <span class="card-title-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--teal)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span>
+      このリトリートで起こすこと
+    </h3>
+    <p>このリトリートは「思考主導」から「気づき主導」へ、主導権を戻す1日です。</p>
+    <p>五次元経営®が扱うのは、行動や戦略の前にある「起点」です。</p>
+
+    <div class="highlight-box">
+      <p><strong>四次元</strong>：思考と感情が結びつき、過去と未来の物語が回り続ける状態</p>
+    </div>
+    <div class="highlight-box">
+      <p><strong>五次元</strong>：思考や感情が起きていることに気づいている意識が、主導権を持つ状態</p>
+    </div>
+
+    <p>この1日でつくるのは、テクニックではなく、<strong>"主導権の位置"</strong>です。</p>
+  </div>
+
+  <div class="protocol-box">
+    <p class="protocol-title">【気づき主導に戻す 30秒プロトコル】</p>
+    <div class="protocol-step">
+      <span class="protocol-num">1</span>
+      <span>いま身体で起きている感覚を1つ言語化する（胸・喉・腹・呼吸など）</span>
+    </div>
+    <div class="protocol-step">
+      <span class="protocol-num">2</span>
+      <span>その感覚に「ええじゃないか」と許可を出す（抵抗をやめる）</span>
+    </div>
+    <div class="protocol-step">
+      <span class="protocol-num">3</span>
+      <span>いま頭の中で回っている物語を1行で書く</span>
+    </div>
+    <div class="protocol-step">
+      <span class="protocol-num">4</span>
+      <span>その物語に「ありがたい」と言う（結合をほどく合図）</span>
+    </div>
+    <div class="protocol-step">
+      <span class="protocol-num">5</span>
+      <span>最後に問いを戻す：「いま、気づきはどこにある？」</span>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section id="overview" class="section" style="background: var(--bg-soft);">
+  <div class="section-header">
+    <div class="section-icon"><svg class="suit-icon large" viewBox="0 0 24 24" fill="var(--teal)"><path d="M17 16.99c-1.35 0-2.2.42-2.95.8-.65.33-1.18.6-2.05.6-.9 0-1.4-.25-2.05-.6-.75-.38-1.57-.8-2.95-.8s-2.2.42-2.95.8c-.65.33-1.17.6-2.05.6v1.95c1.35 0 2.2-.42 2.95-.8.65-.33 1.17-.6 2.05-.6s1.4.25 2.05.6c.75.38 1.57.8 2.95.8s2.2-.42 2.95-.8c.65-.33 1.18-.6 2.05-.6.9 0 1.4.25 2.05.6.75.38 1.58.8 2.95.8v-1.95c-.9 0-1.4-.25-2.05-.6-.75-.38-1.6-.8-2.95-.8zm0-4.45c-1.35 0-2.2.43-2.95.8-.65.32-1.18.6-2.05.6-.9 0-1.4-.25-2.05-.6-.75-.38-1.57-.8-2.95-.8s-2.2.43-2.95.8c-.65.32-1.17.6-2.05.6v1.95c1.35 0 2.2-.43 2.95-.8.65-.35 1.15-.6 2.05-.6s1.4.25 2.05.6c.75.38 1.57.8 2.95.8s2.2-.43 2.95-.8c.65-.35 1.15-.6 2.05-.6s1.4.25 2.05.6c.75.38 1.58.8 2.95.8v-1.95c-.9 0-1.4-.25-2.05-.6-.75-.38-1.6-.8-2.95-.8zm2.95-8.08c-.75-.38-1.58-.8-2.95-.8s-2.2.42-2.95.8c-.65.32-1.18.6-2.05.6-.9 0-1.4-.25-2.05-.6-.75-.37-1.57-.8-2.95-.8s-2.2.42-2.95.8c-.65.33-1.17.6-2.05.6v1.93c1.35 0 2.2-.43 2.95-.8.65-.33 1.17-.6 2.05-.6s1.4.25 2.05.6c.75.38 1.57.8 2.95.8s2.2-.43 2.95-.8c.65-.32 1.18-.6 2.05-.6.9 0 1.4.25 2.05.6.75.38 1.58.8 2.95.8V5.04c-.9 0-1.4-.25-2.05-.58zM17 8.09c-1.35 0-2.2.43-2.95.8-.65.35-1.15.6-2.05.6s-1.4-.25-2.05-.6c-.75-.38-1.57-.8-2.95-.8s-2.2.43-2.95.8c-.65.35-1.15.6-2.05.6v1.95c1.35 0 2.2-.43 2.95-.8.65-.32 1.18-.6 2.05-.6s1.4.25 2.05.6c.75.38 1.57.8 2.95.8s2.2-.43 2.95-.8c.65-.32 1.18-.6 2.05-.6.9 0 1.4.25 2.05.6.75.38 1.58.8 2.95.8V8.49c-.9 0-1.4-.25-2.05-.6-.75-.38-1.6-.8-2.95-.8z"/></svg></div>
+    <div class="section-tag">五次元経営®</div>
+    <h2 class="section-title">全体像</h2>
+    <p class="section-lead">水平軸＝三次元努力 / 垂直軸＝存在</p>
+  </div>
+
+  <div class="quote">
+    みんな、ごきげん──<br>そんな会社が、あたりまえになる未来をつくりたい。
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">三層構造</h3>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>三次元（成果・物質）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        行動と結果。数字は増えても、心が置き去りになりやすい。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>四次元（思考×感情×時間）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        解釈・物語・不安・正しさ・期待が回り、反応が増幅する層。感情は単独で起きるのではなく、多くが思考（意味づけ）と結びついて発火する。ペインボディとは、未消化の感情が思考と結びつき、半自律的に再生する四次元エネルギー。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>五次元（今ここ・気づき）</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        思考や感情を"消す"のではなく、それが起きていることに気づく意識が主導権を持つ層。ここから行動すると、努力よりも「自然な流れ」が立ち上がる。
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">運気とホーキンズスケール</h3>
+    <table class="scale-table">
+      <thead>
+        <tr>
+          <th>帯域</th>
+          <th>スケール</th>
+          <th>経営の特徴</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="scale-low">低運気帯</td>
+          <td>20〜199</td>
+          <td>トラブル多発、火消し対応</td>
+        </tr>
+        <tr>
+          <td class="scale-mid">中運気帯</td>
+          <td>200〜399</td>
+          <td>成果は出るが摩擦と疲労</td>
+        </tr>
+        <tr>
+          <td class="scale-high">高運気帯</td>
+          <td>400〜499</td>
+          <td>組織文化が安定、共感が広がる</td>
+        </tr>
+        <tr>
+          <td class="scale-top">爆運帯</td>
+          <td>500〜599</td>
+          <td>シンクロが増え、成果が自然に集まる</td>
+        </tr>
+        <tr>
+          <td class="scale-top">統合帯</td>
+          <td>600+</td>
+          <td>存在そのものが場を変える</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Heart: 人間関係 -->
+<section id="heart" class="section">
+  <div class="section-header">
+    <div class="section-icon"><svg class="suit-icon large" viewBox="0 0 24 24" fill="#e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+    <div class="section-tag">Heart Session</div>
+    <h2 class="section-title">人間関係の解放と調和</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">自分との関係の次元</h3>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>三次元：自己評価と役割</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        自分との関係＝「自己イメージ」「役割」「成果」によって規定される。他人からの評価や比較によって、自分を肯定・否定する。結果：自己否定・過剰な努力・承認欲求に縛られる。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>四次元：感情と記憶の反映</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        自分との関係は「過去の体験」「両親との関係性」「記憶された感情」に大きく影響される。ペインボディが「自分は愛されない」「自分は足りない」という無意識の物語を繰り返す。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>五次元：存在そのものとの一致</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        自分は「役割」「成果」ではなく、「ただ在る」こと自体で完全。プレゼンス（今ここ）に立つと、自分をジャッジする声が溶け、純粋な存在への信頼が芽生える。
+      </div>
+    </div>
+  </div>
+
+  <!-- Work Cards -->
+  <div class="work-card">
+    <div class="work-header heart">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>A</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己認識</span>
+        <p class="work-title">自分自身との関係：思考の自動運転を外すワーク</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の正しさを手放す →『ええじゃないか』</span>
+      <p class="work-desc">思考も感情もまずはありのままを一旦受け止めて、『ええじゃないか』。それから再選択していく。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header heart">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>K</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己受容</span>
+        <p class="work-title">両親との関係：ルーツを祝福する瞑想</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の期待を手放す →『よしよし』</span>
+      <p class="work-desc">先祖代々欲していたありのまま無条件の愛を『よしよし』で自分に全力でむけてあげる。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header heart">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#e91e63"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>Q</span>
+      <div class="work-title-area">
+        <span class="work-badge">選択</span>
+        <p class="work-title">ペインボディを"ほどく"セッション</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">正しさ・期待を手放す →『ありがたい』</span>
+      <p class="work-desc">感情が振れる時は、正しさや期待を思い出させてくれる。『ありがたい』で、感情をとかそう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Club: 健康 -->
+<section id="club" class="section" style="background: var(--bg-soft);">
+  <div class="section-header">
+    <div class="section-icon"><svg class="suit-icon large" viewBox="0 0 24 24" fill="#4caf50"><path d="M12 2C9.24 2 7 4.24 7 7c0 1.53.69 2.9 1.78 3.82C6.55 11.58 5 13.62 5 16c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5V21h.5c2.76 0 5-2.24 5-5 0-2.38-1.55-4.42-3.78-5.18C16.31 9.9 17 8.53 17 7c0-2.76-2.24-5-5-5z"/></svg></div>
+    <div class="section-tag">Club Session</div>
+    <h2 class="section-title">健康の再設計</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">健康・言葉・意識の次元</h3>
+    <ul class="list-check">
+      <li><strong>健康</strong>：病は"メッセージ"。体の不調は「意識の偏り」を知らせるサイン</li>
+      <li><strong>言葉</strong>：言葉そのものが「波動」を帯びており、現実を創造する力を持つ</li>
+      <li><strong>意識</strong>：思考や感情を超えた「今ここ（プレゼンス）」に立つことが鍵</li>
+    </ul>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header club">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#4caf50"><path d="M12 2C9.24 2 7 4.24 7 7c0 1.53.69 2.9 1.78 3.82C6.55 11.58 5 13.62 5 16c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5V21h.5c2.76 0 5-2.24 5-5 0-2.38-1.55-4.42-3.78-5.18C16.31 9.9 17 8.53 17 7c0-2.76-2.24-5-5-5z"/></svg>A</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己認識</span>
+        <p class="work-title">呼吸・体感ワーク（海辺でのアーシング）</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の正しさを手放す →『ええじゃないか』</span>
+      <p class="work-desc">思考も感情もまずはありのままを一旦受け止めて、『ええじゃないか』。それから再選択していく。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header club">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#4caf50"><path d="M12 2C9.24 2 7 4.24 7 7c0 1.53.69 2.9 1.78 3.82C6.55 11.58 5 13.62 5 16c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5V21h.5c2.76 0 5-2.24 5-5 0-2.38-1.55-4.42-3.78-5.18C16.31 9.9 17 8.53 17 7c0-2.76-2.24-5-5-5z"/></svg>K</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己受容</span>
+        <p class="work-title">「身体の声」を聴くリスニングセッション</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の期待を手放す →『よしよし』</span>
+      <p class="work-desc">先祖代々欲していたありのまま無条件の愛を『よしよし』で自分に全力でむけてあげる。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header club">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#4caf50"><path d="M12 2C9.24 2 7 4.24 7 7c0 1.53.69 2.9 1.78 3.82C6.55 11.58 5 13.62 5 16c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5V21h.5c2.76 0 5-2.24 5-5 0-2.38-1.55-4.42-3.78-5.18C16.31 9.9 17 8.53 17 7c0-2.76-2.24-5-5-5z"/></svg>Q</span>
+      <div class="work-title-area">
+        <span class="work-badge">選択</span>
+        <p class="work-title">五次元健康マップ（食・睡眠・感情・意識）</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">正しさ・期待を手放す →『ありがたい』</span>
+      <p class="work-desc">感情が振れる時は、正しさや期待を思い出させてくれる。『ありがたい』で、感情をとかそう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Diamond: お金 -->
+<section id="diamond" class="section">
+  <div class="section-header">
+    <div class="section-icon"><svg class="suit-icon large" viewBox="0 0 24 24" fill="#ff9800"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg></div>
+    <div class="section-tag">Diamond Session</div>
+    <h2 class="section-title">お金のエネルギーシフト</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">お金の次元</h3>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>三次元：交換と不足の論理</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        お金は「価値の交換手段」であり、所有量で安心や成功が測られる。不足感や競争に基づく。稼いでも不安が消えない。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>四次元：感情と信念の反映</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        お金は「感情」と強く結びついている。恐れ→不安定な収入、執着→常に不足を感じる、罪悪感→受け取れない。お金の流れは「思い込み（マネーブロック）」に支配される。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>五次元：存在と共鳴する豊かさ</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        お金は「エネルギーの循環」。自分の意識レベルが高いほど、自然にお金が流れ込む。「欲しい」ではなく「在る」から始める。価値は「存在の質」から生まれる。
+      </div>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header diamond">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#ff9800"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>A</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己認識</span>
+        <p class="work-title">「不足」から「充足」へ意識を変えるワーク</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の正しさを手放す →『ええじゃないか』</span>
+      <p class="work-desc">思考も感情もまずはありのままを一旦受け止めて、『ええじゃないか』。それから再選択していく。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header diamond">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#ff9800"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>K</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己受容</span>
+        <p class="work-title">お金と感情の構造を可視化</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の期待を手放す →『よしよし』</span>
+      <p class="work-desc">先祖代々欲していたありのまま無条件の愛を『よしよし』で自分に全力でむけてあげる。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header diamond">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#ff9800"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>Q</span>
+      <div class="work-title-area">
+        <span class="work-badge">選択</span>
+        <p class="work-title">豊かさの循環を体験するミニワーク</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">正しさ・期待を手放す →『ありがたい』</span>
+      <p class="work-desc">感情が振れる時は、正しさや期待を思い出させてくれる。『ありがたい』で、感情をとかそう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Spade: 人生目的 -->
+<section id="spade" class="section" style="background: var(--bg-soft);">
+  <div class="section-header">
+    <div class="section-icon"><svg class="suit-icon large" viewBox="0 0 24 24" fill="#3f51b5"><path d="M12 2C9.24 5 4 9 4 14c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5V19h.5c2.76 0 5-2.24 5-5 0-5-5.24-9-8-12z"/></svg></div>
+    <div class="section-tag">Spade Session</div>
+    <h2 class="section-title">人生の目的の明確化</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">人生目的の次元</h3>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>三次元：成果や役割としての目的</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        人生の目的＝「何を成し遂げるか」「どんな役割を果たすか」。社会的成功・肩書・地位・財産が基準になる。達成しても虚しさが残る。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>四次元：自己実現や感情の満足</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        人生の目的＝「やりたいことをやる」「好きなことを追求する」。感情的な充足が重視される。ある程度は満たされるが、感情に依存するため不安定さが残る。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>五次元：存在そのものの展開</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        人生の目的は「何をするか」ではなく「どう在るか」。存在の周波数（愛・喜び・平和）にチューニングすると、自ずと行動や役割が立ち現れる。
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>五次元に立つと、人生の目的は「探すもの」から「すでに在るものを生きる」に変わる</p>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header spade">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#3f51b5"><path d="M12 2C9.24 5 4 9 4 14c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5V19h.5c2.76 0 5-2.24 5-5 0-5-5.24-9-8-12z"/></svg>A</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己認識</span>
+        <p class="work-title">「呼ばれている方向」を可視化するワーク</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の正しさを手放す →『ええじゃないか』</span>
+      <p class="work-desc">思考も感情もまずはありのままを一旦受け止めて、『ええじゃないか』。それから再選択していく。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header spade">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#3f51b5"><path d="M12 2C9.24 5 4 9 4 14c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5V19h.5c2.76 0 5-2.24 5-5 0-5-5.24-9-8-12z"/></svg>K</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己受容</span>
+        <p class="work-title">使命・役割を言語化するライティング</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の期待を手放す →『よしよし』</span>
+      <p class="work-desc">先祖代々欲していたありのまま無条件の愛を『よしよし』で自分に全力でむけてあげる。</p>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header spade">
+      <span class="work-icon"><svg class="suit-icon work" viewBox="0 0 24 24" fill="#3f51b5"><path d="M12 2C9.24 5 4 9 4 14c0 2.76 2.24 5 5 5h.5v-2.5c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5V19h.5c2.76 0 5-2.24 5-5 0-5-5.24-9-8-12z"/></svg>Q</span>
+      <div class="work-title-area">
+        <span class="work-badge">選択</span>
+        <p class="work-title">宿曜・ホーキンズスケールとの照合</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">正しさ・期待を手放す →『ありがたい』</span>
+      <p class="work-desc">感情が振れる時は、正しさや期待を思い出させてくれる。『ありがたい』で、感情をとかそう。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Joker: 統合 -->
+<section id="joker" class="section">
+  <div class="section-header">
+    <div class="section-icon">🃏</div>
+    <div class="section-tag">Joker Session</div>
+    <h2 class="section-title">統合セッション</h2>
+  </div>
+
+  <div class="card">
+    <h3 class="card-title">統合の次元</h3>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim3" onclick="this.parentElement.classList.toggle('open')">
+        <span>三次元：要素の足し算</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        統合＝「バランスを取ること」。人間関係・仕事・健康・お金などを、それぞれ管理して調整する。分断が残るため、「全体性の感覚」は得られにくい。
+      </div>
+    </div>
+
+    <div class="dimension-box">
+      <div class="dimension-header dim4" onclick="this.parentElement.classList.toggle('open')">
+        <span>四次元：相互関係の調和</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        統合＝「つながりを感じること」。感情や信念のパターンを癒し、関係性の中で調和を目指す。調和を実感するが、まだ「対処」や「努力」のニュアンスが強い。
+      </div>
+    </div>
+
+    <div class="dimension-box open">
+      <div class="dimension-header dim5" onclick="this.parentElement.classList.toggle('open')">
+        <span>五次元：すべては一つの存在</span>
+        <span class="dimension-toggle">▼</span>
+      </div>
+      <div class="dimension-content">
+        統合＝「分離がもともとなかったことに気づくこと」。人間関係・健康・お金・人生の目的は、バラバラのテーマではなく「一つの存在の表れ」にすぎない。
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    統合とは「完成させること」ではなく<br>「在るがままの全体性に戻ること」
+  </div>
+
+  <div class="work-card">
+    <div class="work-header joker">
+      <span class="work-icon">🃏A</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己認識</span>
+        <p class="work-title">人間関係・健康・お金を人生目的と統合する演習</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の正しさを手放す →『ええじゃないか』</span>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header joker">
+      <span class="work-icon">🃏K</span>
+      <div class="work-title-area">
+        <span class="work-badge">自己受容</span>
+        <p class="work-title">未来シナリオのビジョンマップ作成</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">自分の期待を手放す →『よしよし』</span>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <div class="work-header joker">
+      <span class="work-icon">🃏Q</span>
+      <div class="work-title-area">
+        <span class="work-badge">選択・行動</span>
+        <p class="work-title">ワンネスを生きる</p>
+      </div>
+    </div>
+    <div class="work-body">
+      <span class="work-keyword">正しさ・期待を手放す →『ありがたい』</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <h3 class="footer-title">このリトリートで持ち帰るもの</h3>
+  <ul class="footer-list">
+    <li>気づき主導の感覚<br><small>思考と感情に飲まれない"間"</small></li>
+    <li>自分の反射パターンの見取り図<br><small>何が起動すると自動運転になるか</small></li>
+    <li>統合ビジョンマップ<br><small>人間関係・健康・お金・目的が一つの流れに</small></li>
+  </ul>
+  <p class="footer-note">
+    五次元化とは、何かを足すことではなく、<br>
+    主導権を"思考"から"気づき"へ戻すこと。<br><br>
+    その瞬間から、経営も人生も<br>
+    「がんばって動かすもの」ではなく、<br>
+    <strong>整って自然に動き出すもの</strong>に変わり始めます。
+  </p>
+  <p class="copyright">© 五次元経営株式会社</p>
+</footer>
+
+</body>
+</html>
