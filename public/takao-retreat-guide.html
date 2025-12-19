@@ -1083,7 +1083,7 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
     <div style="margin-top: 16px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
       <img src="/shukuyokankeiT.png" alt="宿曜関係図" class="zoomable-image" style="width: 100%; height: auto; display: block;" onclick="openLightbox('/shukuyokankeiT.png', '宿曜関係図 - 27宿の関係性マンダラ')">
     </div>
-    <p class="zoom-hint">🔍 タップで拡大</p>
+    <p class="zoom-hint">🔍 タップで拡大（ピンチ操作・ダブルタップ対応）</p>
   </div>
 </section>
 
@@ -1582,8 +1582,12 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
 // Lightbox functionality
 let currentZoom = 1;
 const zoomStep = 0.5;
-const maxZoom = 3;
+const maxZoom = 5;
 const minZoom = 1;
+
+// Pinch zoom variables
+let initialDistance = 0;
+let initialZoom = 1;
 
 function openLightbox(src, caption) {
   const lightbox = document.getElementById('lightbox');
@@ -1624,11 +1628,55 @@ function resetZoom() {
   applyZoom();
 }
 
-function applyZoom() {
+function applyZoom(smooth = true) {
   const lightboxImage = document.getElementById('lightboxImage');
+  lightboxImage.style.transition = smooth ? 'transform 0.2s ease' : 'none';
   lightboxImage.style.transform = `scale(${currentZoom})`;
-  lightboxImage.style.transition = 'transform 0.2s ease';
 }
+
+// Get distance between two touch points
+function getTouchDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Pinch zoom - touch start
+document.getElementById('lightboxImage').addEventListener('touchstart', function(e) {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    initialDistance = getTouchDistance(e.touches);
+    initialZoom = currentZoom;
+  }
+}, { passive: false });
+
+// Pinch zoom - touch move
+document.getElementById('lightboxImage').addEventListener('touchmove', function(e) {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    const currentDistance = getTouchDistance(e.touches);
+    const scale = currentDistance / initialDistance;
+    currentZoom = Math.min(maxZoom, Math.max(minZoom, initialZoom * scale));
+    applyZoom(false);
+  }
+}, { passive: false });
+
+// Double tap to zoom
+let lastTap = 0;
+document.getElementById('lightboxImage').addEventListener('touchend', function(e) {
+  const currentTime = new Date().getTime();
+  const tapLength = currentTime - lastTap;
+  if (tapLength < 300 && tapLength > 0 && e.touches.length === 0) {
+    e.preventDefault();
+    if (currentZoom > 1) {
+      currentZoom = 1;
+    } else {
+      currentZoom = 2.5;
+    }
+    applyZoom();
+  }
+  lastTap = currentTime;
+});
 
 // Close on overlay click (but not on image)
 document.getElementById('lightbox').addEventListener('click', function(e) {
