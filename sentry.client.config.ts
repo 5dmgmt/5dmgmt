@@ -16,6 +16,9 @@ if (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_SENTRY_DSN)
     // 環境名
     environment: 'production',
 
+    // UIウィジェット（Replay, Feedback）を完全に無効化
+    integrations: [],
+
     // 無視するエラー
     ignoreErrors: [
       // ブラウザの拡張機能からのエラー
