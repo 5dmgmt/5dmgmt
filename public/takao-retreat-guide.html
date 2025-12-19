@@ -683,6 +683,98 @@
     .main-content.unlocked {
       display: block;
     }
+
+    /* Image Lightbox */
+    .zoomable-image {
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+    .zoomable-image:active {
+      opacity: 0.8;
+    }
+    .zoom-hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .lightbox-caption {
+      color: white;
+      font-size: 14px;
+      margin-top: 16px;
+      text-align: center;
+    }
+    .lightbox-zoom-controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .lightbox-zoom-btn {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-zoom-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .lightbox-image-container {
+      overflow: auto;
+      max-width: 100%;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
@@ -986,8 +1078,9 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
     <h3 class="card-title">宿曜関係図</h3>
     <p>27宿の関係性を一覧できるマンダラ図。命・業・胎の三角形、栄・親・友・衰・危・安・壊の関係が一目でわかります。</p>
     <div style="margin-top: 16px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
-      <img src="/shukuyokankeiT.png" alt="宿曜関係図" style="width: 100%; height: auto; display: block;">
+      <img src="/shukuyokankeiT.png" alt="宿曜関係図" class="zoomable-image" style="width: 100%; height: auto; display: block;" onclick="openLightbox('/shukuyokankeiT.png', '宿曜関係図 - 27宿の関係性マンダラ')">
     </div>
+    <p class="zoom-hint">🔍 タップで拡大</p>
   </div>
 </section>
 
@@ -1467,6 +1560,87 @@ if (sessionStorage.getItem('retreatUnlocked') === 'true') {
 </footer>
 
 </div><!-- /main-content -->
+
+<!-- Lightbox Overlay -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <div class="lightbox-image-container" id="lightboxContainer">
+    <img src="" alt="" class="lightbox-image" id="lightboxImage">
+  </div>
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+  <div class="lightbox-zoom-controls">
+    <button class="lightbox-zoom-btn" onclick="zoomOut()">−</button>
+    <button class="lightbox-zoom-btn" onclick="resetZoom()">⟲</button>
+    <button class="lightbox-zoom-btn" onclick="zoomIn()">+</button>
+  </div>
+</div>
+
+<script>
+// Lightbox functionality
+let currentZoom = 1;
+const zoomStep = 0.5;
+const maxZoom = 3;
+const minZoom = 1;
+
+function openLightbox(src, caption) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+
+  lightboxImage.src = src;
+  lightboxCaption.textContent = caption || '';
+  currentZoom = 1;
+  lightboxImage.style.transform = 'scale(1)';
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  currentZoom = 1;
+}
+
+function zoomIn() {
+  if (currentZoom < maxZoom) {
+    currentZoom += zoomStep;
+    applyZoom();
+  }
+}
+
+function zoomOut() {
+  if (currentZoom > minZoom) {
+    currentZoom -= zoomStep;
+    applyZoom();
+  }
+}
+
+function resetZoom() {
+  currentZoom = 1;
+  applyZoom();
+}
+
+function applyZoom() {
+  const lightboxImage = document.getElementById('lightboxImage');
+  lightboxImage.style.transform = `scale(${currentZoom})`;
+  lightboxImage.style.transition = 'transform 0.2s ease';
+}
+
+// Close on overlay click (but not on image)
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this || e.target.id === 'lightboxContainer') {
+    closeLightbox();
+  }
+});
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
+</script>
 
 </body>
 </html>
