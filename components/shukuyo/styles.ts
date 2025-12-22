@@ -362,13 +362,29 @@ export const shukuyoKankeiStyles = `
 
 .sk-svg-container {
   padding: 20px;
-  overflow: auto;
-  max-height: calc(100vh - 200px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sk-svg-container svg {
   width: 100%;
+  max-width: min(100%, calc(100vh - 250px));
   height: auto;
-  max-width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 768px) {
+  .sk-svg-container {
+    padding: 10px;
+  }
+
+  .sk-svg-container svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
 }
 `;
