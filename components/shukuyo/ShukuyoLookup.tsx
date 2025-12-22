@@ -266,11 +266,24 @@ export default function ShukuyoLookup() {
           display: inline-block;
           background: var(--5d-teal);
           color: #fff;
-          padding: 8px 16px;
+          padding: 12px 24px;
           border-radius: 100px;
-          font-size: 1rem;
-          font-weight: 600;
+          font-size: 1.4rem;
+          font-weight: 700;
           margin-bottom: 16px;
+          max-width: 100%;
+          text-align: center;
+          line-height: 1.4;
+        }
+        @media (max-width: 600px) {
+          .shukuyo-type-badge {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            white-space: normal;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+          }
         }
         .shukuyo-awareness-intro {
           text-align: center;
