@@ -823,7 +823,7 @@
 .copyright { font-size: 0.875rem; color: rgba(255, 255, 255, 0.7); }
 
 /* ==========================================================================
-   15. Mobile Navigation - Enhanced UX
+   15. Mobile Navigation - Fullscreen Elegant Menu
    ========================================================================== */
 
 .menuBtn {
@@ -834,57 +834,77 @@
   width: 48px;
   height: 48px;
   padding: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
-  border-radius: 12px;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
   position: relative;
-  transition: background-color 0.2s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-tap-highlight-color: transparent;
 }
 
+.menuBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
 .menuBtn:active {
-  background: rgba(255, 255, 255, 0.2);
   transform: scale(0.95);
 }
 
 .menuBtn span {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
   background-color: white;
   border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-              opacity 0.2s ease,
-              width 0.3s ease;
-  margin: 3px 0;
+  position: absolute;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.menuBtn span:nth-child(1) {
+  transform: translateY(-6px);
+}
+
+.menuBtn span:nth-child(2) {
+  width: 14px;
+}
+
+.menuBtn span:nth-child(3) {
+  transform: translateY(6px);
+}
+
+.menuBtn.isOpen {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .menuBtn.isOpen span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-  width: 24px;
-}
-.menuBtn.isOpen span:nth-child(2) {
-  opacity: 0;
-  transform: translateX(-10px);
-}
-.menuBtn.isOpen span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-  width: 24px;
+  transform: rotate(45deg);
+  width: 22px;
 }
 
-/* Mobile Nav Overlay */
+.menuBtn.isOpen span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menuBtn.isOpen span:nth-child(3) {
+  transform: rotate(-45deg);
+  width: 22px;
+}
+
+/* Mobile Nav Overlay - Fullscreen with gradient */
 .mobileNavOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(0, 184, 196, 0.98) 0%, rgba(0, 138, 148, 0.98) 100%);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
 .mobileNavOverlay.isOpen {
@@ -892,101 +912,154 @@
   visibility: visible;
 }
 
+/* Decorative circles */
+.mobileNavOverlay::before,
+.mobileNavOverlay::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.mobileNavOverlay::before {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -100px;
+  animation: floatCircle 6s ease-in-out infinite;
+}
+
+.mobileNavOverlay::after {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  left: -50px;
+  animation: floatCircle 8s ease-in-out infinite reverse;
+}
+
+@keyframes floatCircle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 20px) scale(1.1); }
+}
+
+/* Mobile Nav - Centered fullscreen */
 .mobileNav {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(320px, 85vw);
-  background: var(--lp-surface);
+  inset: 0;
   z-index: 1000;
-  padding-top: 100px;
-  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 0;
-  overflow-y: auto;
-  transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  padding: 100px 40px 60px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .mobileNav.isOpen {
-  transform: translateX(0);
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .mobileNav a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 18px 24px;
-  text-align: left;
-  font-size: 1.0625rem;
-  font-weight: 500;
-  color: var(--lp-text-primary);
+  display: block;
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: white;
   text-decoration: none;
-  border-bottom: 1px solid var(--lp-border);
-  transition: background-color 0.15s ease,
-              color 0.15s ease,
-              padding-left 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
+  padding: 16px 32px;
+  margin: 4px 0;
+  border-radius: 16px;
+  position: relative;
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateY(30px) scale(0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.02em;
+}
+
+.mobileNav a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  transition: background 0.3s ease;
+}
+
+.mobileNav a:hover::before,
+.mobileNav a:active::before {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mobileNav a:active {
+  transform: scale(0.95);
 }
 
 .mobileNav.isOpen a {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0) scale(1);
 }
 
-/* Staggered animation for menu items */
-.mobileNav.isOpen a:nth-child(1) { transition-delay: 0.05s; }
-.mobileNav.isOpen a:nth-child(2) { transition-delay: 0.1s; }
-.mobileNav.isOpen a:nth-child(3) { transition-delay: 0.15s; }
-.mobileNav.isOpen a:nth-child(4) { transition-delay: 0.2s; }
-.mobileNav.isOpen a:nth-child(5) { transition-delay: 0.25s; }
-.mobileNav.isOpen a:nth-child(6) { transition-delay: 0.3s; }
+/* Staggered animation for menu items - elegant timing */
+.mobileNav.isOpen a:nth-child(1) { transition-delay: 0.1s; }
+.mobileNav.isOpen a:nth-child(2) { transition-delay: 0.15s; }
+.mobileNav.isOpen a:nth-child(3) { transition-delay: 0.2s; }
+.mobileNav.isOpen a:nth-child(4) { transition-delay: 0.25s; }
+.mobileNav.isOpen a:nth-child(5) { transition-delay: 0.3s; }
+.mobileNav.isOpen a:nth-child(6) { transition-delay: 0.35s; }
 
+/* Remove arrow indicator */
 .mobileNav a::after {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-right: 2px solid var(--lp-text-muted);
-  border-bottom: 2px solid var(--lp-text-muted);
-  transform: rotate(-45deg);
-  opacity: 0.5;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: none;
 }
 
-.mobileNav a:active {
-  background-color: var(--lp-primary-light);
-  padding-left: 28px;
-}
-
-.mobileNav a:active::after {
-  transform: rotate(-45deg) translateX(4px);
-  opacity: 1;
-}
-
+/* CTA Button in mobile nav */
 .mobileNav .btn {
-  margin: 24px;
-  width: calc(100% - 48px);
-  text-align: center;
+  margin-top: 32px;
+  padding: 16px 48px;
+  font-size: 1.125rem;
+  background: white !important;
+  color: var(--lp-primary) !important;
+  border-radius: 100px;
+  font-weight: 700;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mobileNav.isOpen .btn {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.35s;
+  transition-delay: 0.4s;
 }
 
-.mobileNav .btn::after {
-  display: none;
+.mobileNav .btn:hover,
+.mobileNav .btn:active {
+  background: rgba(255, 255, 255, 0.9) !important;
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Close hint at bottom */
+.mobileNavCloseHint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.5s;
+}
+
+.mobileNav.isOpen .mobileNavCloseHint {
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -1016,6 +1089,295 @@
 @media (max-width: 768px) { .mobileBreak { display: block; } }
 .pcBreak { display: block; }
 @media (max-width: 768px) { .pcBreak { display: none; } }
+
+/* ==========================================================================
+   16.1 Additional Mobile Responsive Styles
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Container */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Section */
+  .section {
+    padding: 48px 0;
+  }
+
+  .sectionHeader {
+    margin-bottom: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .sectionLead {
+    font-size: 1rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .heroTarget {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+
+  .heroCatch {
+    font-size: 1rem;
+  }
+
+  .heroLead {
+    font-size: 1rem;
+    padding: 0 8px;
+  }
+
+  .heroValue {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  .heroImageContainer {
+    margin-top: 40px;
+  }
+
+  /* Trust Section */
+  .trustSection {
+    padding: 24px 0;
+  }
+
+  .trustItem {
+    gap: 8px;
+  }
+
+  .trustIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .trustLabel {
+    font-size: 0.7rem;
+  }
+
+  /* Features */
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .featureCard {
+    padding: 20px;
+  }
+
+  .featureIcon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .featureCard h3 {
+    font-size: 1.125rem;
+  }
+
+  /* Architecture */
+  .architectureContent {
+    gap: 32px;
+  }
+
+  .architectureDiagram {
+    padding: 16px;
+    font-size: 0.8rem;
+  }
+
+  .archLayer {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Testimonials */
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .testimonialCard {
+    padding: 20px;
+  }
+
+  .testimonialQuote {
+    font-size: 2rem;
+  }
+
+  .testimonialText {
+    font-size: 0.9375rem;
+  }
+
+  /* Pricing */
+  .pricingGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .pricingCard {
+    padding: 24px;
+  }
+
+  .pricingCard.popular {
+    transform: none;
+  }
+
+  .pricingCard.popular:hover {
+    transform: translateY(-4px);
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  /* Security */
+  .securityGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .securityCard {
+    padding: 20px;
+  }
+
+  /* Compliance */
+  .complianceSection {
+    padding: 24px;
+  }
+
+  .complianceGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .complianceItem {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  /* FAQ */
+  .faqItem {
+    margin-bottom: 8px;
+  }
+
+  .faqQuestion {
+    font-size: 1rem;
+    padding: 16px;
+  }
+
+  .faqAnswer {
+    padding: 0 16px 16px;
+    font-size: 0.9375rem;
+  }
+
+  /* CTA */
+  .ctaTitle {
+    font-size: 1.5rem;
+  }
+
+  .ctaLead {
+    font-size: 1rem;
+  }
+
+  .ctaBtn {
+    font-size: 1rem;
+    padding: 12px 24px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .ctaForm {
+    margin-top: 24px;
+  }
+
+  .formLabel {
+    font-size: 0.8125rem;
+  }
+
+  .formInput {
+    padding: 10px 12px;
+    font-size: 0.9375rem;
+  }
+
+  /* Footer */
+  .mainFooter {
+    padding: 32px 0;
+  }
+
+  .footerNav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .copyright {
+    font-size: 0.8125rem;
+  }
+
+  /* Service Cards */
+  .serviceCard {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .serviceCardQuestion {
+    font-size: 1.25rem;
+  }
+
+  .serviceCardDescription {
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+  }
+
+  .serviceCardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Link Cards */
+  .linkCard {
+    padding: 1.25rem;
+  }
+
+  .linkCardTitle {
+    font-size: 1rem;
+  }
+
+  /* Info Box */
+  .infoBox {
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Question Section */
+  .questionTitle {
+    font-size: 1.25rem;
+  }
+
+  .questionText {
+    font-size: 0.9375rem;
+    line-height: 1.9;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9375rem;
+  }
+
+  .btnLarge {
+    font-size: 1rem;
+    padding: 14px 24px;
+  }
+}
 
 /* ==========================================================================
    17. Reusable Card Components

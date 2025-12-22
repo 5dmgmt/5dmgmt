@@ -107,11 +107,14 @@ export default function FiveDmgmtHeader() {
           ))}
           <Link
             href="/company/contact"
-            className={`${styles.btn} ${styles.btnPrimary} five-d-nav-btn`}
+            className={`${styles.btn} ${styles.btnPrimary}`}
             onClick={handleNavClick}
           >
             お問い合わせ
           </Link>
+          <span className={styles.mobileNavCloseHint}>
+            タップで閉じる
+          </span>
         </nav>
       </div>
     </header>

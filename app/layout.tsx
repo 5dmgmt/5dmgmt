@@ -5,7 +5,7 @@
  * - GA4 トラッキング（環境変数 NEXT_PUBLIC_GA_ID で設定）
  */
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
@@ -16,6 +16,14 @@ import styles from '@/components/landing/LandingPage.module.css';
 
 // GA4 測定ID（環境変数から取得）
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+// Viewport設定（スマホ対応に必須）
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],

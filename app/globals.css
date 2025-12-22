@@ -388,7 +388,7 @@ a.five-d-nav-btn {
 .five-d-page main a:not([class*="btn"]):not([class*="ctaBtn"]):hover::after { width: 100%; }
 
 .five-d-logo-img { height: 40px; width: auto; }
-@media (max-width: 768px) { .five-d-logo-img { height: 32px; } }
+@media (max-width: 768px) { .five-d-logo-img { height: 28px; } }
 
 /* ==========================================================================
    12. Mobile Menu
@@ -542,4 +542,99 @@ a.five-d-nav-btn {
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   15. Mobile Responsive Enhancements
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Header adjustments */
+  .five-d-header {
+    border-radius: 12px !important;
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+  }
+
+  .five-d-header a {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.875rem;
+  }
+
+  .five-d-nav-btn,
+  .five-d-nav-btn.btnPrimary,
+  a.five-d-nav-btn {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8125rem !important;
+  }
+
+  /* Footer mobile */
+  .five-d-footer {
+    padding: 32px 16px !important;
+  }
+
+  /* Form elements */
+  .five-d-page input,
+  .five-d-page select,
+  .five-d-page textarea {
+    font-size: 16px !important; /* Prevent iOS zoom on focus */
+    padding: 12px !important;
+  }
+
+  /* Card hover effects - disable on touch devices */
+  .five-d-page [class*="featureCard"]:hover,
+  .five-d-page [class*="testimonialCard"]:hover {
+    transform: none !important;
+  }
+
+  /* Button touch targets */
+  .five-d-page [class*="btn"],
+  .five-d-page button,
+  .five-d-page [class*="ctaBtn"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Images responsive */
+  .five-d-page img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Tables responsive */
+  .five-d-page table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Text size adjustments */
+  .five-d-page h1 { font-size: 1.75rem !important; }
+  .five-d-page h2 { font-size: 1.5rem !important; }
+  .five-d-page h3 { font-size: 1.25rem !important; }
+
+  /* Scroll offset for fixed header - smaller on mobile */
+  [id^="chapter"] {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Small mobile devices (below 480px) */
+@media (max-width: 480px) {
+  .five-d-header {
+    top: 8px !important;
+  }
+
+  .five-d-page h1 { font-size: 1.5rem !important; }
+
+  .five-d-nav-btn,
+  a.five-d-nav-btn {
+    padding: 0.35rem 0.875rem !important;
+    font-size: 0.75rem !important;
+  }
 }
