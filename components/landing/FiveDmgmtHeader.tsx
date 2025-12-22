@@ -112,9 +112,6 @@ export default function FiveDmgmtHeader() {
           >
             お問い合わせ
           </Link>
-          <span className={styles.mobileNavCloseHint}>
-            タップで閉じる
-          </span>
         </nav>
       </div>
     </header>
