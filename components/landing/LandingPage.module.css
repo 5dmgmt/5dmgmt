@@ -988,8 +988,8 @@
   .mainHeader .container { flex-wrap: nowrap; height: 64px; padding: 0 16px; justify-content: space-between; }
   .logo { margin-right: 0; font-size: 1.25rem; }
   .logoIcon { width: 28px; height: 28px; }
-  .mainNav { display: none; }
-  .menuBtn { display: flex; }
+  .mainNav { display: none !important; }
+  .menuBtn { display: flex !important; }
   .heroTitle { font-size: 2.25rem; }
   .heroSubtitle { font-size: 1.25rem; }
   .heroActions { flex-direction: column; align-items: center; }
