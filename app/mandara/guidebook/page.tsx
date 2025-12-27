@@ -245,7 +245,7 @@ export default function GuidebookPage() {
                   onClick={() => setSelectedCard(card)}
                   style={{
                     cursor: 'pointer',
-                    borderRadius: '12px',
+                    borderRadius: '16px',
                     overflow: 'hidden',
                     boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
                     transition: 'transform 0.2s, box-shadow 0.2s',
@@ -260,14 +260,16 @@ export default function GuidebookPage() {
                     e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.08)';
                   }}
                 >
-                  <Image
-                    src={getCardImagePath(card.カード番号)}
-                    alt={`カード${card.カード番号}: ${card.日本語キーワード}`}
-                    width={200}
-                    height={200}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                  <div style={{ padding: '0.75rem', textAlign: 'center' }}>
+                  <div style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}>
+                    <Image
+                      src={getCardImagePath(card.カード番号)}
+                      alt={`カード${card.カード番号}: ${card.日本語キーワード}`}
+                      width={200}
+                      height={200}
+                      style={{ width: '100%', height: 'auto', display: 'block' }}
+                    />
+                  </div>
+                  <div style={{ padding: '0.75rem', textAlign: 'center', borderRadius: '0 0 16px 16px' }}>
                     <p style={{
                       fontSize: '0.8125rem',
                       fontWeight: '700',
