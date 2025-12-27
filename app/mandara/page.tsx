@@ -243,36 +243,6 @@ export default function MandaraOraclePage() {
                             </p>
                           </div>
 
-                          {/* 象意 */}
-                          {card.象意 && (
-                            <div style={{ marginBottom: '1rem' }}>
-                              <p style={{ color: 'var(--lp-primary)', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.25rem' }}>象意</p>
-                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, fontSize: '0.875rem' }}>{card.象意}</p>
-                            </div>
-                          )}
-
-                          {/* グループ・方位・時 */}
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
-                            {card.グループ && (
-                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
-                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>グループ</p>
-                                <p style={{ margin: 0, fontWeight: '500' }}>{card.グループ}</p>
-                              </div>
-                            )}
-                            {card.方位 && (
-                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
-                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>方位</p>
-                                <p style={{ margin: 0, fontWeight: '500' }}>{card.方位}</p>
-                              </div>
-                            )}
-                            {card.時 && (
-                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
-                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>時</p>
-                                <p style={{ margin: 0, fontWeight: '500' }}>{card.時}</p>
-                              </div>
-                            )}
-                          </div>
-
                           {/* カードからのメッセージ */}
                           {card.カードからのメッセージ && (
                             <div style={{
@@ -296,11 +266,11 @@ export default function MandaraOraclePage() {
                             <div style={{
                               marginBottom: '1.5rem',
                               padding: '1rem',
-                              background: 'rgba(5, 150, 105, 0.05)',
+                              background: 'rgba(0, 184, 196, 0.08)',
                               borderRadius: '12px',
-                              borderLeft: '4px solid #059669'
+                              borderLeft: '4px solid #00a0aa'
                             }}>
-                              <p style={{ color: '#059669', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
+                              <p style={{ color: '#00a0aa', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
                                 ☆ キセキのレシピ ☆
                               </p>
                               <div style={{ color: 'var(--lp-text-secondary)', lineHeight: '1.9', fontSize: '0.9375rem' }}>
@@ -312,27 +282,17 @@ export default function MandaraOraclePage() {
                           {/* アファメーション */}
                           {card.アファメーション && (
                             <div style={{
-                              background: 'linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(79,70,229,0.08) 100%)',
+                              background: 'rgba(0, 184, 196, 0.12)',
                               borderRadius: '12px',
                               padding: '1rem',
-                              borderLeft: '4px solid #7c3aed'
+                              borderLeft: '4px solid #008891'
                             }}>
-                              <p style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
+                              <p style={{ color: '#008891', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
                                 ☆ アファメーション ☆
                               </p>
                               <div style={{ color: 'var(--lp-text-primary)', fontStyle: 'italic', lineHeight: '1.9', fontSize: '0.9375rem' }}>
                                 {formatMessage(card.アファメーション)}
                               </div>
-                            </div>
-                          )}
-
-                          {/* 属性情報 */}
-                          {card.attributes && (
-                            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--lp-border)' }}>
-                              <span className={styles.serviceCardTagMuted}>{card.attributes.形}</span>
-                              <span className={styles.serviceCardTagMuted}>{card.attributes.数}</span>
-                              <span className={styles.serviceCardTagMuted}>{card.attributes.色}</span>
-                              <span className={styles.serviceCardTagMuted}>{card.attributes.塗り}</span>
                             </div>
                           )}
                         </div>

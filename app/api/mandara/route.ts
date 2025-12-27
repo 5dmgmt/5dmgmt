@@ -163,14 +163,18 @@ export async function GET(request: NextRequest) {
 
       const card3 = cards.find(c => Number(c.カード番号) === card3Num);
 
-      const selected = [...firstTwo, card3!];
+      if (!card3) {
+        return NextResponse.json({ error: 'Failed to find third card data' }, { status: 500 });
+      }
+
+      const selected = [...firstTwo, card3];
       return NextResponse.json({
         mode: 'trio',
         description: '3枚目はSETゲームルールで自動選択されました',
         rule: '4属性（形・数・色・塗り）が全て「同じ」か「全て異なる」組み合わせ',
         cards: selected.map(c => ({
           ...c,
-          attributes: attributes.find(a => Number(a.カード番号) === Number(c!.カード番号))
+          attributes: attributes.find(a => Number(a.カード番号) === Number(c.カード番号))
         })),
         success: true
       });
