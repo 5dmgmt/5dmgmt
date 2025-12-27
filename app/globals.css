@@ -152,6 +152,7 @@ a.five-d-nav-btn {
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
   animation: navBtnShine 2.5s ease-in-out infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 .five-d-nav-btn:hover {
@@ -228,6 +229,7 @@ a.five-d-nav-btn {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
+  pointer-events: none;
 }
 
 .five-d-page [class*="btn"]:hover::before,
@@ -298,6 +300,7 @@ a.five-d-nav-btn {
   height: 200%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   animation: pulse 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .five-d-page [class*="ctaTitle"] { color: white !important; font-weight: 700 !important; }
