@@ -62,15 +62,6 @@ const servicesJsonLd = {
 
 const programs = [
   {
-    title: 'イマココ体験セッション',
-    question: '90分、思考を止められますか？',
-    description: '考えることをやめる。それだけのことが、なぜこれほど難しいのか。このセッションでは、安全な環境で「思考の外」を体験します。',
-    duration: '90分',
-    format: 'オンライン / 対面',
-    price: '無料（初回限定）',
-    href: '/taiken/imakoko',
-  },
-  {
     title: 'ゆるゆるマンダラ® オラクルカード',
     question: '頭ではなく、ハートで選べますか？',
     description: '思考で答えを出そうとすると、堂々巡りになります。カードをガイドにして、ハートに意識を向ける。81枚のカードが、思考から離れハートで選択するサポートをします。',
@@ -78,6 +69,15 @@ const programs = [
     format: 'オンライン',
     price: '無料',
     href: '/mandara',
+  },
+  {
+    title: 'イマココ体験セッション',
+    question: '90分、思考を止められますか？',
+    description: '考えることをやめる。それだけのことが、なぜこれほど難しいのか。このセッションでは、安全な環境で「思考の外」を体験します。',
+    duration: '90分',
+    format: 'オンライン / 対面',
+    price: '無料（初回限定）',
+    href: '/taiken/imakoko',
   },
   {
     title: '経営者リトリート',
