@@ -73,11 +73,13 @@ function findThirdCard(
   attributes: CardAttributes[],
   card1Num: number,
   card2Num: number
-): number | null {
+): { cardNum: number | null; debug?: string } {
   const c1 = attributes.find(a => Number(a.カード番号) === card1Num);
   const c2 = attributes.find(a => Number(a.カード番号) === card2Num);
 
-  if (!c1 || !c2) return null;
+  if (!c1 || !c2) {
+    return { cardNum: null, debug: `c1=${!!c1}, c2=${!!c2}, card1Num=${card1Num}, card2Num=${card2Num}` };
+  }
 
   const target = {
     形コード: getThirdValue(Number(c1.形コード), Number(c2.形コード)),
@@ -94,7 +96,11 @@ function findThirdCard(
       Number(a.塗りコード) === target.塗りコード
   );
 
-  return found ? Number(found.カード番号) : null;
+  if (!found) {
+    return { cardNum: null, debug: `target=${JSON.stringify(target)}, attrCount=${attributes.length}` };
+  }
+
+  return { cardNum: Number(found.カード番号) };
 }
 
 // GET: カードを引く
@@ -155,16 +161,16 @@ export async function GET(request: NextRequest) {
       const firstTwo = getRandomCards(cards, 2);
       const card1Num = Number(firstTwo[0].カード番号);
       const card2Num = Number(firstTwo[1].カード番号);
-      const card3Num = findThirdCard(attributes, card1Num, card2Num);
+      const result = findThirdCard(attributes, card1Num, card2Num);
 
-      if (!card3Num) {
-        return NextResponse.json({ error: 'Failed to find third card' }, { status: 500 });
+      if (!result.cardNum) {
+        return NextResponse.json({ error: 'Failed to find third card', debug: result.debug }, { status: 500 });
       }
 
-      const card3 = cards.find(c => Number(c.カード番号) === card3Num);
+      const card3 = cards.find(c => Number(c.カード番号) === result.cardNum);
 
       if (!card3) {
-        return NextResponse.json({ error: 'Failed to find third card data' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to find third card data', cardNum: result.cardNum }, { status: 500 });
       }
 
       const selected = [...firstTwo, card3];
@@ -218,16 +224,16 @@ export async function POST(request: NextRequest) {
     }
 
     // 3枚目を計算
-    const card3Num = findThirdCard(attributes, card1Num, card2Num);
+    const result = findThirdCard(attributes, card1Num, card2Num);
 
-    if (!card3Num) {
+    if (!result.cardNum) {
       return NextResponse.json(
-        { error: 'Failed to calculate third card' },
+        { error: 'Failed to calculate third card', debug: result.debug },
         { status: 500 }
       );
     }
 
-    const card3Data = cards.find(c => Number(c.カード番号) === card3Num);
+    const card3Data = cards.find(c => Number(c.カード番号) === result.cardNum);
 
     return NextResponse.json({
       card1: {
@@ -240,7 +246,7 @@ export async function POST(request: NextRequest) {
       },
       card3: {
         ...card3Data,
-        attributes: attributes.find(a => Number(a.カード番号) === card3Num)
+        attributes: attributes.find(a => Number(a.カード番号) === result.cardNum)
       },
       rule: 'SET game rule: 各属性が「全て同じ」か「全て異なる」',
       success: true
