@@ -109,9 +109,22 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const mode = searchParams.get('mode') || '1'; // 1, 2, 3
     const cardNum = searchParams.get('card'); // 特定カードを取得
+    const all = searchParams.get('all'); // 全カード取得
 
     const cards = loadCardData();
     const attributes = loadCardAttributes();
+
+    // 全カードを取得
+    if (all === 'true') {
+      return NextResponse.json({
+        cards: cards.map(c => ({
+          ...c,
+          attributes: attributes.find(a => Number(a.カード番号) === Number(c.カード番号))
+        })),
+        total: cards.length,
+        success: true
+      });
+    }
 
     // 特定カードの詳細を取得
     if (cardNum) {

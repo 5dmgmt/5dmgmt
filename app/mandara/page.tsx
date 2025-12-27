@@ -315,14 +315,21 @@ export default function MandaraOraclePage() {
                   ))}
                 </div>
 
-                {/* リセットボタン */}
-                <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                {/* ボタン群 */}
+                <div style={{ textAlign: 'center', marginTop: '3rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <button
                     onClick={resetDraw}
                     className={`${styles.btn} ${styles.btnSecondary}`}
                   >
                     もう一度引く
                   </button>
+                  <a
+                    href="/mandara/guidebook"
+                    className={`${styles.btn} ${styles.btnPrimary}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    ガイドブックを読む
+                  </a>
                 </div>
               </div>
             )}
