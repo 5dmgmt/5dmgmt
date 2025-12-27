@@ -21,6 +21,19 @@ interface Card {
   アファメーション: string;
 }
 
+// 曼荼羅の配置順序（9×9）
+const MANDALA_ORDER = [
+  [51, 6, 69, 46, 1, 64, 53, 8, 71],
+  [60, 42, 24, 55, 37, 19, 44, 26, 62],
+  [15, 78, 33, 10, 73, 28, 17, 80, 35],
+  [52, 7, 70, 50, 5, 68, 48, 3, 66],
+  [61, 43, 25, 59, 41, 23, 57, 39, 21],
+  [16, 79, 34, 14, 77, 32, 12, 75, 30],
+  [47, 2, 65, 54, 9, 72, 49, 4, 67],
+  [56, 38, 20, 63, 45, 27, 58, 40, 22],
+  [11, 74, 29, 18, 81, 36, 13, 76, 31]
+];
+
 export default function GuidebookPage() {
   const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +61,11 @@ export default function GuidebookPage() {
   const getCardImagePath = (cardNum: number) => {
     const num = String(cardNum).padStart(2, '0');
     return `/mandara-cards/card-${num}.jpg`;
+  };
+
+  // カード番号からカードを取得
+  const getCardByNumber = (num: number) => {
+    return cards.find(c => Number(c.カード番号) === num);
   };
 
   // テキストを行ごとに分割して表示
@@ -94,6 +112,70 @@ export default function GuidebookPage() {
           <p className={styles.heroLead} style={{ fontSize: '1rem' }}>
             81枚のカードの意味と使い方を解説します。<br />
             カードをタップして詳細を表示できます。
+          </p>
+        </div>
+      </section>
+
+      {/* Mandala Grid Section */}
+      <section style={{ background: '#1a1a4e', padding: '2rem 1rem' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h2 style={{
+            color: 'white',
+            textAlign: 'center',
+            fontSize: '1.25rem',
+            marginBottom: '1.5rem',
+            fontWeight: '600'
+          }}>
+            ゆるゆるマンダラ® 81枚の配置
+          </h2>
+          {!loading && cards.length > 0 && (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(9, 1fr)',
+              gap: '2px',
+              aspectRatio: '1 / 1'
+            }}>
+              {MANDALA_ORDER.flat().map((cardNum) => {
+                const card = getCardByNumber(cardNum);
+                return (
+                  <div
+                    key={cardNum}
+                    onClick={() => card && setSelectedCard(card)}
+                    style={{
+                      cursor: 'pointer',
+                      position: 'relative',
+                      aspectRatio: '1 / 1',
+                      overflow: 'hidden',
+                      borderRadius: '4px'
+                    }}
+                  >
+                    <Image
+                      src={getCardImagePath(cardNum)}
+                      alt={card ? `${cardNum}: ${card.日本語キーワード}` : `カード${cardNum}`}
+                      fill
+                      sizes="(max-width: 600px) 11vw, 66px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {loading && (
+            <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+              <div className="loading-spinner" />
+              <p style={{ color: 'rgba(255,255,255,0.7)', marginTop: '1rem', fontSize: '0.875rem' }}>
+                読み込み中...
+              </p>
+            </div>
+          )}
+          <p style={{
+            color: 'rgba(255,255,255,0.6)',
+            textAlign: 'center',
+            fontSize: '0.75rem',
+            marginTop: '1rem'
+          }}>
+            カードをタップして詳細を表示
           </p>
         </div>
       </section>
