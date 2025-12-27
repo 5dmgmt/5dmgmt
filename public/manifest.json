@@ -1,0 +1,28 @@
+{
+  "name": "五次元経営 | 宿曜鑑定",
+  "short_name": "五次元経営",
+  "description": "宿曜鑑定・イマココ体験・経営者リトリート。気づきを深め、運気を上げる五次元経営の実践プログラム。",
+  "start_url": "/unki/shukuyo",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00B8C4",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "business"],
+  "lang": "ja",
+  "dir": "ltr"
+}

@@ -23,6 +23,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
+  viewportFit: 'cover', // iPhoneノッチ対応
 };
 
 const notoSansJP = Noto_Sans_JP({
@@ -95,6 +96,14 @@ export default function RootLayout({
   return (
     <html lang="ja" className={notoSansJP.variable}>
       <head>
+        {/* PWA対応: manifest, Apple Web App設定 */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#00B8C4" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="五次元経営" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -126,6 +135,24 @@ export default function RootLayout({
           <main>{children}</main>
           <FiveDmgmtFooter />
         </div>
+
+        {/* Service Worker登録 */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('SW registered:', registration.scope);
+                  },
+                  function(err) {
+                    console.log('SW registration failed:', err);
+                  }
+                );
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
