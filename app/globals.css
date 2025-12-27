@@ -493,6 +493,21 @@ a.five-d-nav-btn {
   animation: cardFadeIn 0.3s ease-out;
 }
 
+/* Horizontal scroll container - hide scrollbar */
+.horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.horizontal-scroll > * {
+  scroll-snap-align: start;
+}
+
 /* Animation classes */
 .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
 .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }

@@ -172,19 +172,33 @@ export default function MandaraOraclePage() {
                       <strong style={{ color: 'var(--lp-primary)' }}>{result.description}</strong><br />
                       <span style={{ fontSize: '0.875rem' }}>{result.rule}</span>
                     </p>
+                    <p style={{ margin: '0.5rem 0 0', fontSize: '0.8125rem', color: 'var(--lp-text-muted)' }}>
+                      ← 横にスワイプして全てのカードを見る →
+                    </p>
                   </div>
                 )}
 
                 {/* カード表示 */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: result.cards.length === 1 ? '1fr' : result.cards.length === 2 ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '2rem',
-                  maxWidth: result.cards.length === 1 ? '400px' : '100%',
-                  margin: '0 auto'
-                }}>
+                <div
+                  className="horizontal-scroll"
+                  style={{
+                    display: 'flex',
+                    gap: '1.5rem',
+                    justifyContent: result.cards.length === 1 ? 'center' : 'flex-start',
+                    paddingBottom: '1rem',
+                    margin: '0 -1rem',
+                    padding: '0 1rem 1rem'
+                  }}
+                >
                   {result.cards.map((card, index) => (
-                    <div key={card.カード番号}>
+                    <div
+                      key={card.カード番号}
+                      style={{
+                        flex: result.cards.length === 1 ? '0 0 100%' : result.cards.length === 2 ? '0 0 calc(50% - 0.75rem)' : '0 0 280px',
+                        maxWidth: result.cards.length === 1 ? '400px' : result.cards.length === 2 ? 'calc(50% - 0.75rem)' : '280px',
+                        scrollSnapAlign: 'start'
+                      }}
+                    >
                       {/* カード画像 */}
                       <div
                         onClick={() => setExpandedCard(expandedCard === index ? null : index)}
