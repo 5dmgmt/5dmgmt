@@ -121,9 +121,9 @@ export default function MandaraOraclePage() {
                     <div className={styles.serviceCardTagGroup}>
                       <span className={styles.serviceCardTag}>2枚引き</span>
                     </div>
-                    <p className={styles.serviceCardQuestion}>過去と未来</p>
+                    <p className={styles.serviceCardQuestion}>二つの選択肢</p>
                     <p className={styles.serviceCardDescription}>
-                      2枚のカードが過去からの学びと未来への導きを示します。
+                      二つの選択肢に迷ったとき、それぞれのカードがヒントを与えます。
                     </p>
                   </button>
 
@@ -135,9 +135,9 @@ export default function MandaraOraclePage() {
                     <div className={styles.serviceCardTagGroup}>
                       <span className={styles.serviceCardTag}>3枚引き</span>
                     </div>
-                    <p className={styles.serviceCardQuestion}>SETの法則</p>
+                    <p className={styles.serviceCardQuestion}>過去・現在・未来</p>
                     <p className={styles.serviceCardDescription}>
-                      3枚目はSETゲームのルールで決まる運命のカードです。
+                      3つの因果を知りたいとき。過去・現在・未来の流れを読み解きます。
                     </p>
                   </button>
                 </div>
@@ -222,7 +222,7 @@ export default function MandaraOraclePage() {
 
                       {/* カード詳細（展開時） */}
                       {expandedCard === index && (
-                        <div className={styles.serviceCard} style={{ marginTop: '1rem', animation: 'fadeIn 0.3s ease-out' }}>
+                        <div className={`${styles.serviceCard} card-fade-in`} style={{ marginTop: '1rem' }}>
                           {/* キーワード */}
                           <div style={{ textAlign: 'center', borderBottom: '1px solid var(--lp-border)', paddingBottom: '1rem', marginBottom: '1rem' }}>
                             <p style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--lp-primary)', margin: '0 0 0.25rem' }}>
@@ -338,25 +338,6 @@ export default function MandaraOraclePage() {
           </div>
         </div>
       </section>
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-        .loading-spinner {
-          width: 48px;
-          height: 48px;
-          border: 4px solid #e0f7fa;
-          border-top: 4px solid #00B8C4;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin: 0 auto 1rem;
-        }
-      `}</style>
     </>
   );
 }
