@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import styles from '@/components/landing/LandingPage.module.css';
 
 interface CardAttributes {
   形: string;
@@ -70,217 +71,292 @@ export default function MandaraOraclePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-950 via-slate-900 to-slate-950 text-white">
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        {/* ヘッダー */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-amber-200 to-yellow-400 bg-clip-text text-transparent">
-            ゆるゆるマンダラ®
+    <>
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.container}>
+          <h1 className={styles.heroTitle}>
+            ゆるゆるマンダラ®<br />
+            オラクルカード
           </h1>
-          <h2 className="text-xl md:text-2xl text-slate-300">オラクルカード</h2>
+          <p className={styles.heroLead}>
+            思考で答えを出そうとすると、堂々巡りになります。<br />
+            カードをガイドにして、ハートに意識を向ける。<br />
+            81枚のカードが、思考から離れハートで選択するサポートをします。
+          </p>
         </div>
+      </section>
 
-        {/* モード選択 */}
-        {!selectedMode && (
-          <div className="space-y-6">
-            <p className="text-center text-slate-400 mb-8">
-              カードを引く枚数を選んでください
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <button
-                onClick={() => drawCards(1)}
-                className="group relative p-8 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-amber-500/50 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-6xl mb-4">🃏</div>
-                <div className="text-xl font-bold mb-2">1枚引き</div>
-                <div className="text-sm text-slate-400">今のあなたへのメッセージ</div>
-              </button>
+      {/* Main Section */}
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <div className={styles.cardContainer}>
+            {/* モード選択 */}
+            {!selectedMode && (
+              <>
+                <div className={styles.sectionHeader}>
+                  <p className={styles.sectionTag}>SELECT</p>
+                  <h2 className={styles.sectionTitle}>カードを引く枚数を選んでください</h2>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                  <button
+                    onClick={() => drawCards(1)}
+                    className={styles.serviceCard}
+                    style={{ cursor: 'pointer', border: 'none', textAlign: 'left' }}
+                  >
+                    <div className={styles.serviceCardTagGroup}>
+                      <span className={styles.serviceCardTag}>1枚引き</span>
+                    </div>
+                    <p className={styles.serviceCardQuestion}>今のあなたへ</p>
+                    <p className={styles.serviceCardDescription}>
+                      今この瞬間に必要なメッセージを1枚のカードから受け取ります。
+                    </p>
+                  </button>
 
-              <button
-                onClick={() => drawCards(2)}
-                className="group relative p-8 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-amber-500/50 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-6xl mb-4">🃏🃏</div>
-                <div className="text-xl font-bold mb-2">2枚引き</div>
-                <div className="text-sm text-slate-400">過去と未来のメッセージ</div>
-              </button>
+                  <button
+                    onClick={() => drawCards(2)}
+                    className={styles.serviceCard}
+                    style={{ cursor: 'pointer', border: 'none', textAlign: 'left' }}
+                  >
+                    <div className={styles.serviceCardTagGroup}>
+                      <span className={styles.serviceCardTag}>2枚引き</span>
+                    </div>
+                    <p className={styles.serviceCardQuestion}>過去と未来</p>
+                    <p className={styles.serviceCardDescription}>
+                      2枚のカードが過去からの学びと未来への導きを示します。
+                    </p>
+                  </button>
 
-              <button
-                onClick={() => drawCards(3)}
-                className="group relative p-8 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 hover:border-amber-500/50 transition-all duration-300 hover:scale-105"
-              >
-                <div className="text-6xl mb-4">🃏🃏🃏</div>
-                <div className="text-xl font-bold mb-2">3枚引き</div>
-                <div className="text-sm text-slate-400">SETの法則で導かれる運命</div>
-              </button>
-            </div>
-          </div>
-        )}
+                  <button
+                    onClick={() => drawCards(3)}
+                    className={styles.serviceCard}
+                    style={{ cursor: 'pointer', border: 'none', textAlign: 'left' }}
+                  >
+                    <div className={styles.serviceCardTagGroup}>
+                      <span className={styles.serviceCardTag}>3枚引き</span>
+                    </div>
+                    <p className={styles.serviceCardQuestion}>SETの法則</p>
+                    <p className={styles.serviceCardDescription}>
+                      3枚目はSETゲームのルールで決まる運命のカードです。
+                    </p>
+                  </button>
+                </div>
+              </>
+            )}
 
-        {/* ローディング */}
-        {loading && (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-amber-500 border-t-transparent"></div>
-            <p className="mt-4 text-slate-400">カードを引いています...</p>
-          </div>
-        )}
-
-        {/* 結果表示 */}
-        {result && !loading && (
-          <div className="space-y-8">
-            {/* 3枚引きの説明 */}
-            {result.mode === 'trio' && (
-              <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-                <p className="text-amber-300 text-sm">{result.description}</p>
-                <p className="text-slate-400 text-xs mt-1">{result.rule}</p>
+            {/* ローディング */}
+            {loading && (
+              <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+                <div className="loading-spinner" />
+                <p style={{ color: 'var(--lp-text-muted)' }}>カードを引いています...</p>
               </div>
             )}
 
-            {/* カード表示 */}
-            <div className={`grid gap-6 ${
-              result.cards.length === 1 ? 'grid-cols-1 max-w-md mx-auto' :
-              result.cards.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto' :
-              'grid-cols-1 md:grid-cols-3'
-            }`}>
-              {result.cards.map((card, index) => (
-                <div key={card.カード番号} className="space-y-4">
-                  {/* カード画像 */}
-                  <div
-                    onClick={() => setExpandedCard(expandedCard === index ? null : index)}
-                    className="relative cursor-pointer rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-amber-500/20"
-                  >
-                    <Image
-                      src={getCardImagePath(card.カード番号)}
-                      alt={`カード${card.カード番号}: ${card.日本語キーワード}`}
-                      width={400}
-                      height={400}
-                      className="w-full h-auto"
-                      priority
-                    />
-                    {/* タップヒント */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <p className="text-center text-white/80 text-sm">
-                        タップして詳細を表示
-                      </p>
-                    </div>
+            {/* 結果表示 */}
+            {result && !loading && (
+              <div>
+                {/* 3枚引きの説明 */}
+                {result.mode === 'trio' && (
+                  <div className={styles.infoBox} style={{ marginBottom: '2rem', marginTop: 0 }}>
+                    <p className={styles.infoBoxText} style={{ margin: 0 }}>
+                      <strong style={{ color: 'var(--lp-primary)' }}>{result.description}</strong><br />
+                      <span style={{ fontSize: '0.875rem' }}>{result.rule}</span>
+                    </p>
                   </div>
+                )}
 
-                  {/* カード詳細（展開時） */}
-                  {expandedCard === index && (
-                    <div className="bg-slate-800/90 rounded-xl p-5 space-y-4 animate-fadeIn">
-                      {/* キーワード */}
-                      <div className="text-center border-b border-slate-700 pb-4">
-                        <div className="text-2xl font-bold text-amber-300">
-                          {card.日本語キーワード}
-                        </div>
-                        <div className="text-slate-400">
-                          {card.読み} / {card.英語キーワード}
+                {/* カード表示 */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: result.cards.length === 1 ? '1fr' : result.cards.length === 2 ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '2rem',
+                  maxWidth: result.cards.length === 1 ? '400px' : '100%',
+                  margin: '0 auto'
+                }}>
+                  {result.cards.map((card, index) => (
+                    <div key={card.カード番号}>
+                      {/* カード画像 */}
+                      <div
+                        onClick={() => setExpandedCard(expandedCard === index ? null : index)}
+                        style={{
+                          cursor: 'pointer',
+                          borderRadius: '16px',
+                          overflow: 'hidden',
+                          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                          transition: 'transform 0.2s, box-shadow 0.2s',
+                          border: '1px solid var(--lp-border)',
+                          position: 'relative'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-4px)';
+                          e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,184,196,0.2)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0)';
+                          e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                        }}
+                      >
+                        <Image
+                          src={getCardImagePath(card.カード番号)}
+                          alt={`カード${card.カード番号}: ${card.日本語キーワード}`}
+                          width={400}
+                          height={400}
+                          style={{ width: '100%', height: 'auto', display: 'block' }}
+                          priority
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
+                          padding: '2rem 1rem 1rem',
+                          color: 'white',
+                          textAlign: 'center'
+                        }}>
+                          <p style={{ margin: 0, fontSize: '0.875rem' }}>
+                            タップして詳細を表示
+                          </p>
                         </div>
                       </div>
 
-                      {/* 象意 */}
-                      {card.象意 && (
-                        <div>
-                          <h4 className="text-amber-400 text-sm font-bold mb-1">象意</h4>
-                          <p className="text-slate-300 text-sm">{card.象意}</p>
-                        </div>
-                      )}
-
-                      {/* グループ・方位・時 */}
-                      <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                        {card.グループ && (
-                          <div className="bg-slate-700/50 rounded p-2">
-                            <div className="text-slate-400">グループ</div>
-                            <div className="text-white">{card.グループ}</div>
+                      {/* カード詳細（展開時） */}
+                      {expandedCard === index && (
+                        <div className={styles.serviceCard} style={{ marginTop: '1rem', animation: 'fadeIn 0.3s ease-out' }}>
+                          {/* キーワード */}
+                          <div style={{ textAlign: 'center', borderBottom: '1px solid var(--lp-border)', paddingBottom: '1rem', marginBottom: '1rem' }}>
+                            <p style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--lp-primary)', margin: '0 0 0.25rem' }}>
+                              {card.日本語キーワード}
+                            </p>
+                            <p style={{ color: 'var(--lp-text-muted)', margin: 0, fontSize: '0.875rem' }}>
+                              {card.読み} / {card.英語キーワード}
+                            </p>
                           </div>
-                        )}
-                        {card.方位 && (
-                          <div className="bg-slate-700/50 rounded p-2">
-                            <div className="text-slate-400">方位</div>
-                            <div className="text-white">{card.方位}</div>
+
+                          {/* 象意 */}
+                          {card.象意 && (
+                            <div style={{ marginBottom: '1rem' }}>
+                              <p style={{ color: 'var(--lp-primary)', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.25rem' }}>象意</p>
+                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, fontSize: '0.875rem' }}>{card.象意}</p>
+                            </div>
+                          )}
+
+                          {/* グループ・方位・時 */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
+                            {card.グループ && (
+                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
+                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>グループ</p>
+                                <p style={{ margin: 0, fontWeight: '500' }}>{card.グループ}</p>
+                              </div>
+                            )}
+                            {card.方位 && (
+                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
+                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>方位</p>
+                                <p style={{ margin: 0, fontWeight: '500' }}>{card.方位}</p>
+                              </div>
+                            )}
+                            {card.時 && (
+                              <div style={{ background: 'var(--lp-bg-secondary)', borderRadius: '8px', padding: '0.5rem', textAlign: 'center' }}>
+                                <p style={{ fontSize: '0.75rem', color: 'var(--lp-text-muted)', margin: '0 0 0.25rem' }}>時</p>
+                                <p style={{ margin: 0, fontWeight: '500' }}>{card.時}</p>
+                              </div>
+                            )}
                           </div>
-                        )}
-                        {card.時 && (
-                          <div className="bg-slate-700/50 rounded p-2">
-                            <div className="text-slate-400">時</div>
-                            <div className="text-white">{card.時}</div>
-                          </div>
-                        )}
-                      </div>
 
-                      {/* カードからのメッセージ */}
-                      {card.カードからのメッセージ && (
-                        <div>
-                          <h4 className="text-amber-400 text-sm font-bold mb-2">カードからのメッセージ</h4>
-                          <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">
-                            {card.カードからのメッセージ}
-                          </p>
-                        </div>
-                      )}
+                          {/* カードからのメッセージ */}
+                          {card.カードからのメッセージ && (
+                            <div style={{ marginBottom: '1rem' }}>
+                              <p style={{ color: 'var(--lp-primary)', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>カードからのメッセージ</p>
+                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
+                                {card.カードからのメッセージ}
+                              </p>
+                            </div>
+                          )}
 
-                      {/* キセキのレシピ */}
-                      {card.キセキのレシピ && (
-                        <div>
-                          <h4 className="text-emerald-400 text-sm font-bold mb-2">キセキのレシピ</h4>
-                          <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">
-                            {card.キセキのレシピ}
-                          </p>
-                        </div>
-                      )}
+                          {/* キセキのレシピ */}
+                          {card.キセキのレシピ && (
+                            <div style={{ marginBottom: '1rem' }}>
+                              <p style={{ color: '#059669', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>キセキのレシピ</p>
+                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
+                                {card.キセキのレシピ}
+                              </p>
+                            </div>
+                          )}
 
-                      {/* アファメーション */}
-                      {card.アファメーション && (
-                        <div className="bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-lg p-4">
-                          <h4 className="text-purple-300 text-sm font-bold mb-2">アファメーション</h4>
-                          <p className="text-white text-sm leading-relaxed italic whitespace-pre-wrap">
-                            {card.アファメーション}
-                          </p>
-                        </div>
-                      )}
+                          {/* アファメーション */}
+                          {card.アファメーション && (
+                            <div style={{
+                              background: 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(79,70,229,0.1) 100%)',
+                              borderRadius: '12px',
+                              padding: '1rem'
+                            }}>
+                              <p style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>アファメーション</p>
+                              <p style={{ color: 'var(--lp-text-primary)', margin: 0, fontStyle: 'italic', lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
+                                {card.アファメーション}
+                              </p>
+                            </div>
+                          )}
 
-                      {/* 属性情報 */}
-                      {card.attributes && (
-                        <div className="flex justify-center gap-2 text-xs pt-2 border-t border-slate-700">
-                          <span className="bg-slate-600 px-2 py-1 rounded">{card.attributes.形}</span>
-                          <span className="bg-slate-600 px-2 py-1 rounded">{card.attributes.数}</span>
-                          <span className="bg-slate-600 px-2 py-1 rounded">{card.attributes.色}</span>
-                          <span className="bg-slate-600 px-2 py-1 rounded">{card.attributes.塗り}</span>
+                          {/* 属性情報 */}
+                          {card.attributes && (
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--lp-border)' }}>
+                              <span className={styles.serviceCardTagMuted}>{card.attributes.形}</span>
+                              <span className={styles.serviceCardTagMuted}>{card.attributes.数}</span>
+                              <span className={styles.serviceCardTagMuted}>{card.attributes.色}</span>
+                              <span className={styles.serviceCardTagMuted}>{card.attributes.塗り}</span>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
-                  )}
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            {/* リセットボタン */}
-            <div className="text-center pt-8">
-              <button
-                onClick={resetDraw}
-                className="px-8 py-3 bg-slate-700 hover:bg-slate-600 rounded-full transition-colors"
-              >
-                もう一度引く
-              </button>
-            </div>
+                {/* リセットボタン */}
+                <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                  <button
+                    onClick={resetDraw}
+                    className={`${styles.btn} ${styles.btnSecondary}`}
+                  >
+                    もう一度引く
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-
-        {/* フッター */}
-        <div className="text-center mt-16 pt-8 border-t border-slate-800">
-          <p className="text-slate-500 text-sm">ゆるゆるマンダラ® オラクルカード</p>
-          <p className="text-slate-600 text-xs mt-1">81枚のカードがあなたにメッセージを届けます</p>
         </div>
-      </div>
+      </section>
 
-      <style jsx>{`
+      {/* Footer Message */}
+      <section className={`${styles.section} ${styles.testimonialsSection}`}>
+        <div className={styles.container}>
+          <div className={styles.questionSection}>
+            <p className={styles.questionText}>
+              思考を止めて、ハートで感じる。<br />
+              81枚のカードは、あなたの内なる声を引き出すガイドです。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <style jsx global>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-10px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        .loading-spinner {
+          width: 48px;
+          height: 48px;
+          border: 4px solid #e0f7fa;
+          border-top: 4px solid #00B8C4;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem;
         }
       `}</style>
-    </div>
+    </>
   );
 }
