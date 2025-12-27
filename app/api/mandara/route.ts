@@ -74,8 +74,8 @@ function findThirdCard(
   card1Num: number,
   card2Num: number
 ): number | null {
-  const c1 = attributes.find(a => a.カード番号 === card1Num);
-  const c2 = attributes.find(a => a.カード番号 === card2Num);
+  const c1 = attributes.find(a => Number(a.カード番号) === card1Num);
+  const c2 = attributes.find(a => Number(a.カード番号) === card2Num);
 
   if (!c1 || !c2) return null;
 
