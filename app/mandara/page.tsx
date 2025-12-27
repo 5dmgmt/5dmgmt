@@ -70,6 +70,16 @@ export default function MandaraOraclePage() {
     return `/mandara-cards/card-${num}.jpg`;
   };
 
+  // テキストを行ごとに分割して表示（|で区切られたテキストを改行表示）
+  const formatMessage = (text: string) => {
+    const lines = text.split(/\s*\|\s*/);
+    return lines.map((line, i) => (
+      <span key={i} style={{ display: 'block', marginBottom: i < lines.length - 1 ? '0.75rem' : 0 }}>
+        {line.trim()}
+      </span>
+    ));
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -265,35 +275,54 @@ export default function MandaraOraclePage() {
 
                           {/* カードからのメッセージ */}
                           {card.カードからのメッセージ && (
-                            <div style={{ marginBottom: '1rem' }}>
-                              <p style={{ color: 'var(--lp-primary)', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>カードからのメッセージ</p>
-                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
-                                {card.カードからのメッセージ}
+                            <div style={{
+                              marginBottom: '1.5rem',
+                              padding: '1rem',
+                              background: 'rgba(0, 184, 196, 0.05)',
+                              borderRadius: '12px',
+                              borderLeft: '4px solid var(--lp-primary)'
+                            }}>
+                              <p style={{ color: 'var(--lp-primary)', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
+                                ☆ カードからのメッセージ ☆
                               </p>
+                              <div style={{ color: 'var(--lp-text-secondary)', lineHeight: '1.9', fontSize: '0.9375rem' }}>
+                                {formatMessage(card.カードからのメッセージ)}
+                              </div>
                             </div>
                           )}
 
                           {/* キセキのレシピ */}
                           {card.キセキのレシピ && (
-                            <div style={{ marginBottom: '1rem' }}>
-                              <p style={{ color: '#059669', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>キセキのレシピ</p>
-                              <p style={{ color: 'var(--lp-text-secondary)', margin: 0, lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
-                                {card.キセキのレシピ}
+                            <div style={{
+                              marginBottom: '1.5rem',
+                              padding: '1rem',
+                              background: 'rgba(5, 150, 105, 0.05)',
+                              borderRadius: '12px',
+                              borderLeft: '4px solid #059669'
+                            }}>
+                              <p style={{ color: '#059669', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
+                                ☆ キセキのレシピ ☆
                               </p>
+                              <div style={{ color: 'var(--lp-text-secondary)', lineHeight: '1.9', fontSize: '0.9375rem' }}>
+                                {formatMessage(card.キセキのレシピ)}
+                              </div>
                             </div>
                           )}
 
                           {/* アファメーション */}
                           {card.アファメーション && (
                             <div style={{
-                              background: 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(79,70,229,0.1) 100%)',
+                              background: 'linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(79,70,229,0.08) 100%)',
                               borderRadius: '12px',
-                              padding: '1rem'
+                              padding: '1rem',
+                              borderLeft: '4px solid #7c3aed'
                             }}>
-                              <p style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>アファメーション</p>
-                              <p style={{ color: 'var(--lp-text-primary)', margin: 0, fontStyle: 'italic', lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
-                                {card.アファメーション}
+                              <p style={{ color: '#7c3aed', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.75rem' }}>
+                                ☆ アファメーション ☆
                               </p>
+                              <div style={{ color: 'var(--lp-text-primary)', fontStyle: 'italic', lineHeight: '1.9', fontSize: '0.9375rem' }}>
+                                {formatMessage(card.アファメーション)}
+                              </div>
                             </div>
                           )}
 
