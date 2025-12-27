@@ -108,7 +108,7 @@ export default function MandaraOraclePage() {
                   <p className={styles.sectionTag}>SELECT</p>
                   <h2 className={styles.sectionTitle}>カードを引く枚数を選んでください</h2>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
                   <button
                     onClick={() => drawCards(1)}
                     className={styles.serviceCard}
