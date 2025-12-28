@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${encodeURIComponent(user.name)}_鑑定書.pdf"`,
+        'Content-Disposition': `attachment; filename*=UTF-8''${encodeURIComponent(user.name + '_鑑定書.pdf')}`,
         'Content-Length': pdfBuffer.length.toString(),
       },
     });
@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `inline; filename="${encodeURIComponent(testUser.name)}_鑑定書.pdf"`,
+        'Content-Disposition': `inline; filename*=UTF-8''${encodeURIComponent(testUser.name + '_鑑定書.pdf')}`,
         'Content-Length': pdfBuffer.length.toString(),
       },
     });
