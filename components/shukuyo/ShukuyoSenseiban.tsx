@@ -67,11 +67,36 @@ const getRelationColor = (relation: string): string => {
 interface ShukuyoSenseibanProps {
   width?: number;
   height?: number;
+  /** ユーザーの宿（例: '虚' または '虚宿'）。指定すると、この宿が12時の位置に来るように初期表示 */
+  userShukuyo?: string;
 }
 
-export default function ShukuyoSenseiban({ width = 500, height = 500 }: ShukuyoSenseibanProps) {
+/**
+ * 宿名から初期回転角度を計算
+ * @param shukuyoName 宿名（例: '虚' または '虚宿'）
+ * @returns 回転角度（ラジアン）
+ */
+function calculateInitialRotation(shukuyoName?: string): number {
+  if (!shukuyoName) return 0;
+
+  // '虚宿' -> '虚' に正規化
+  const normalizedName = shukuyoName.replace('宿', '');
+
+  // STARSリストから該当する宿のインデックスを探す
+  const starIndex = STARS.findIndex(s => s.name === normalizedName);
+  if (starIndex === -1) return 0;
+
+  // 27宿の角度ステップ
+  const angleStep = (Math.PI * 2) / 27;
+
+  // その宿が12時の位置（上）に来るように回転角度を計算
+  // STARSリストは昴(0)が12時から始まるので、その宿を上に持ってくるには逆回転が必要
+  return -starIndex * angleStep;
+}
+
+export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuyo }: ShukuyoSenseibanProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(() => calculateInitialRotation(userShukuyo));
   const [isDragging, setIsDragging] = useState(false);
   const lastAngleRef = useRef(0);
   const dimensionsRef = useRef({
@@ -83,6 +108,12 @@ export default function ShukuyoSenseiban({ width = 500, height = 500 }: ShukuyoS
     innerMostRadius: 0,
     centerRadius: 0,
   });
+
+  // userShukuyoが変更されたら回転をリセット
+  useEffect(() => {
+    const newRotation = calculateInitialRotation(userShukuyo);
+    setRotation(newRotation);
+  }, [userShukuyo]);
 
   // 12時の位置にある宿名を取得
   const getTopStarName = useCallback((rot: number) => {

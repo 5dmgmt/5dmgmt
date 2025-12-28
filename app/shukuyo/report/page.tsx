@@ -12,6 +12,44 @@ interface YearFortune {
   description: string;
 }
 
+// 九星名と番号のマッピング
+const KYUSEI_MAP: Record<string, number> = {
+  '一白水星': 1,
+  '二黒土星': 2,
+  '三碧木星': 3,
+  '四緑木星': 4,
+  '五黄土星': 5,
+  '六白金星': 6,
+  '七赤金星': 7,
+  '八白土星': 8,
+  '九紫火星': 9,
+};
+
+/**
+ * 曼荼羅カード番号を計算
+ * @param sangenKyuun 三元九運（1-9）
+ * @param yearStar 年星番号（1-9）
+ * @param monthStar 月星番号（1-9）
+ * @param dayStar 日星番号（1-9）
+ * @returns { intention: number, essence: number, action: number }
+ */
+function calculateMandalaCards(
+  sangenKyuun: number,
+  yearStar: number,
+  monthStar: number,
+  dayStar: number
+): { intention: number; essence: number; action: number } {
+  // 計算式:
+  // 意図のヒント = 三元九運 - 9 + 年星 × 9
+  // 本質面 = 年星 - 9 + 月星 × 9
+  // 行動面 = 月星 - 9 + 日星 × 9
+  return {
+    intention: sangenKyuun - 9 + yearStar * 9,
+    essence: yearStar - 9 + monthStar * 9,
+    action: monthStar - 9 + dayStar * 9,
+  };
+}
+
 // テスト用デフォルトデータ（仮名）
 const defaultUserData = {
   name: '山田花子',
@@ -20,9 +58,19 @@ const defaultUserData = {
   weekday: '木曜日',
   shichiyoRyohi: '七曜陵逼生まれ',
   structureTitle: '制御された夢想家',
+  // 三元九運
+  sangenKyuun: 5,          // 第五運
+  sangenKyuunName: '第五運',
+  // 干支
+  yearKanshi: '庚子',      // 年干支
+  monthKanshi: '丙戌',     // 月干支
+  dayKanshi: '戊子',       // 日干支
+  // 九星
   yearKyusei: '四緑木星',
   monthKyusei: '九紫火星',
   dayKyusei: '九紫火星',
+  // 空亡
+  kuubou: '寅卯－',
 };
 
 // テスト用年運データ（9年サイクル - 九星気学）
@@ -399,6 +447,14 @@ export default function ShukuyoReportPage() {
   const [user] = useState(defaultUserData);
   const [downloading, setDownloading] = useState(false);
 
+  // 曼荼羅カード番号を計算
+  const mandalaCards = calculateMandalaCards(
+    user.sangenKyuun,
+    KYUSEI_MAP[user.yearKyusei] || 1,
+    KYUSEI_MAP[user.monthKyusei] || 1,
+    KYUSEI_MAP[user.dayKyusei] || 1
+  );
+
   const handlePrint = () => {
     window.print();
   };
@@ -628,7 +684,7 @@ export default function ShukuyoReportPage() {
             <div>
               {/* 27宿円形図（既存の宿曜盤コンポーネント） */}
               <div style={{ ...styles.card, textAlign: 'center' }}>
-                <ShukuyoSenseiban width={300} height={300} />
+                <ShukuyoSenseiban width={300} height={300} userShukuyo={user.shukuyo} />
                 <p style={{ fontSize: '14px', color: '#374151', marginTop: '8px' }}>あなたの宿曜27宿：{user.shukuyo}（回転して確認できます）</p>
               </div>
 
@@ -642,10 +698,33 @@ export default function ShukuyoReportPage() {
                 ))}
               </div>
 
-              {/* 九星情報 */}
+              {/* 命式情報 */}
               <div style={{ marginTop: '16px' }}>
-                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>九星情報</h3>
-                <div style={styles.infoGrid}>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>命式情報</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+                  {/* 干支 */}
+                  <div style={{ ...styles.infoBox, backgroundColor: '#f0f9ff' }}>
+                    <p style={styles.infoLabel}>年干支</p>
+                    <p style={styles.infoValue}>{user.yearKanshi}</p>
+                  </div>
+                  <div style={{ ...styles.infoBox, backgroundColor: '#f0f9ff' }}>
+                    <p style={styles.infoLabel}>月干支</p>
+                    <p style={styles.infoValue}>{user.monthKanshi}</p>
+                  </div>
+                  <div style={{ ...styles.infoBox, backgroundColor: '#f0f9ff' }}>
+                    <p style={styles.infoLabel}>日干支</p>
+                    <p style={styles.infoValue}>{user.dayKanshi}</p>
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '8px' }}>
+                  {/* 三元九運 */}
+                  <div style={{ ...styles.infoBox, gridColumn: 'span 2', backgroundColor: '#fef3c7', textAlign: 'center' }}>
+                    <p style={styles.infoLabel}>三元九運</p>
+                    <p style={{ ...styles.infoValue, fontSize: '18px' }}>{user.sangenKyuunName}</p>
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', marginTop: '8px' }}>
+                  {/* 九星 */}
                   <div style={styles.infoBox}>
                     <p style={styles.infoLabel}>年星（本命星）</p>
                     <p style={styles.infoValue}>{user.yearKyusei}</p>
@@ -658,10 +737,6 @@ export default function ShukuyoReportPage() {
                     <p style={styles.infoLabel}>日星（日命星）</p>
                     <p style={styles.infoValue}>{user.dayKyusei}</p>
                   </div>
-                  <div style={styles.infoBox}>
-                    <p style={styles.infoLabel}>宿曜</p>
-                    <p style={styles.infoValue}>{user.shukuyo}</p>
-                  </div>
                 </div>
               </div>
 
@@ -672,29 +747,29 @@ export default function ShukuyoReportPage() {
                   <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
                     <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>意図のヒント</p>
                     <img
-                      src="/mandara-cards/card-32.jpg"
-                      alt="カード32"
+                      src={`/mandara-cards/card-${String(mandalaCards.intention).padStart(2, '0')}.jpg`}
+                      alt={`カード${mandalaCards.intention}`}
                       style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
                     />
-                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.32</p>
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.{mandalaCards.intention}</p>
                   </div>
                   <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
                     <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>本質面</p>
                     <img
-                      src="/mandara-cards/card-76.jpg"
-                      alt="カード76"
+                      src={`/mandara-cards/card-${String(mandalaCards.essence).padStart(2, '0')}.jpg`}
+                      alt={`カード${mandalaCards.essence}`}
                       style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
                     />
-                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.76</p>
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.{mandalaCards.essence}</p>
                   </div>
                   <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
                     <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>行動面</p>
                     <img
-                      src="/mandara-cards/card-81.jpg"
-                      alt="カード81"
+                      src={`/mandara-cards/card-${String(mandalaCards.action).padStart(2, '0')}.jpg`}
+                      alt={`カード${mandalaCards.action}`}
                       style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
                     />
-                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.81</p>
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.{mandalaCards.action}</p>
                   </div>
                 </div>
               </div>
