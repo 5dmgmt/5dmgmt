@@ -25,24 +25,52 @@ const defaultUserData = {
   dayKyusei: '九紫火星',
 };
 
-// テスト用年運データ（9年サイクル）
-const defaultYearFortunes: YearFortune[] = [
-  { year: 2022, level: 6, season: '夏', theme: '離-赤', description: '情熱と表現の年。創造性が高まり注目を集める時期。' },
-  { year: 2023, level: 5, season: '秋', theme: '坤-黄', description: '安定と収穫の年。地道な努力が実を結ぶ。' },
-  { year: 2024, level: 7, season: '秋', theme: '兌-藍', description: '喜びと交流の年。人間関係が広がる。' },
-  { year: 2025, level: 8, season: '秋', theme: '乾-白', description: '発展と成功の年。リーダーシップを発揮する時期。' },
-  { year: 2026, level: 2, season: '冬', theme: '冬1-意図を溶かす', description: '内省の年。次のサイクルへの準備期間。' },
-  { year: 2027, level: 1, season: '冬', theme: '冬2-闇', description: '最も深い冬。静かに過ごし力を蓄える。' },
-  { year: 2028, level: 3, season: '春', theme: '震-緑', description: '新しい始まりの年。行動を開始する時期。' },
-  { year: 2029, level: 4, season: '春', theme: '巽-青', description: '成長と発展の年。学びと経験を積む。' },
-  { year: 2030, level: 5, season: '夏', theme: '坎-紺', description: '試練と知恵の年。困難を乗り越え成長する。' },
+// テスト用年運データ（9年サイクル - 九星気学）
+const nineYearCycle: YearFortune[] = [
+  { year: 2022, level: 6, season: '夏', theme: '六白金星', description: '天の気を受ける年。リーダーシップと決断力が高まる。' },
+  { year: 2023, level: 5, season: '秋', theme: '五黄土星', description: '中心の年。周囲への影響力が最大化する時期。' },
+  { year: 2024, level: 4, season: '秋', theme: '四緑木星', description: '信用と人脈の年。協調性が運を開く。' },
+  { year: 2025, level: 3, season: '秋', theme: '三碧木星', description: '発展と躍進の年。新しい挑戦に適した時期。' },
+  { year: 2026, level: 2, season: '冬', theme: '二黒土星', description: '忍耐と基盤の年。地道な努力が実を結ぶ。' },
+  { year: 2027, level: 1, season: '冬', theme: '一白水星', description: '潜伏の年。内面を磨き次の飛躍に備える。' },
+  { year: 2028, level: 9, season: '春', theme: '九紫火星', description: '頂点の年。注目と成功のピーク。' },
+  { year: 2029, level: 8, season: '春', theme: '八白土星', description: '変革の年。大きな転換点となる時期。' },
+  { year: 2030, level: 7, season: '夏', theme: '七赤金星', description: '収穫と喜びの年。人間関係が豊かになる。' },
+];
+
+// テスト用年運データ（12年サイクル - 十二支）
+const twelveYearCycle: YearFortune[] = [
+  { year: 2020, level: 1, season: '冬', theme: '子（ね）', description: '始まりの年。新しい12年サイクルのスタート。' },
+  { year: 2021, level: 3, season: '冬', theme: '丑（うし）', description: '耐える年。じっくりと力を蓄える時期。' },
+  { year: 2022, level: 5, season: '春', theme: '寅（とら）', description: '動き出す年。行動を起こすタイミング。' },
+  { year: 2023, level: 7, season: '春', theme: '卯（う）', description: '発展の年。成長と拡大の時期。' },
+  { year: 2024, level: 9, season: '春', theme: '辰（たつ）', description: '飛躍の年。大きなチャンスが訪れる。' },
+  { year: 2025, level: 11, season: '夏', theme: '巳（み）', description: '実りの年。努力が形になる時期。' },
+  { year: 2026, level: 12, season: '夏', theme: '午（うま）', description: '頂点の年。最も勢いのある時期。' },
+  { year: 2027, level: 10, season: '夏', theme: '未（ひつじ）', description: '安定の年。成果を味わう時期。' },
+  { year: 2028, level: 8, season: '秋', theme: '申（さる）', description: '知恵の年。経験を活かす時期。' },
+  { year: 2029, level: 6, season: '秋', theme: '酉（とり）', description: '収穫の年。成果をまとめる時期。' },
+  { year: 2030, level: 4, season: '秋', theme: '戌（いぬ）', description: '準備の年。次のサイクルに備える。' },
+  { year: 2031, level: 2, season: '冬', theme: '亥（い）', description: '終息の年。サイクルの締めくくり。' },
 ];
 
 // 年運グラフコンポーネント
-function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFortune[]; currentYear?: number }) {
+function YearFortuneGraph({
+  fortunes,
+  currentYear = 2025,
+  title = '',
+  maxLevel = 9,
+  accentColor = '#00B8C4'
+}: {
+  fortunes: YearFortune[];
+  currentYear?: number;
+  title?: string;
+  maxLevel?: number;
+  accentColor?: string;
+}) {
   const width = 400;
-  const height = 200;
-  const padding = { top: 30, right: 30, bottom: 40, left: 40 };
+  const height = 180;
+  const padding = { top: title ? 35 : 25, right: 25, bottom: 35, left: 35 };
   const graphWidth = width - padding.left - padding.right;
   const graphHeight = height - padding.top - padding.bottom;
 
@@ -51,7 +79,7 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
   const yearRange = maxYear - minYear;
 
   const getX = (year: number) => padding.left + ((year - minYear) / yearRange) * graphWidth;
-  const getY = (level: number) => padding.top + graphHeight - ((level - 1) / 8) * graphHeight;
+  const getY = (level: number) => padding.top + graphHeight - ((level - 1) / (maxLevel - 1)) * graphHeight;
 
   // 季節による色
   const getSeasonColor = (season: string) => {
@@ -72,17 +100,32 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
   // グラデーションエリアのパス
   const areaPath = `${linePath} L ${getX(fortunes[fortunes.length - 1].year)} ${height - padding.bottom} L ${padding.left} ${height - padding.bottom} Z`;
 
+  // グリッドレベル（maxLevelに応じて調整）
+  const gridLevels = maxLevel === 12
+    ? [1, 4, 7, 10, 12]
+    : [1, 3, 5, 7, 9];
+
+  // ユニークなグラデーションID
+  const gradientId = `fortuneGradient-${maxLevel}`;
+
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: 'block', margin: '0 auto' }}>
       <defs>
-        <linearGradient id="fortuneGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#00B8C4" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#00B8C4" stopOpacity="0.05" />
+        <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor={accentColor} stopOpacity="0.4" />
+          <stop offset="100%" stopColor={accentColor} stopOpacity="0.05" />
         </linearGradient>
       </defs>
 
+      {/* タイトル */}
+      {title && (
+        <text x={width / 2} y={18} textAnchor="middle" fontSize="12" fill={accentColor} fontWeight="bold">
+          {title}
+        </text>
+      )}
+
       {/* 背景グリッド */}
-      {[1, 3, 5, 7, 9].map(level => (
+      {gridLevels.map(level => (
         <g key={level}>
           <line
             x1={padding.left}
@@ -106,10 +149,10 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
       ))}
 
       {/* グラデーションエリア */}
-      <path d={areaPath} fill="url(#fortuneGradient)" />
+      <path d={areaPath} fill={`url(#${gradientId})`} />
 
       {/* 折れ線 */}
-      <path d={linePath} stroke="#00B8C4" strokeWidth={2} fill="none" />
+      <path d={linePath} stroke={accentColor} strokeWidth={2} fill="none" />
 
       {/* データポイント */}
       {fortunes.map((f, i) => (
@@ -117,10 +160,10 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
           {/* 年ラベル */}
           <text
             x={getX(f.year)}
-            y={height - padding.bottom + 15}
+            y={height - padding.bottom + 12}
             textAnchor="middle"
-            fontSize="10"
-            fill={f.year === currentYear ? '#00B8C4' : '#6b7280'}
+            fontSize="9"
+            fill={f.year === currentYear ? accentColor : '#6b7280'}
             fontWeight={f.year === currentYear ? 'bold' : 'normal'}
           >
             {f.year}
@@ -130,10 +173,10 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
           <circle
             cx={getX(f.year)}
             cy={getY(f.level)}
-            r={f.year === currentYear ? 8 : 5}
-            fill={f.year === currentYear ? '#00B8C4' : getSeasonColor(f.season)}
+            r={f.year === currentYear ? 6 : 4}
+            fill={f.year === currentYear ? accentColor : getSeasonColor(f.season)}
             stroke="white"
-            strokeWidth={2}
+            strokeWidth={1.5}
           />
 
           {/* 現在年マーカー */}
@@ -141,34 +184,24 @@ function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFort
             <>
               <line
                 x1={getX(f.year)}
-                y1={getY(f.level) + 10}
+                y1={getY(f.level) + 8}
                 x2={getX(f.year)}
-                y2={height - padding.bottom}
-                stroke="#00B8C4"
+                y2={height - padding.bottom - 2}
+                stroke={accentColor}
                 strokeWidth={1}
-                strokeDasharray="4,4"
+                strokeDasharray="3,3"
               />
-              <text
-                x={getX(f.year)}
-                y={getY(f.level) - 12}
-                textAnchor="middle"
-                fontSize="11"
-                fill="#00B8C4"
-                fontWeight="bold"
-              >
-                現在
-              </text>
             </>
           )}
         </g>
       ))}
 
       {/* 季節レジェンド */}
-      <g transform={`translate(${width - 100}, 10)`}>
+      <g transform={`translate(${width - 90}, ${title ? 28 : 8})`}>
         {['春', '夏', '秋', '冬'].map((season, i) => (
-          <g key={season} transform={`translate(${i * 22}, 0)`}>
-            <circle cx={5} cy={5} r={4} fill={getSeasonColor(season)} />
-            <text x={12} y={9} fontSize="8" fill="#6b7280">{season}</text>
+          <g key={season} transform={`translate(${i * 20}, 0)`}>
+            <circle cx={4} cy={4} r={3} fill={getSeasonColor(season)} />
+            <text x={9} y={7} fontSize="7" fill="#6b7280">{season}</text>
           </g>
         ))}
       </g>
@@ -655,39 +688,51 @@ export default function ShukuyoReportPage() {
             {/* 右カラム */}
             <div>
               <div>
-                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>年運推移（9年サイクル）</h3>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>年運推移</h3>
 
-                {/* 動的年運グラフ */}
-                <div style={{ ...styles.card, marginBottom: '12px' }}>
-                  <YearFortuneGraph fortunes={defaultYearFortunes} currentYear={2025} />
+                {/* 9年サイクル（九星気学） */}
+                <div style={{ ...styles.card, marginBottom: '8px', padding: '12px' }}>
+                  <YearFortuneGraph
+                    fortunes={nineYearCycle}
+                    currentYear={2025}
+                    title="九星気学（9年周期）"
+                    maxLevel={9}
+                    accentColor="#00B8C4"
+                  />
                 </div>
 
-                {/* 現在年と翌年の詳細 */}
-                {defaultYearFortunes
-                  .filter(f => f.year === 2025 || f.year === 2026)
-                  .map(fortune => (
-                    <div key={fortune.year} style={styles.yearCard}>
-                      <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>
-                        {fortune.year}年 - {fortune.theme}の年
-                        <span style={{
-                          marginLeft: '8px',
-                          fontSize: '12px',
-                          padding: '2px 8px',
-                          borderRadius: '12px',
-                          backgroundColor: fortune.season === '春' ? '#E8F5E9' :
-                                          fortune.season === '夏' ? '#FFEBEE' :
-                                          fortune.season === '秋' ? '#FFF8E1' : '#E3F2FD',
-                          color: fortune.season === '春' ? '#4CAF50' :
-                                fortune.season === '夏' ? '#FF5722' :
-                                fortune.season === '秋' ? '#FF9800' : '#2196F3'
-                        }}>
-                          {fortune.season} Lv.{fortune.level}
-                        </span>
+                {/* 12年サイクル（十二支） */}
+                <div style={{ ...styles.card, marginBottom: '8px', padding: '12px' }}>
+                  <YearFortuneGraph
+                    fortunes={twelveYearCycle}
+                    currentYear={2025}
+                    title="十二支（12年周期）"
+                    maxLevel={12}
+                    accentColor="#9C27B0"
+                  />
+                </div>
+
+                {/* 現在年の詳細（両サイクル） */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                  {/* 9年サイクル 2025年 */}
+                  {nineYearCycle.filter(f => f.year === 2025).map(fortune => (
+                    <div key={`9y-${fortune.year}`} style={{ ...styles.yearCard, marginBottom: 0 }}>
+                      <p style={{ fontWeight: 'bold', color: '#00B8C4', fontSize: '12px' }}>
+                        九星: {fortune.theme}
                       </p>
-                      <p style={{ fontSize: '14px', color: '#374151' }}>{fortune.description}</p>
+                      <p style={{ fontSize: '11px', color: '#374151' }}>{fortune.description}</p>
                     </div>
-                  ))
-                }
+                  ))}
+                  {/* 12年サイクル 2025年 */}
+                  {twelveYearCycle.filter(f => f.year === 2025).map(fortune => (
+                    <div key={`12y-${fortune.year}`} style={{ ...styles.yearCard, marginBottom: 0, borderLeftColor: '#9C27B0' }}>
+                      <p style={{ fontWeight: 'bold', color: '#9C27B0', fontSize: '12px' }}>
+                        十二支: {fortune.theme}
+                      </p>
+                      <p style={{ fontSize: '11px', color: '#374151' }}>{fortune.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div style={{ marginTop: '16px' }}>
