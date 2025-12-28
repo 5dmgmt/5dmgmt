@@ -667,19 +667,34 @@ export default function ShukuyoReportPage() {
 
               {/* 魂のテーマ */}
               <div style={{ marginTop: '16px' }}>
-                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>魂のテーマ</h3>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>魂のテーマ（ゆるゆる曼荼羅カード）</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
-                    <p style={{ fontSize: '12px', color: '#4b5563' }}>意図のヒント</p>
-                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>32</p>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>意図のヒント</p>
+                    <img
+                      src="/mandara-cards/card-32.jpg"
+                      alt="カード32"
+                      style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
+                    />
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.32</p>
                   </div>
-                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
-                    <p style={{ fontSize: '12px', color: '#4b5563' }}>本質面</p>
-                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>76</p>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>本質面</p>
+                    <img
+                      src="/mandara-cards/card-76.jpg"
+                      alt="カード76"
+                      style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
+                    />
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.76</p>
                   </div>
-                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
-                    <p style={{ fontSize: '12px', color: '#4b5563' }}>行動面</p>
-                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>81</p>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '11px', color: '#4b5563', marginBottom: '4px' }}>行動面</p>
+                    <img
+                      src="/mandara-cards/card-81.jpg"
+                      alt="カード81"
+                      style={{ width: '100%', maxWidth: '120px', borderRadius: '4px', marginBottom: '4px' }}
+                    />
+                    <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4' }}>No.81</p>
                   </div>
                 </div>
               </div>
