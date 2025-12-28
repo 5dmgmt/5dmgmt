@@ -69,7 +69,7 @@ function ShukuyoCircle({ honmei }: { honmei: string }) {
   };
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="mx-auto">
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: 'block', margin: '0 auto' }}>
       {/* 外側の円 */}
       <circle cx={cx} cy={cy} r={outerR} stroke="#00B8C4" strokeWidth={2} fill="none" />
       {/* 内側の円 */}
@@ -130,6 +130,155 @@ function ShukuyoCircle({ honmei }: { honmei: string }) {
   );
 }
 
+// スタイル定義
+const styles = {
+  controlBar: {
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#1f2937',
+    color: 'white',
+    padding: '16px 24px',
+    zIndex: 50,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: '18px',
+    fontWeight: 'bold' as const,
+  },
+  buttonGroup: {
+    display: 'flex',
+    gap: '16px',
+  },
+  btnPrint: {
+    backgroundColor: '#3b82f6',
+    color: 'white',
+    padding: '8px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    fontWeight: 500,
+  },
+  btnDownload: {
+    backgroundColor: '#22c55e',
+    color: 'white',
+    padding: '8px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    fontWeight: 500,
+  },
+  container: {
+    paddingTop: '80px',
+    backgroundColor: '#f3f4f6',
+    minHeight: '100vh',
+    padding: '80px 20px 40px',
+  },
+  page: {
+    backgroundColor: '#F5F5F0',
+    padding: '40px',
+    maxWidth: '1200px',
+    margin: '0 auto 32px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    aspectRatio: '1.414',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '24px',
+  },
+  logo: {
+    width: '48px',
+    height: '48px',
+    backgroundColor: '#00B8C4',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#FFD700',
+    fontSize: '24px',
+  },
+  teal: { color: '#00B8C4' },
+  tealBg: { backgroundColor: '#00B8C4', color: 'white' },
+  yellowBg: { backgroundColor: '#FCD34D' },
+  grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' },
+  card: {
+    backgroundColor: 'white',
+    padding: '16px',
+    borderRadius: '8px',
+    border: '1px solid #e5e7eb',
+  },
+  cardHeader: {
+    borderBottom: '1px solid #00B8C4',
+    paddingBottom: '8px',
+    marginBottom: '12px',
+    fontWeight: 'bold' as const,
+    color: '#00B8C4',
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '24px',
+    fontSize: '14px',
+    color: '#6b7280',
+  },
+  pageNum: {
+    color: '#00B8C4',
+    fontWeight: 'bold' as const,
+  },
+  sectionTitle: {
+    fontSize: '24px',
+    fontWeight: 'bold' as const,
+    color: '#00B8C4',
+    borderBottom: '2px solid #00B8C4',
+    paddingBottom: '16px',
+    marginBottom: '24px',
+  },
+  legendItem: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: '12px',
+  },
+  legendDot: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    marginRight: '4px',
+  },
+  infoGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '8px',
+  },
+  infoBox: {
+    backgroundColor: 'white',
+    padding: '12px',
+    borderRadius: '4px',
+    border: '1px solid #e5e7eb',
+  },
+  infoLabel: {
+    fontSize: '12px',
+    color: '#6b7280',
+  },
+  infoValue: {
+    fontSize: '14px',
+    fontWeight: 'bold' as const,
+    color: '#00B8C4',
+  },
+  yearCard: {
+    backgroundColor: 'white',
+    padding: '16px',
+    borderRadius: '8px',
+    borderLeft: '4px solid #00B8C4',
+    marginBottom: '12px',
+  },
+};
+
 export default function ShukuyoReportPage() {
   const [user] = useState(defaultUserData);
   const [downloading, setDownloading] = useState(false);
@@ -171,7 +320,7 @@ export default function ShukuyoReportPage() {
   return (
     <>
       {/* 印刷用スタイル */}
-      <style jsx global>{`
+      <style>{`
         @media print {
           .no-print { display: none !important; }
           .print-page { page-break-after: always; }
@@ -181,62 +330,59 @@ export default function ShukuyoReportPage() {
       `}</style>
 
       {/* コントロールバー */}
-      <div className="no-print fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 flex justify-between items-center">
-        <h1 className="text-lg font-bold">宿曜鑑定書プレビュー</h1>
-        <div className="flex gap-4">
-          <button
-            onClick={handlePrint}
-            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
-          >
+      <div className="no-print" style={styles.controlBar}>
+        <h1 style={styles.title}>宿曜鑑定書プレビュー</h1>
+        <div style={styles.buttonGroup}>
+          <button onClick={handlePrint} style={styles.btnPrint}>
             印刷 / PDF保存
           </button>
           <button
             onClick={handleDownloadPDF}
             disabled={downloading}
-            className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded disabled:opacity-50"
+            style={{
+              ...styles.btnDownload,
+              opacity: downloading ? 0.5 : 1,
+              cursor: downloading ? 'not-allowed' : 'pointer',
+            }}
           >
             {downloading ? 'PDF生成中...' : 'PDFダウンロード'}
           </button>
         </div>
       </div>
 
-      <div className="pt-16 bg-gray-100 min-h-screen">
+      <div style={styles.container}>
         {/* Page 00 - 表紙 */}
-        <div className="print-page bg-[#F5F5F0] p-8 max-w-[1200px] mx-auto mb-8 shadow-lg" style={{ aspectRatio: '1.414' }}>
-          {/* ヘッダー */}
-          <div className="flex justify-between items-start mb-6">
+        <div className="print-page" style={styles.page}>
+          <div style={styles.header}>
             <div>
-              <p className="text-sm text-[#00B8C4]">【宿曜の構造】</p>
-              <p className="text-lg text-[#4A90A4] mb-2">{user.structureTitle}</p>
-              <p className="text-base text-gray-700 mb-2">{user.shukuyo}{user.weekday}生まれ</p>
-              <div className="flex items-baseline">
-                <span className="text-3xl font-bold text-gray-800">{user.name} 様</span>
-                <span className="text-xl text-[#00B8C4] font-bold ml-2">の人生が思い通りになる運気爆上り宿曜鑑定書</span>
+              <p style={{ fontSize: '14px', color: '#00B8C4' }}>【宿曜の構造】</p>
+              <p style={{ fontSize: '18px', color: '#4A90A4', marginBottom: '8px' }}>{user.structureTitle}</p>
+              <p style={{ fontSize: '16px', color: '#374151', marginBottom: '8px' }}>{user.shukuyo}{user.weekday}生まれ</p>
+              <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                <span style={{ fontSize: '28px', fontWeight: 'bold', color: '#1f2937' }}>{user.name} 様</span>
+                <span style={{ fontSize: '20px', color: '#00B8C4', fontWeight: 'bold', marginLeft: '8px' }}>の人生が思い通りになる運気爆上り宿曜鑑定書</span>
               </div>
             </div>
-            <div className="w-16 h-16 bg-[#00B8C4] rounded-full flex items-center justify-center">
-              <span className="text-2xl text-yellow-400">★</span>
-            </div>
+            <div style={styles.logo}>★</div>
           </div>
 
-          {/* 2カラム */}
-          <div className="grid grid-cols-2 gap-8">
+          <div style={styles.grid2}>
             {/* 左カラム */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-base font-bold text-[#00B8C4] mb-2">◆空海が伝え、家康が封じた叡智　宿曜27宿</h3>
-                <p className="text-sm text-gray-700">「人を見抜き、時を選び、関係を操り、自らに気づく技術」</p>
-                <p className="text-sm text-gray-700 ml-8">→ これは統治の側にとっては"危険な力"でもありました。</p>
+            <div>
+              <div style={{ marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4', marginBottom: '8px' }}>◆空海が伝え、家康が封じた叡智　宿曜27宿</h3>
+                <p style={{ fontSize: '14px', color: '#374151' }}>「人を見抜き、時を選び、関係を操り、自らに気づく技術」</p>
+                <p style={{ fontSize: '14px', color: '#374151', marginLeft: '32px' }}>→ これは統治の側にとっては&quot;危険な力&quot;でもありました。</p>
+              </div>
+
+              <div style={{ marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4', marginBottom: '8px' }}>◆運気爆上げするにはすでにあなたの中にある<br />　最高の設定を起動するだけです</h3>
+                <p style={{ fontSize: '14px', color: '#374151' }}>これは修正や改善ではなく、あなたの魂のOSを起動するだけで、ラクラク、カンタン、ごきげん♪に実現できます。</p>
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-[#00B8C4] mb-2">◆運気爆上げするにはすでにあなたの中にある<br />　最高の設定を起動するだけです</h3>
-                <p className="text-sm text-gray-700">これは修正や改善ではなく、あなたの魂のOSを起動するだけで、ラクラク、カンタン、ごきげん♪に実現できます。</p>
-              </div>
-
-              <div>
-                <h3 className="text-base font-bold text-[#00B8C4] mb-2">◆鑑定書の見方と役立て方</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4', marginBottom: '8px' }}>◆鑑定書の見方と役立て方</h3>
+                <ul style={{ fontSize: '14px', color: '#374151', listStyle: 'none', padding: 0 }}>
                   <li>✔ 構造の概要：意思決定や行動の土台</li>
                   <li>✔ 葛藤パターン：運気を下げる落とし穴</li>
                   <li>✔ マネジメントのヒント：運を味方にする方法</li>
@@ -246,63 +392,57 @@ export default function ShukuyoReportPage() {
             </div>
 
             {/* 右カラム */}
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-base font-bold text-[#00B8C4] mb-2">◆この鑑定書で受け取れるギフト</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>・あなたの波に乗るバイオリズム：2025年のエネルギーの波と最高のタイミング</li>
+            <div>
+              <div style={{ marginBottom: '16px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#00B8C4', marginBottom: '8px' }}>◆この鑑定書で受け取れるギフト</h3>
+                <ul style={{ fontSize: '14px', color: '#374151', listStyle: 'none', padding: 0 }}>
+                  <li style={{ marginBottom: '4px' }}>・あなたの波に乗るバイオリズム：2025年のエネルギーの波と最高のタイミング</li>
                   <li>・あなたの天才性の取扱説明書：宿曜が示す、あなただけの成功回路</li>
                 </ul>
               </div>
 
-              <div className="bg-[#00B8C4] p-4 rounded-lg text-white">
-                <h4 className="font-bold mb-2">【無料】宿曜活用Zoomセッション（30分）</h4>
-                <ul className="text-sm space-y-1">
+              <div style={{ backgroundColor: '#00B8C4', padding: '16px', borderRadius: '8px', color: 'white', marginBottom: '16px' }}>
+                <h4 style={{ fontWeight: 'bold', marginBottom: '8px' }}>【無料】宿曜活用Zoomセッション（30分）</h4>
+                <ul style={{ fontSize: '14px', listStyle: 'none', padding: 0 }}>
                   <li>・あなたの宿曜の天才性とアキレス腱の詳細</li>
                   <li>・2025年の最高の波の乗り方</li>
                   <li>・重要な人との相性による相乗効果</li>
                 </ul>
               </div>
 
-              <div className="bg-yellow-400 p-3 rounded text-center">
-                <p className="font-bold text-gray-800">あなたはすでに完璧。あとは、その設定を起動するだけです。</p>
+              <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '8px', textAlign: 'center' }}>
+                <p style={{ fontWeight: 'bold', color: '#1f2937' }}>あなたはすでに完璧。あとは、その設定を起動するだけです。</p>
               </div>
             </div>
           </div>
 
-          <div className="text-center text-sm text-gray-500 mt-6">© 2025 五次元経営株式会社</div>
+          <div style={{ textAlign: 'center', fontSize: '14px', color: '#6b7280', marginTop: '24px' }}>© 2025 五次元経営株式会社</div>
         </div>
 
         {/* Page 01 - 構造秘図 */}
-        <div className="print-page bg-[#F5F5F0] p-8 max-w-[1200px] mx-auto mb-8 shadow-lg" style={{ aspectRatio: '1.414' }}>
-          <div className="border-b-2 border-[#00B8C4] pb-4 mb-6 flex justify-between items-start">
+        <div className="print-page" style={styles.page}>
+          <div style={{ ...styles.header, borderBottom: '2px solid #00B8C4', paddingBottom: '16px' }}>
             <div>
-              <h2 className="text-2xl font-bold text-[#00B8C4]">{user.shukuyo}{user.weekday}生まれの経営者の構造秘図</h2>
-              <p className="text-base text-[#4A90A4]">{user.name} 様 | {user.structureTitle}</p>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>{user.shukuyo}{user.weekday}生まれの経営者の構造秘図</h2>
+              <p style={{ fontSize: '16px', color: '#4A90A4' }}>{user.name} 様 | {user.structureTitle}</p>
             </div>
-            <div className="w-12 h-12 bg-[#00B8C4] rounded-full flex items-center justify-center">
-              <span className="text-xl text-yellow-400">★</span>
-            </div>
+            <div style={{ ...styles.logo, width: '48px', height: '48px' }}>★</div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div style={styles.grid2}>
             {/* 左カラム */}
-            <div className="space-y-4">
-              <div className="bg-white p-4 rounded-lg border border-gray-300">
-                <div className="border-b border-[#00B8C4] pb-2 mb-3">
-                  <h3 className="font-bold text-[#00B8C4]">✔ 構造の概要（意思決定のスタイル）</h3>
-                </div>
-                <p className="text-sm text-gray-700 leading-relaxed">
+            <div>
+              <div style={styles.card}>
+                <div style={styles.cardHeader}>✔ 構造の概要（意思決定のスタイル）</div>
+                <p style={{ fontSize: '14px', color: '#374151', lineHeight: 1.6 }}>
                   虚宿は「形のない宝を探し求める」精神性の高い宿で、夢と理想を追い求める傾向があります。
                   木曜日生まれは拡大・発展のエネルギーを持ち、大きなビジョンを描く力に優れています。
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-lg border border-gray-300">
-                <div className="border-b border-[#00B8C4] pb-2 mb-3">
-                  <h3 className="font-bold text-[#00B8C4]">🌀 起こりやすい葛藤・自動反応パターン</h3>
-                </div>
-                <ul className="text-sm text-gray-700 space-y-1">
+              <div style={{ ...styles.card, marginTop: '16px' }}>
+                <div style={styles.cardHeader}>🌀 起こりやすい葛藤・自動反応パターン</div>
+                <ul style={{ fontSize: '14px', color: '#374151', listStyle: 'none', padding: 0 }}>
                   <li>・理想の過度な拡大により、実現可能性を見失う</li>
                   <li>・成長への焦りから、基盤を固める前に拡大</li>
                   <li>・現実的な制約を無視した計画を立てる</li>
@@ -310,11 +450,9 @@ export default function ShukuyoReportPage() {
                 </ul>
               </div>
 
-              <div className="bg-white p-4 rounded-lg border border-gray-300">
-                <div className="border-b border-[#00B8C4] pb-2 mb-3">
-                  <h3 className="font-bold text-[#00B8C4]">💡 ポテンシャル（構造的強み）</h3>
-                </div>
-                <ul className="text-sm text-gray-700 space-y-1">
+              <div style={{ ...styles.card, marginTop: '16px' }}>
+                <div style={styles.cardHeader}>💡 ポテンシャル（構造的強み）</div>
+                <ul style={{ fontSize: '14px', color: '#374151', listStyle: 'none', padding: 0 }}>
                   <li>・常識を超えた「ビッグビジョン創造力」</li>
                   <li>・不可能を可能にする信念と行動力</li>
                   <li>・人を巻き込むカリスマ性</li>
@@ -324,30 +462,26 @@ export default function ShukuyoReportPage() {
             </div>
 
             {/* 右カラム */}
-            <div className="space-y-4">
-              <div className="bg-white p-4 rounded-lg border border-gray-300">
-                <div className="border-b border-[#00B8C4] pb-2 mb-3">
-                  <h3 className="font-bold text-[#00B8C4]">🔎 構造活用のマネジメントのヒント</h3>
-                </div>
-                <div className="text-sm text-gray-700 space-y-2">
-                  <p className="font-bold">◆経営者本人がこの構造の場合：</p>
-                  <ul className="ml-4 space-y-1">
+            <div>
+              <div style={styles.card}>
+                <div style={styles.cardHeader}>🔎 構造活用のマネジメントのヒント</div>
+                <div style={{ fontSize: '14px', color: '#374151' }}>
+                  <p style={{ fontWeight: 'bold' }}>◆経営者本人がこの構造の場合：</p>
+                  <ul style={{ marginLeft: '16px', listStyle: 'none', padding: 0 }}>
                     <li>・ビッグビジョンと段階的実行計画を組み合わせる</li>
                     <li>・信頼できる実務型の右腕を置く</li>
                   </ul>
-                  <p className="font-bold mt-2">◆この構造を持つ部下がいる場合：</p>
-                  <ul className="ml-4 space-y-1">
+                  <p style={{ fontWeight: 'bold', marginTop: '8px' }}>◆この構造を持つ部下がいる場合：</p>
+                  <ul style={{ marginLeft: '16px', listStyle: 'none', padding: 0 }}>
                     <li>・夢を語らせ、大きなプロジェクトを任せる</li>
                     <li>・創造性を発揮できる環境を用意</li>
                   </ul>
                 </div>
               </div>
 
-              <div className="bg-yellow-400 p-4 rounded-lg">
-                <div className="border-b border-[#00B8C4] pb-2 mb-3">
-                  <h3 className="font-bold text-[#00B8C4]">✨ 五次元経営的進化テーマ</h3>
-                </div>
-                <p className="text-sm text-gray-800 leading-relaxed">
+              <div style={{ ...styles.card, marginTop: '16px', backgroundColor: '#FCD34D' }}>
+                <div style={styles.cardHeader}>✨ 五次元経営的進化テーマ</div>
+                <p style={{ fontSize: '14px', color: '#1f2937', lineHeight: 1.6 }}>
                   虚宿×木曜（七曜陵逼）構造の進化の鍵は、「無限の理想」に「現実的な一歩」を組み合わせること。
                   壮大なビジョンを描きながらも、今日できる小さな行動を積み重ねることで、夢は着実に形になっていきます。
                   <br /><br />
@@ -357,139 +491,135 @@ export default function ShukuyoReportPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mt-6">
-            <p className="text-sm text-gray-500">© 2025 五次元経営株式会社</p>
-            <p className="text-[#00B8C4] font-bold">2 / 3</p>
+          <div style={styles.footer}>
+            <p>© 2025 五次元経営株式会社</p>
+            <p style={styles.pageNum}>2 / 3</p>
           </div>
         </div>
 
         {/* Page 02 - ゆるゆるマンダラ命式 */}
-        <div className="print-page bg-[#F5F5F0] p-8 max-w-[1200px] mx-auto mb-8 shadow-lg" style={{ aspectRatio: '1.414' }}>
-          <div className="border-b-2 border-[#00B8C4] pb-4 mb-6 flex justify-between items-start">
+        <div className="print-page" style={styles.page}>
+          <div style={{ ...styles.header, borderBottom: '2px solid #00B8C4', paddingBottom: '16px' }}>
             <div>
-              <h2 className="text-2xl font-bold text-[#00B8C4]">ゆるゆるマンダラ 暦術 命式</h2>
-              <p className="text-base text-[#4A90A4]">{user.name} 様 | {user.shukuyo} | {user.shichiyoRyohi}</p>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>ゆるゆるマンダラ 暦術 命式</h2>
+              <p style={{ fontSize: '16px', color: '#4A90A4' }}>{user.name} 様 | {user.shukuyo} | {user.shichiyoRyohi}</p>
             </div>
-            <div className="w-12 h-12 bg-[#00B8C4] rounded-full flex items-center justify-center">
-              <span className="text-xl text-yellow-400">★</span>
-            </div>
+            <div style={{ ...styles.logo, width: '48px', height: '48px' }}>★</div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div style={styles.grid2}>
             {/* 左カラム */}
-            <div className="space-y-4">
+            <div>
               {/* 27宿円形図 */}
-              <div className="bg-white p-4 rounded-lg">
+              <div style={{ ...styles.card, textAlign: 'center' }}>
                 <ShukuyoCircle honmei={user.shukuyo} />
-                <p className="text-center text-sm text-gray-700 mt-2">あなたの宿曜27宿：{user.shukuyo}</p>
+                <p style={{ fontSize: '14px', color: '#374151', marginTop: '8px' }}>あなたの宿曜27宿：{user.shukuyo}</p>
               </div>
 
               {/* 相性凡例 */}
-              <div className="flex flex-wrap gap-2 justify-center">
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginTop: '16px' }}>
                 {Object.entries(COMPATIBILITY_COLORS).map(([type, color]) => (
-                  <div key={type} className="flex items-center">
-                    <div className="w-3 h-3 rounded-full mr-1" style={{ backgroundColor: color }} />
-                    <span className="text-xs text-gray-600">{type}</span>
+                  <div key={type} style={styles.legendItem}>
+                    <div style={{ ...styles.legendDot, backgroundColor: color }} />
+                    <span style={{ fontSize: '12px', color: '#6b7280' }}>{type}</span>
                   </div>
                 ))}
               </div>
 
               {/* 九星情報 */}
-              <div>
-                <h3 className="font-bold text-[#00B8C4] border-b border-[#00B8C4] pb-2 mb-3">九星情報</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs text-gray-500">年星（本命星）</p>
-                    <p className="text-sm font-bold text-[#00B8C4]">{user.yearKyusei}</p>
+              <div style={{ marginTop: '16px' }}>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>九星情報</h3>
+                <div style={styles.infoGrid}>
+                  <div style={styles.infoBox}>
+                    <p style={styles.infoLabel}>年星（本命星）</p>
+                    <p style={styles.infoValue}>{user.yearKyusei}</p>
                   </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs text-gray-500">月星（月命星）</p>
-                    <p className="text-sm font-bold text-[#00B8C4]">{user.monthKyusei}</p>
+                  <div style={styles.infoBox}>
+                    <p style={styles.infoLabel}>月星（月命星）</p>
+                    <p style={styles.infoValue}>{user.monthKyusei}</p>
                   </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs text-gray-500">日星（日命星）</p>
-                    <p className="text-sm font-bold text-[#00B8C4]">{user.dayKyusei}</p>
+                  <div style={styles.infoBox}>
+                    <p style={styles.infoLabel}>日星（日命星）</p>
+                    <p style={styles.infoValue}>{user.dayKyusei}</p>
                   </div>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs text-gray-500">宿曜</p>
-                    <p className="text-sm font-bold text-[#00B8C4]">{user.shukuyo}</p>
+                  <div style={styles.infoBox}>
+                    <p style={styles.infoLabel}>宿曜</p>
+                    <p style={styles.infoValue}>{user.shukuyo}</p>
                   </div>
                 </div>
               </div>
 
               {/* 魂のテーマ */}
-              <div>
-                <h3 className="font-bold text-[#00B8C4] border-b border-[#00B8C4] pb-2 mb-3">魂のテーマ</h3>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="bg-yellow-400 p-3 rounded text-center">
-                    <p className="text-xs text-gray-600">意図のヒント</p>
-                    <p className="text-2xl font-bold text-[#00B8C4]">32</p>
+              <div style={{ marginTop: '16px' }}>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>魂のテーマ</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '12px', color: '#4b5563' }}>意図のヒント</p>
+                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>32</p>
                   </div>
-                  <div className="bg-yellow-400 p-3 rounded text-center">
-                    <p className="text-xs text-gray-600">本質面</p>
-                    <p className="text-2xl font-bold text-[#00B8C4]">76</p>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '12px', color: '#4b5563' }}>本質面</p>
+                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>76</p>
                   </div>
-                  <div className="bg-yellow-400 p-3 rounded text-center">
-                    <p className="text-xs text-gray-600">行動面</p>
-                    <p className="text-2xl font-bold text-[#00B8C4]">81</p>
+                  <div style={{ backgroundColor: '#FCD34D', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '12px', color: '#4b5563' }}>行動面</p>
+                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00B8C4' }}>81</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* 右カラム */}
-            <div className="space-y-4">
+            <div>
               <div>
-                <h3 className="font-bold text-[#00B8C4] border-b border-[#00B8C4] pb-2 mb-3">年運推移（2025-2026）</h3>
-                <div className="space-y-3">
-                  <div className="bg-white p-4 rounded-lg border-l-4 border-[#00B8C4]">
-                    <p className="font-bold text-[#00B8C4]">2025年 - 兌-藍の年</p>
-                    <p className="text-sm text-gray-700">交流が活発で楽しみの多い時期。後半の運気下降に合わせて、波動が合う人との繋がりを大切に。新しい出会いがビジネスチャンスに。</p>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>年運推移（2025-2026）</h3>
+                <div style={styles.yearCard}>
+                  <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>2025年 - 兌-藍の年</p>
+                  <p style={{ fontSize: '14px', color: '#374151' }}>交流が活発で楽しみの多い時期。後半の運気下降に合わせて、波動が合う人との繋がりを大切に。新しい出会いがビジネスチャンスに。</p>
+                </div>
+                <div style={styles.yearCard}>
+                  <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>2026年 - 冬1-意図を溶かす年</p>
+                  <p style={{ fontSize: '14px', color: '#374151' }}>冬の時期到来。自分のエゴに従って行動すると全てが裏目に。この時期は内省し、次のサイクルへの準備期間として活用。</p>
+                </div>
+              </div>
+
+              <div style={{ marginTop: '16px' }}>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>相性の見方</h3>
+                <div style={styles.card}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', padding: '8px 0' }}>
+                    <span style={{ fontSize: '14px', color: '#6b7280' }}>命・栄・親・友</span>
+                    <span style={{ fontSize: '14px', fontWeight: 'bold' }}>良好な相性。協力関係に適している</span>
                   </div>
-                  <div className="bg-white p-4 rounded-lg border-l-4 border-[#00B8C4]">
-                    <p className="font-bold text-[#00B8C4]">2026年 - 冬1-意図を溶かす年</p>
-                    <p className="text-sm text-gray-700">冬の時期到来。自分のエゴに従って行動すると全てが裏目に。この時期は内省し、次のサイクルへの準備期間として活用。</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0' }}>
+                    <span style={{ fontSize: '14px', color: '#6b7280' }}>安・危・成・壊・衰</span>
+                    <span style={{ fontSize: '14px', fontWeight: 'bold' }}>注意が必要。関係性を意識して対応</span>
                   </div>
                 </div>
               </div>
 
-              <div>
-                <h3 className="font-bold text-[#00B8C4] border-b border-[#00B8C4] pb-2 mb-3">相性の見方</h3>
-                <div className="bg-white p-3 rounded">
-                  <div className="flex justify-between border-b py-2">
-                    <span className="text-sm text-gray-500">命・栄・親・友</span>
-                    <span className="text-sm font-bold">良好な相性。協力関係に適している</span>
+              <div style={{ marginTop: '16px' }}>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>生年月日情報</h3>
+                <div style={styles.card}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', padding: '8px 0' }}>
+                    <span style={{ fontSize: '14px', color: '#6b7280' }}>生年月日</span>
+                    <span style={{ fontSize: '14px', fontWeight: 'bold' }}>{user.birthDate}</span>
                   </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-sm text-gray-500">安・危・成・壊・衰</span>
-                    <span className="text-sm font-bold">注意が必要。関係性を意識して対応</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #e5e7eb', padding: '8px 0' }}>
+                    <span style={{ fontSize: '14px', color: '#6b7280' }}>曜日</span>
+                    <span style={{ fontSize: '14px', fontWeight: 'bold' }}>{user.weekday}</span>
                   </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-[#00B8C4] border-b border-[#00B8C4] pb-2 mb-3">生年月日情報</h3>
-                <div className="bg-white p-3 rounded">
-                  <div className="flex justify-between border-b py-2">
-                    <span className="text-sm text-gray-500">生年月日</span>
-                    <span className="text-sm font-bold">{user.birthDate}</span>
-                  </div>
-                  <div className="flex justify-between border-b py-2">
-                    <span className="text-sm text-gray-500">曜日</span>
-                    <span className="text-sm font-bold">{user.weekday}</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-sm text-gray-500">七曜陵逼</span>
-                    <span className="text-sm font-bold">{user.shichiyoRyohi}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0' }}>
+                    <span style={{ fontSize: '14px', color: '#6b7280' }}>七曜陵逼</span>
+                    <span style={{ fontSize: '14px', fontWeight: 'bold' }}>{user.shichiyoRyohi}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex justify-between items-center mt-6">
-            <p className="text-sm text-gray-500">© 2025 五次元経営株式会社</p>
-            <p className="text-[#00B8C4] font-bold">3 / 3</p>
+          <div style={styles.footer}>
+            <p>© 2025 五次元経営株式会社</p>
+            <p style={styles.pageNum}>3 / 3</p>
           </div>
         </div>
       </div>
