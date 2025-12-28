@@ -1,10 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import ShukuyoSenseiban from '@/components/shukuyo/ShukuyoSenseiban';
 
-// テスト用デフォルトデータ
+// 年運データ型定義
+interface YearFortune {
+  year: number;
+  level: number; // 1-9 (1=冬、9=絶頂期)
+  season: string; // 春・夏・秋・冬
+  theme: string;
+  description: string;
+}
+
+// テスト用デフォルトデータ（仮名）
 const defaultUserData = {
-  name: '麻生文子',
+  name: '山田花子',
   birthDate: '1960-10-27',
   shukuyo: '虚宿',
   weekday: '木曜日',
@@ -14,6 +24,157 @@ const defaultUserData = {
   monthKyusei: '九紫火星',
   dayKyusei: '九紫火星',
 };
+
+// テスト用年運データ（9年サイクル）
+const defaultYearFortunes: YearFortune[] = [
+  { year: 2022, level: 6, season: '夏', theme: '離-赤', description: '情熱と表現の年。創造性が高まり注目を集める時期。' },
+  { year: 2023, level: 5, season: '秋', theme: '坤-黄', description: '安定と収穫の年。地道な努力が実を結ぶ。' },
+  { year: 2024, level: 7, season: '秋', theme: '兌-藍', description: '喜びと交流の年。人間関係が広がる。' },
+  { year: 2025, level: 8, season: '秋', theme: '乾-白', description: '発展と成功の年。リーダーシップを発揮する時期。' },
+  { year: 2026, level: 2, season: '冬', theme: '冬1-意図を溶かす', description: '内省の年。次のサイクルへの準備期間。' },
+  { year: 2027, level: 1, season: '冬', theme: '冬2-闇', description: '最も深い冬。静かに過ごし力を蓄える。' },
+  { year: 2028, level: 3, season: '春', theme: '震-緑', description: '新しい始まりの年。行動を開始する時期。' },
+  { year: 2029, level: 4, season: '春', theme: '巽-青', description: '成長と発展の年。学びと経験を積む。' },
+  { year: 2030, level: 5, season: '夏', theme: '坎-紺', description: '試練と知恵の年。困難を乗り越え成長する。' },
+];
+
+// 年運グラフコンポーネント
+function YearFortuneGraph({ fortunes, currentYear = 2025 }: { fortunes: YearFortune[]; currentYear?: number }) {
+  const width = 400;
+  const height = 200;
+  const padding = { top: 30, right: 30, bottom: 40, left: 40 };
+  const graphWidth = width - padding.left - padding.right;
+  const graphHeight = height - padding.top - padding.bottom;
+
+  const minYear = Math.min(...fortunes.map(f => f.year));
+  const maxYear = Math.max(...fortunes.map(f => f.year));
+  const yearRange = maxYear - minYear;
+
+  const getX = (year: number) => padding.left + ((year - minYear) / yearRange) * graphWidth;
+  const getY = (level: number) => padding.top + graphHeight - ((level - 1) / 8) * graphHeight;
+
+  // 季節による色
+  const getSeasonColor = (season: string) => {
+    switch (season) {
+      case '春': return '#4CAF50';
+      case '夏': return '#FF5722';
+      case '秋': return '#FFC107';
+      case '冬': return '#2196F3';
+      default: return '#9E9E9E';
+    }
+  };
+
+  // 折れ線のパス
+  const linePath = fortunes
+    .map((f, i) => `${i === 0 ? 'M' : 'L'} ${getX(f.year)} ${getY(f.level)}`)
+    .join(' ');
+
+  // グラデーションエリアのパス
+  const areaPath = `${linePath} L ${getX(fortunes[fortunes.length - 1].year)} ${height - padding.bottom} L ${padding.left} ${height - padding.bottom} Z`;
+
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: 'block', margin: '0 auto' }}>
+      <defs>
+        <linearGradient id="fortuneGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#00B8C4" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#00B8C4" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+
+      {/* 背景グリッド */}
+      {[1, 3, 5, 7, 9].map(level => (
+        <g key={level}>
+          <line
+            x1={padding.left}
+            y1={getY(level)}
+            x2={width - padding.right}
+            y2={getY(level)}
+            stroke="#e5e7eb"
+            strokeWidth={1}
+            strokeDasharray={level === 5 ? '0' : '4,4'}
+          />
+          <text
+            x={padding.left - 8}
+            y={getY(level) + 4}
+            textAnchor="end"
+            fontSize="10"
+            fill="#9ca3af"
+          >
+            {level}
+          </text>
+        </g>
+      ))}
+
+      {/* グラデーションエリア */}
+      <path d={areaPath} fill="url(#fortuneGradient)" />
+
+      {/* 折れ線 */}
+      <path d={linePath} stroke="#00B8C4" strokeWidth={2} fill="none" />
+
+      {/* データポイント */}
+      {fortunes.map((f, i) => (
+        <g key={f.year}>
+          {/* 年ラベル */}
+          <text
+            x={getX(f.year)}
+            y={height - padding.bottom + 15}
+            textAnchor="middle"
+            fontSize="10"
+            fill={f.year === currentYear ? '#00B8C4' : '#6b7280'}
+            fontWeight={f.year === currentYear ? 'bold' : 'normal'}
+          >
+            {f.year}
+          </text>
+
+          {/* データポイント円 */}
+          <circle
+            cx={getX(f.year)}
+            cy={getY(f.level)}
+            r={f.year === currentYear ? 8 : 5}
+            fill={f.year === currentYear ? '#00B8C4' : getSeasonColor(f.season)}
+            stroke="white"
+            strokeWidth={2}
+          />
+
+          {/* 現在年マーカー */}
+          {f.year === currentYear && (
+            <>
+              <line
+                x1={getX(f.year)}
+                y1={getY(f.level) + 10}
+                x2={getX(f.year)}
+                y2={height - padding.bottom}
+                stroke="#00B8C4"
+                strokeWidth={1}
+                strokeDasharray="4,4"
+              />
+              <text
+                x={getX(f.year)}
+                y={getY(f.level) - 12}
+                textAnchor="middle"
+                fontSize="11"
+                fill="#00B8C4"
+                fontWeight="bold"
+              >
+                現在
+              </text>
+            </>
+          )}
+        </g>
+      ))}
+
+      {/* 季節レジェンド */}
+      <g transform={`translate(${width - 100}, 10)`}>
+        {['春', '夏', '秋', '冬'].map((season, i) => (
+          <g key={season} transform={`translate(${i * 22}, 0)`}>
+            <circle cx={5} cy={5} r={4} fill={getSeasonColor(season)} />
+            <text x={12} y={9} fontSize="8" fill="#6b7280">{season}</text>
+          </g>
+        ))}
+      </g>
+    </svg>
+  );
+}
 
 // 27宿の順序
 const SHUKUYO_ORDER = [
@@ -50,84 +211,6 @@ function calculateCompatibility(honmei: string, target: string): string {
   if (distance === 7 || distance === 20) return '成';
   if (distance === 8 || distance === 19) return '壊';
   return '安';
-}
-
-// 27宿円形図コンポーネント
-function ShukuyoCircle({ honmei }: { honmei: string }) {
-  const size = 300;
-  const cx = size / 2;
-  const cy = size / 2;
-  const outerR = size / 2 - 20;
-  const innerR = outerR - 40;
-
-  const getPosition = (index: number, radius: number) => {
-    const angle = (index * (360 / 27) - 90) * (Math.PI / 180);
-    return {
-      x: cx + radius * Math.cos(angle),
-      y: cy + radius * Math.sin(angle),
-    };
-  };
-
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: 'block', margin: '0 auto' }}>
-      {/* 外側の円 */}
-      <circle cx={cx} cy={cy} r={outerR} stroke="#00B8C4" strokeWidth={2} fill="none" />
-      {/* 内側の円 */}
-      <circle cx={cx} cy={cy} r={innerR} stroke="#4A90A4" strokeWidth={1} fill="none" />
-
-      {/* 27宿を配置 */}
-      {SHUKUYO_ORDER.map((shuku, index) => {
-        const pos = getPosition(index, innerR);
-        const outerPos = getPosition(index, outerR);
-        const isHonmei = shuku === honmei;
-        const compatibility = calculateCompatibility(honmei, shuku);
-        const color = isHonmei ? '#00B8C4' : COMPATIBILITY_COLORS[compatibility];
-
-        return (
-          <g key={shuku}>
-            {/* 放射線 */}
-            <line
-              x1={cx}
-              y1={cy}
-              x2={outerPos.x}
-              y2={outerPos.y}
-              stroke="#666"
-              strokeWidth={0.5}
-              opacity={0.3}
-            />
-            {/* 宿の円 */}
-            <circle
-              cx={pos.x}
-              cy={pos.y}
-              r={isHonmei ? 18 : 12}
-              fill={color}
-              stroke={isHonmei ? '#FFD700' : 'none'}
-              strokeWidth={isHonmei ? 3 : 0}
-            />
-            {/* 宿名（本命宿のみ） */}
-            {isHonmei && (
-              <text
-                x={pos.x}
-                y={pos.y + 4}
-                textAnchor="middle"
-                fontSize="8"
-                fill="white"
-                fontWeight="bold"
-              >
-                {shuku.charAt(0)}
-              </text>
-            )}
-          </g>
-        );
-      })}
-
-      {/* 中央の円 */}
-      <circle cx={cx} cy={cy} r={35} fill="white" stroke="#00B8C4" strokeWidth={2} />
-      <text x={cx} y={cy + 5} textAnchor="middle" fontSize="12" fill="#00B8C4" fontWeight="bold">
-        本命
-      </text>
-    </svg>
-  );
 }
 
 // スタイル定義
@@ -510,10 +593,10 @@ export default function ShukuyoReportPage() {
           <div style={styles.grid2}>
             {/* 左カラム */}
             <div>
-              {/* 27宿円形図 */}
+              {/* 27宿円形図（既存の宿曜盤コンポーネント） */}
               <div style={{ ...styles.card, textAlign: 'center' }}>
-                <ShukuyoCircle honmei={user.shukuyo} />
-                <p style={{ fontSize: '14px', color: '#374151', marginTop: '8px' }}>あなたの宿曜27宿：{user.shukuyo}</p>
+                <ShukuyoSenseiban width={300} height={300} />
+                <p style={{ fontSize: '14px', color: '#374151', marginTop: '8px' }}>あなたの宿曜27宿：{user.shukuyo}（回転して確認できます）</p>
               </div>
 
               {/* 相性凡例 */}
@@ -572,15 +655,39 @@ export default function ShukuyoReportPage() {
             {/* 右カラム */}
             <div>
               <div>
-                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>年運推移（2025-2026）</h3>
-                <div style={styles.yearCard}>
-                  <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>2025年 - 兌-藍の年</p>
-                  <p style={{ fontSize: '14px', color: '#374151' }}>交流が活発で楽しみの多い時期。後半の運気下降に合わせて、波動が合う人との繋がりを大切に。新しい出会いがビジネスチャンスに。</p>
+                <h3 style={{ fontWeight: 'bold', color: '#00B8C4', borderBottom: '1px solid #00B8C4', paddingBottom: '8px', marginBottom: '12px' }}>年運推移（9年サイクル）</h3>
+
+                {/* 動的年運グラフ */}
+                <div style={{ ...styles.card, marginBottom: '12px' }}>
+                  <YearFortuneGraph fortunes={defaultYearFortunes} currentYear={2025} />
                 </div>
-                <div style={styles.yearCard}>
-                  <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>2026年 - 冬1-意図を溶かす年</p>
-                  <p style={{ fontSize: '14px', color: '#374151' }}>冬の時期到来。自分のエゴに従って行動すると全てが裏目に。この時期は内省し、次のサイクルへの準備期間として活用。</p>
-                </div>
+
+                {/* 現在年と翌年の詳細 */}
+                {defaultYearFortunes
+                  .filter(f => f.year === 2025 || f.year === 2026)
+                  .map(fortune => (
+                    <div key={fortune.year} style={styles.yearCard}>
+                      <p style={{ fontWeight: 'bold', color: '#00B8C4' }}>
+                        {fortune.year}年 - {fortune.theme}の年
+                        <span style={{
+                          marginLeft: '8px',
+                          fontSize: '12px',
+                          padding: '2px 8px',
+                          borderRadius: '12px',
+                          backgroundColor: fortune.season === '春' ? '#E8F5E9' :
+                                          fortune.season === '夏' ? '#FFEBEE' :
+                                          fortune.season === '秋' ? '#FFF8E1' : '#E3F2FD',
+                          color: fortune.season === '春' ? '#4CAF50' :
+                                fortune.season === '夏' ? '#FF5722' :
+                                fortune.season === '秋' ? '#FF9800' : '#2196F3'
+                        }}>
+                          {fortune.season} Lv.{fortune.level}
+                        </span>
+                      </p>
+                      <p style={{ fontSize: '14px', color: '#374151' }}>{fortune.description}</p>
+                    </div>
+                  ))
+                }
               </div>
 
               <div style={{ marginTop: '16px' }}>
