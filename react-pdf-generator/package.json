@@ -1,0 +1,23 @@
+{
+  "name": "react-pdf-generator",
+  "version": "1.0.0",
+  "description": "宿曜レポートPDF生成システム",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "generate": "ts-node --transpile-only src/index.tsx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["shukuyo", "pdf", "report"],
+  "author": "五次元経営株式会社",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@react-pdf/renderer": "^4.3.1",
+    "@types/react": "^19.2.7",
+    "react": "^19.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "xlsx": "^0.18.5"
+  }
+}

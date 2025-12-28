@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# react-pdf-generator
+react-pdf-generator/node_modules
+react-pdf-generator/output
+react-pdf-generator/dist
