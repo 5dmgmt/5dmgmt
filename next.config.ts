@@ -8,9 +8,8 @@ const nextConfig: NextConfig = {
   // サーバーサイドでのみ使用するパッケージを外部化
   serverExternalPackages: ['better-sqlite3'],
 
-  // 画像最適化の品質設定
+  // 画像最適化の設定
   images: {
-    quality: 90,
     formats: ['image/webp', 'image/avif'],
   },
 
