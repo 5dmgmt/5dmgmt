@@ -57,8 +57,8 @@ export default function ShukuyoPage() {
               </p>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-              <ShukuyoSenseibanWrapper width={500} height={500} />
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', width: '100%', maxWidth: '500px', margin: '0 auto 2rem' }}>
+              <ShukuyoSenseibanWrapper maxSize={500} />
             </div>
 
             {/* 使い方説明 */}

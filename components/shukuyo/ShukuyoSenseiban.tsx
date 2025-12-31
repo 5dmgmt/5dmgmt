@@ -3,9 +3,10 @@
 /**
  * 宿曜占星盤コンポーネント
  * Canvas APIを使用して二重円を描画し、ドラッグ/タッチで回転させる
+ * レスポンシブ対応：正方形を維持しながら画面幅に応じてサイズ調整
  */
 
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useCallback, useState, useLayoutEffect } from 'react';
 
 // 27宿データ（昴を12時の位置に配置・反時計回り）
 const STARS = [
@@ -65,10 +66,16 @@ const getRelationColor = (relation: string): string => {
 };
 
 interface ShukuyoSenseibanProps {
+  /** 固定サイズを指定する場合に使用（指定しない場合は親要素に合わせてレスポンシブ） */
+  size?: number;
+  /** @deprecated width は size に置き換えられました */
   width?: number;
+  /** @deprecated height は size に置き換えられました */
   height?: number;
   /** ユーザーの宿（例: '虚' または '虚宿'）。指定すると、この宿が12時の位置に来るように初期表示 */
   userShukuyo?: string;
+  /** 最大サイズの制限（デフォルト: 500px） */
+  maxSize?: number;
 }
 
 /**
@@ -94,10 +101,18 @@ function calculateInitialRotation(shukuyoName?: string): number {
   return -starIndex * angleStep;
 }
 
-export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuyo }: ShukuyoSenseibanProps) {
+export default function ShukuyoSenseiban({
+  size,
+  width,
+  height,
+  userShukuyo,
+  maxSize = 500
+}: ShukuyoSenseibanProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [rotation, setRotation] = useState(() => calculateInitialRotation(userShukuyo));
   const [isDragging, setIsDragging] = useState(false);
+  const [canvasSize, setCanvasSize] = useState(size || width || 300);
   const lastAngleRef = useRef(0);
   const dimensionsRef = useRef({
     centerX: 0,
@@ -108,6 +123,30 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
     innerMostRadius: 0,
     centerRadius: 0,
   });
+
+  // コンテナサイズに基づいてCanvasサイズを計算（正方形を維持）
+  useEffect(() => {
+    const updateSize = () => {
+      if (size) {
+        // 固定サイズが指定されている場合
+        setCanvasSize(Math.min(size, maxSize));
+        return;
+      }
+
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        // 正方形を維持しつつ、最大サイズを制限
+        const newSize = Math.min(containerWidth, maxSize);
+        setCanvasSize(newSize);
+      }
+    };
+
+    updateSize();
+
+    // リサイズ時に再計算
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, [size, maxSize]);
 
   // userShukuyoが変更されたら回転をリセット
   useEffect(() => {
@@ -163,17 +202,17 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
   }, []);
 
   // 描画処理
-  const draw = useCallback((ctx: CanvasRenderingContext2D, rot: number) => {
+  const draw = useCallback((ctx: CanvasRenderingContext2D, rot: number, currentSize: number) => {
     const { centerX, centerY, outerRadius, middleRadius, innerRadius, innerMostRadius, centerRadius } = dimensionsRef.current;
     const angleStep = (Math.PI * 2) / 27;
     const offsetAngle = (-6.8 * Math.PI) / 180;
 
     // キャンバスをクリア
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, currentSize, currentSize);
 
     // 背景
     ctx.fillStyle = '#fafafa';
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, currentSize, currentSize);
 
     // 外側の円（27宿）- 回転する
     STARS.forEach((star, i) => {
@@ -203,12 +242,15 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
       const textX = centerX + Math.cos(textAngle) * textRadius;
       const textY = centerY + Math.sin(textAngle) * textRadius;
 
+      // フォントサイズをサイズに応じて調整
+      const outerFontSize = Math.max(10, Math.round(currentSize / 30));
+
       ctx.save();
       ctx.translate(textX, textY);
       ctx.rotate(textAngle + Math.PI / 2);
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.font = 'bold 16px sans-serif';
+      ctx.font = `bold ${outerFontSize}px sans-serif`;
       ctx.fillStyle = '#333';
       ctx.fillText(star.name, 0, 0);
       ctx.restore();
@@ -242,12 +284,15 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
       const textX = centerX + Math.cos(textAngle) * textRadius;
       const textY = centerY + Math.sin(textAngle) * textRadius;
 
+      // フォントサイズをサイズに応じて調整
+      const innerFontSize = Math.max(8, Math.round(currentSize / 35));
+
       ctx.save();
       ctx.translate(textX, textY);
       ctx.rotate(textAngle + Math.PI / 2);
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.font = 'bold 14px sans-serif';
+      ctx.font = `bold ${innerFontSize}px sans-serif`;
       ctx.fillStyle = '#333';
       ctx.fillText(relation, 0, 0);
       ctx.restore();
@@ -270,31 +315,34 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
 
     // 中心のテキスト
     const topStarName = getTopStarName(rot);
+    // 中心フォントサイズをサイズに応じて調整
+    const centerFontSize = Math.max(18, Math.round(currentSize / 14));
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = 'bold 36px sans-serif';
+    ctx.font = `bold ${centerFontSize}px sans-serif`;
     ctx.fillStyle = '#333';
     ctx.fillText(topStarName + '宿', centerX, centerY);
-  }, [width, height, getOuterCircleColor, getTopStarName]);
+  }, [getOuterCircleColor, getTopStarName]);
 
   // Canvas初期化
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || canvasSize <= 0) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // 高解像度ディスプレイ対応
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width = canvasSize * dpr;
+    canvas.height = canvasSize * dpr;
     ctx.scale(dpr, dpr);
 
-    // 描画サイズ
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const maxRadius = Math.min(width, height) / 2 - 20;
+    // 描画サイズ（正方形なのでcanvasSizeを使用）
+    const padding = Math.max(10, canvasSize * 0.04); // パディングもサイズに応じて調整
+    const centerX = canvasSize / 2;
+    const centerY = canvasSize / 2;
+    const maxRadius = canvasSize / 2 - padding;
     const outerRadius = maxRadius;
     const middleRadius = maxRadius * 0.75;
     const innerRadius = middleRadius;
@@ -311,8 +359,8 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
       centerRadius,
     };
 
-    draw(ctx, rotation);
-  }, [width, height, rotation, draw]);
+    draw(ctx, rotation, canvasSize);
+  }, [canvasSize, rotation, draw]);
 
   // イベントハンドラ
   const getAngle = (clientX: number, clientY: number) => {
@@ -378,14 +426,25 @@ export default function ShukuyoSenseiban({ width = 500, height = 500, userShukuy
   const handleTouchEnd = () => handleEnd();
 
   return (
-    <div className="shukuyo-senseiban-container">
+    <div
+      ref={containerRef}
+      className="shukuyo-senseiban-container"
+      style={{
+        width: '100%',
+        maxWidth: maxSize,
+        margin: '0 auto',
+        aspectRatio: '1 / 1',
+      }}
+    >
       <canvas
         ref={canvasRef}
         className="shukuyo-canvas"
         style={{
-          width: width,
-          height: height,
+          width: canvasSize,
+          height: canvasSize,
           maxWidth: '100%',
+          display: 'block',
+          margin: '0 auto',
           touchAction: 'none',
           cursor: isDragging ? 'grabbing' : 'grab',
           border: '2px solid #ddd',

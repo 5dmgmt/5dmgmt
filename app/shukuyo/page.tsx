@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { encodeShukuyoCodeBrowser } from '@/lib/shukuyo-code';
 
 export default function ShukuyoInputPage() {
   const router = useRouter();
@@ -43,14 +44,16 @@ export default function ShukuyoInputPage() {
       // イニシャル生成
       const initials = generateInitials(name);
 
+      // コードを生成（生年月日をURLに含めない）
+      const code = encodeShukuyoCodeBrowser(birthDate, initials);
+
       // 動的ルートにリダイレクト
-      // URLパラメータとして名前とメールも渡す
       const params = new URLSearchParams({
         name: name || '名前未設定',
         email: email || '',
       });
 
-      router.push(`/shukuyo/report/${birthDate}/${initials}?${params.toString()}`);
+      router.push(`/shukuyo/report/${code}?${params.toString()}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : '予期せぬエラーが発生しました');
     } finally {
@@ -60,7 +63,9 @@ export default function ShukuyoInputPage() {
 
   // 簡易鑑定（デモ表示）
   const handleDemo = () => {
-    router.push('/shukuyo/report/1973-11-12/TM?name=望月貴生&demo=true');
+    // サンプル: 1973-11-12, TM → エンコード
+    const demoCode = encodeShukuyoCodeBrowser('1973-11-12', 'TM');
+    router.push(`/shukuyo/report/${demoCode}?name=望月貴生&demo=true`);
   };
 
   return (

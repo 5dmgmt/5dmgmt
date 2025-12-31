@@ -684,7 +684,7 @@ export default function ShukuyoReportPage() {
             <div>
               {/* 27宿円形図（既存の宿曜盤コンポーネント） */}
               <div style={{ ...styles.card, textAlign: 'center' }}>
-                <ShukuyoSenseiban width={300} height={300} userShukuyo={user.shukuyo} />
+                <ShukuyoSenseiban maxSize={320} userShukuyo={user.shukuyo} />
                 <p style={{ fontSize: '14px', color: '#374151', marginTop: '8px' }}>あなたの宿曜27宿：{user.shukuyo}（回転して確認できます）</p>
               </div>
 

@@ -192,3 +192,21 @@ export const COMPATIBILITY_TYPES = [
 ] as const;
 
 export type CompatibilityType = typeof COMPATIBILITY_TYPES[number];
+
+// ============================================
+// 宿×曜日 189通りデータ（s9シートから）
+// ============================================
+
+export interface ShukuyoYoubiData {
+  specialDay: string;      // 特殊日（金剛峯日、七曜陵逼など）
+  overview: string;        // 概要
+  conflict: string;        // 葛藤パターン
+  potential: string;       // ポテンシャル
+  evolutionTheme: string;  // 進化テーマ
+  lifeUsage: string;       // 人生での活用
+  businessUsage: string;   // ビジネスでの活用
+  oneLiner: string;        // 一行メッセージ
+}
+
+// キー形式: "昴日", "昴月", "昴火", ... (27宿 × 7曜日 = 189通り)
+export type ShukuyoYoubiMap = Record<string, ShukuyoYoubiData>;

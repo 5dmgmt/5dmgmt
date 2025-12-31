@@ -14,10 +14,16 @@ import type {
   ShichiyoTrait,
   Meishiki,
   ShukuyoName,
+  ShukuyoYoubiData,
+  ShukuyoYoubiMap,
 } from './types';
 
 // JSON データをインポート
 import masterData from './shukuyo-master-data.json';
+import shukuyoYoubiRawData from './shukuyo-youbi-data.json';
+
+// 宿×曜日データに型を適用
+const shukuyoYoubiData = shukuyoYoubiRawData as unknown as ShukuyoYoubiMap;
 
 // 型アサーション（JSONデータに型を適用）
 export const shukuyoData = masterData as unknown as ShukuyoMasterData;
@@ -92,6 +98,25 @@ export function getMeishiki(): Meishiki {
  */
 export function getAllData(): ShukuyoMasterData {
   return shukuyoData;
+}
+
+/**
+ * 宿名と曜日から189通りの詳細データを取得
+ * @param shukuyo 宿名（例: "鬼"）
+ * @param youbi 曜日（例: "月"）
+ * @returns 宿×曜日の詳細データ
+ */
+export function getShukuyoYoubiData(shukuyo: string, youbi: string): ShukuyoYoubiData | undefined {
+  // キーを生成（例: "鬼月"）
+  const key = `${shukuyo}${youbi}`;
+  return shukuyoYoubiData[key];
+}
+
+/**
+ * 全ての宿×曜日データを取得
+ */
+export function getAllShukuyoYoubiData(): ShukuyoYoubiMap {
+  return shukuyoYoubiData;
 }
 
 // 型定義もエクスポート
