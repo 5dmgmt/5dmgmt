@@ -11,7 +11,8 @@ const STATIC_LAST_MODIFIED = new Date('2025-01-01');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.5dmgmt.com';
-  const now = new Date();
+  // 東京時間で現在日時を取得
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
 
   // 全ページのリスト
   const pages = [

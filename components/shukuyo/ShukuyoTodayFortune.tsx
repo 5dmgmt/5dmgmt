@@ -31,7 +31,8 @@ interface FortuneResult {
 }
 
 export default function ShukuyoTodayFortune() {
-  const currentYear = new Date().getFullYear();
+  // 東京時間で現在年を取得
+  const currentYear = parseInt(new Date().toLocaleString('en-CA', { timeZone: 'Asia/Tokyo', year: 'numeric' }));
   const [year, setYear] = useState(1990);
   const [month, setMonth] = useState(1);
   const [day, setDay] = useState(1);

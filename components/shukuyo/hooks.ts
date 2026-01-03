@@ -55,7 +55,7 @@ export function useLocalStorage(
       const saveData = {
         peopleData,
         basePerson,
-        savedAt: new Date().toISOString()
+        savedAt: new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
       if (!silent) {

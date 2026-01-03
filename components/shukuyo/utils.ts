@@ -51,10 +51,10 @@ export async function getShukuyoData(
 }
 
 /**
- * 年の選択肢を生成
+ * 年の選択肢を生成（東京時間基準）
  */
 export function generateYearOptions(): number[] {
-  const currentYear = new Date().getFullYear();
+  const currentYear = parseInt(new Date().toLocaleString('en-CA', { timeZone: 'Asia/Tokyo', year: 'numeric' }));
   return Array.from({ length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
 }
 

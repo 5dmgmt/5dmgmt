@@ -68,11 +68,14 @@ export async function GET(request: NextRequest) {
     const masterDb = new Database(MASTER_DB_PATH, { readonly: true });
     const fortuneDb = new Database(FORTUNE_DB_PATH, { readonly: true });
 
-    // 今日の日付
-    const today = new Date();
-    const todayYear = today.getFullYear();
-    const todayMonth = today.getMonth() + 1;
-    const todayDay = today.getDate();
+    // 今日の日付（東京時間で取得）
+    const tokyoDateStr = new Date().toLocaleString('en-CA', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }); // "2024-01-15" 形式
+    const [todayYear, todayMonth, todayDay] = tokyoDateStr.split('-').map(Number);
 
     // 生年月日の宿曜を取得
     const birthDateStr = `${year}/${month}/${day}`;
