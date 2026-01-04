@@ -48,7 +48,11 @@ export default function MandaraOraclePage() {
     setExpandedCard(null);
 
     try {
-      const res = await fetch(`/api/mandara?mode=${mode}`);
+      // キャッシュ無効化 + タイムスタンプでブラウザキャッシュも回避
+      const res = await fetch(`/api/mandara?mode=${mode}&t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      });
       const data = await res.json();
       setResult(data);
     } catch (error) {

@@ -3,6 +3,17 @@ import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
 
+// キャッシュ無効化（毎回新しいカードを引く）
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+// キャッシュ無効化ヘッダー
+const noCacheHeaders = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0',
+};
+
 // カードデータの型定義
 interface CardData {
   カード番号: number;
@@ -123,7 +134,7 @@ export async function GET(request: NextRequest) {
         })),
         total: cards.length,
         success: true
-      });
+      }, { headers: noCacheHeaders });
     }
 
     // 特定カードの詳細を取得
@@ -133,14 +144,14 @@ export async function GET(request: NextRequest) {
       const attr = attributes.find(a => Number(a.カード番号) === num);
 
       if (!card) {
-        return NextResponse.json({ error: 'Card not found' }, { status: 404 });
+        return NextResponse.json({ error: 'Card not found' }, { status: 404, headers: noCacheHeaders });
       }
 
       return NextResponse.json({
         card,
         attributes: attr,
         success: true
-      });
+      }, { headers: noCacheHeaders });
     }
 
     // カードを引く
@@ -157,7 +168,7 @@ export async function GET(request: NextRequest) {
           attributes: attributes.find(a => Number(a.カード番号) === Number(c.カード番号))
         })),
         success: true
-      });
+      }, { headers: noCacheHeaders });
     } else if (count === 2) {
       // 2枚引き
       const selected = getRandomCards(cards, 2);
@@ -168,7 +179,7 @@ export async function GET(request: NextRequest) {
           attributes: attributes.find(a => Number(a.カード番号) === Number(c.カード番号))
         })),
         success: true
-      });
+      }, { headers: noCacheHeaders });
     } else if (count === 3) {
       // 3枚引き (SETルールで3枚目を決定)
       const firstTwo = getRandomCards(cards, 2);
@@ -177,13 +188,13 @@ export async function GET(request: NextRequest) {
       const result = findThirdCard(attributes, card1Num, card2Num);
 
       if (!result.cardNum) {
-        return NextResponse.json({ error: 'Failed to find third card', debug: result.debug }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to find third card', debug: result.debug }, { status: 500, headers: noCacheHeaders });
       }
 
       const card3 = cards.find(c => Number(c.カード番号) === result.cardNum);
 
       if (!card3) {
-        return NextResponse.json({ error: 'Failed to find third card data', cardNum: result.cardNum }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to find third card data', cardNum: result.cardNum }, { status: 500, headers: noCacheHeaders });
       }
 
       const selected = [...firstTwo, card3];
@@ -196,13 +207,13 @@ export async function GET(request: NextRequest) {
           attributes: attributes.find(a => Number(a.カード番号) === Number(c.カード番号))
         })),
         success: true
-      });
+      }, { headers: noCacheHeaders });
     }
 
-    return NextResponse.json({ error: 'Invalid mode. Use 1, 2, or 3' }, { status: 400 });
+    return NextResponse.json({ error: 'Invalid mode. Use 1, 2, or 3' }, { status: 400, headers: noCacheHeaders });
   } catch (error) {
     console.error('Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500, headers: noCacheHeaders });
   }
 }
 
@@ -215,7 +226,7 @@ export async function POST(request: NextRequest) {
     if (!card1 || !card2) {
       return NextResponse.json(
         { error: 'card1 and card2 are required' },
-        { status: 400 }
+        { status: 400, headers: noCacheHeaders }
       );
     }
 
@@ -232,7 +243,7 @@ export async function POST(request: NextRequest) {
     if (!card1Data || !card2Data) {
       return NextResponse.json(
         { error: 'Invalid card number' },
-        { status: 400 }
+        { status: 400, headers: noCacheHeaders }
       );
     }
 
@@ -242,7 +253,7 @@ export async function POST(request: NextRequest) {
     if (!result.cardNum) {
       return NextResponse.json(
         { error: 'Failed to calculate third card', debug: result.debug },
-        { status: 500 }
+        { status: 500, headers: noCacheHeaders }
       );
     }
 
@@ -263,9 +274,9 @@ export async function POST(request: NextRequest) {
       },
       rule: 'SET game rule: 各属性が「全て同じ」か「全て異なる」',
       success: true
-    });
+    }, { headers: noCacheHeaders });
   } catch (error) {
     console.error('Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500, headers: noCacheHeaders });
   }
 }
